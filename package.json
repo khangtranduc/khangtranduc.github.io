@@ -23,6 +23,7 @@
     "postcss": "^8.4.14",
     "postcss-load-config": "^4.0.1",
     "svelte": "^3.53.1",
+    "svelte-bootstrap-svg-icons": "^0.1.6",
     "svelte-check": "^2.9.2",
     "svelte-chota": "^1.8.6",
     "svelte-preprocess": "^4.10.7",
