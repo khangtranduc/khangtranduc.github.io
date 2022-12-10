@@ -11,26 +11,28 @@
   } from 'svelte-bootstrap-svg-icons';
 </script>
 
-<Navbar let:hidden let:toggle>
+<Navbar let:hidden let:toggle rounded color="form">
     <NavBrand href="/">
         <img src="/profile.jpg" class="mr-3 h-6 sm:h-9 rounded-full" alt="Wavy Logo"/>
         <span class="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
             Khang Tran
         </span>
     </NavBrand>
-    <DarkMode/>
-    <NavHamburger on:click={toggle} />
-    <NavUl {hidden}>
-      <NavLi href="/" active={true}>Home</NavLi>
-      <NavLi href="/about">About</NavLi>
-    </NavUl>
+    <div class="flex gap-x-5">
+      <DarkMode class="flex-none"/>
+      <NavHamburger on:click={toggle} />
+      <NavUl {hidden}>
+        <NavLi href="/" active={true}>Home</NavLi>
+        <NavLi href="/about">About</NavLi>
+      </NavUl>
+    </div>
   </Navbar>
 
 <slot />
 
 
 <Footer footerType="socialmedia" class="flex justify-around">
-    <P color="text-gray-400 dark:text-white"  size="xs">Tran Duc Khang</P>
+    <P color="text-gray-400 dark:text-white"  size="sm">Tran Duc Khang</P>
     <div class="flex flex-row-reverse flex-1 gap-x-5">
         <FooterIcon href="/" class="text-gray-400 hover:text-black">
         <Github/>
