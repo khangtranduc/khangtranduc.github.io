@@ -31,8 +31,8 @@
 <slot />
 
 
-<Footer footerType="socialmedia" class="flex justify-around">
-    <P color="text-gray-400 dark:text-white"  size="sm">Tran Duc Khang</P>
+<Footer footerType="socialmedia" class="absolute bottom-0 flex justify-around w-full">
+    <P color="text-gray-400 dark:text-white" size="sm">Tran Duc Khang</P>
     <div class="flex flex-row-reverse flex-1 gap-x-5">
         <FooterIcon href="/" class="text-gray-400 hover:text-black">
         <Github/>
