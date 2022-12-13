@@ -18,15 +18,15 @@
             Khang Tran
         </span>
     </NavBrand>
-    <div class="flex gap-x-5">
-      <DarkMode class="flex-none"/>
+    <div class="flex md:order-2">
+      <DarkMode/>
       <NavHamburger on:click={toggle} />
-      <NavUl {hidden}>
-        <NavLi href="/" active={true}>Home</NavLi>
-        <NavLi href="/about">About</NavLi>
-      </NavUl>
     </div>
-  </Navbar>
+    <NavUl {hidden}>
+      <NavLi href="/" active={true}>Home</NavLi>
+      <NavLi href="/about">About</NavLi>
+    </NavUl>
+</Navbar>
 
 <slot />
 
