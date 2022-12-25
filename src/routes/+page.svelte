@@ -1,73 +1,130 @@
-<div class="container">
-    <section class="grid">
-        <div class="inner">
-            <article class="info">
-                <img class="profile" src="/mugshot.jpeg" alt=""/>
-                <h4>Tran Duc Khang</h4>
-                <p>Epic Gamer</p>
-                <div class="flex">
-                    <iconify-icon icon="fa6-solid:envelope" width="30"/>
-                    <iconify-icon icon="fa6-brands:linkedin" width="30"/>
-                    <iconify-icon icon="fa6-brands:github" width="30"/>
-                </div>
-            </article>           
+<div class='container-fluid'>
+    <section>
+        <img src='mugshot.jpeg' alt=''/>
+        <h3>Tran Duc Khang</h3>
+        <p>Epic Gamer</p>
+        <div>
+            <iconify-icon icon="fa6-brands:github" width="30"/>
+            <iconify-icon icon="fa6-brands:linkedin" width="30"/>
+            <iconify-icon icon="lucide:mail" width="30"/>
+        </div>
+    </section>
+
+    <div>
+        <section>
+            <h2>About <span>Me</span></h2>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut 
+                labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris 
+                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit 
+                esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt 
+                in culpa qui officia deserunt mollit anim id est laborum.
+            </p>
+        </section>
+
+        <div class="grid">
             <article>
-                <h4>Interests</h4>
-                <ul>
-                    <li>Physics</li>
-                    <li>Engineering</li>
-                    <li>Programming</li>
-                </ul>
+                <h4>Education</h4>
+                <p><em>NUS High School of Math and Science</em></p>
+                <button>
+                    <span>More Info</span>
+                    <iconify-icon icon="lucide:arrow-right"/>
+                </button>
+            </article>
+                
+            <article>
+                <h4>Current Project</h4>
+                <p><em>Shielding-Free Signal Noise Suppression in Portable Low-Field MRI</em></p>
+                <button>
+                    <span>More Info</span>
+                    <iconify-icon icon="lucide:arrow-right"/>
+                </button>
             </article>
         </div>
-        <article>
-            <h2>About Me</h2>
-            <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus urna nulla, ullamcorper eu lobortis ac, rhoncus eu lacus. Integer tristique pellentesque malesuada. Donec molestie at leo at pellentesque. Duis tincidunt leo nec enim pretium pharetra ac sit amet enim. Sed congue tellus vel commodo porttitor. Suspendisse volutpat malesuada nunc sit amet pellentesque. Pellentesque nisl nunc, maximus at diam non, lacinia pharetra urna. Sed id felis vulputate, sollicitudin mauris id, aliquam ligula. Proin dolor ipsum, condimentum vitae eros sed, suscipit tempus neque. Aenean maximus, tellus in hendrerit ornare, lacus dolor lobortis nunc, sit amet hendrerit quam justo vitae ex. Etiam commodo tortor quis arcu cursus sodales sed eget ligula.
-            </p>
-        </article>
-    </section>
+    </div>
+    
 </div>
 
 <style lang="scss">
-    .flex {
+    .container-fluid{
         display: flex;
+        gap: 3rem;
+        justify-content: center;
         align-items: center;
-    } 
-    iconify-icon {
-        color: black;
-        &:hover {
-            color: gray;
+        margin-top: 2rem;
+
+        > div, 
+        > section {
+            height: 100%;
+
+            section {
+                margin: 0;
+            }
+
+            p {
+                margin: 0 0 1rem 0;
+            }
+
+            &:not(:first-child){
+                p {
+                    width: 40rem;
+                }
+            }
+
+            .grid article {
+                display: flex;
+                flex-direction: column;
+                padding: 1.25rem;
+                margin: 0;
+                justify-content: space-between;
+                p {
+                    width: 100%;
+                }
+            }
+
+            h1, h2, h3, h4 {
+                margin: 0;
+                span {
+                    background: linear-gradient(to right, $primary-300, $primary-400);
+                    background-clip: text;
+                    color: transparent;
+                }
+            }
+
+            &:first-child {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+
+                p {
+                    font-size: 1.1rem;
+                }
+
+                iconify-icon {
+                    transition: .1s;
+
+                    &:hover {
+                        color: gray;
+                        transition: .1s;
+                    }
+                }
+                
+                div {
+                    display: flex;
+                    gap: .5em;
+                    align-items: center;
+                    justify-content: center;
+                }
+
+                img {
+                    border-radius: 100%;
+                    width: 8rem;
+                    height: 8rem;
+                    object-fit: cover;
+                    object-position: 50% 10%;
+                }
+            }
         }
-    }
-    .inner article:first-child {
-        margin-bottom: 1%;
-    }
-    .inner article:last-child{
-        margin-top: 1%;
-    }
-    h4 {
-        margin: 2% 0 1% 0;
-    }
-    article p {
-        display: flex;
-        flex-wrap: wrap;
-    }
-    .info div {
-        display: flex;
-        gap: 1rem;
-        justify-content: center;
-    }
-    .info{
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
-    .profile {
-        width: 10rem;
-        height: 10rem;
-        border-radius: 100%;
-        object-fit: cover;
     }
 </style>
