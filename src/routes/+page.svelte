@@ -80,6 +80,12 @@
                 p {
                     width: 100%;
                 }
+                button {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    gap: .5rem;
+                }
             }
 
             h1, h2, h3, h4 {
