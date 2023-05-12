@@ -1,4 +1,5 @@
 <script lang="ts">
+    import "@picocss/pico/scss/pico.scss";
     import { goto } from '$app/navigation';
     import Darkmode from './darkmode.svelte';
 </script>
@@ -10,13 +11,13 @@
           <li><strong>Khang Tran</strong></li>
         </ul>
         <ul>
-          <li><a href="/">Home</a></li>
-          <li><a href="/about">About</a></li>
-          <li><a href="/contact" role="button">Contact</a></li>
+          <li><iconify-icon icon="lucide:github"/></li>
           <li><Darkmode /></li>
         </ul>
     </nav>
 </main>
+
+<slot/>
 
 <style lang="scss">
     img {
