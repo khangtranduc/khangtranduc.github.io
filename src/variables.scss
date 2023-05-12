@@ -5,8 +5,6 @@ $primary-500: #009688;
 $primary-600: #00897b;
 $primary-700: #00796b;
 
-$gray: rgb(248, 248, 248);
-
 $breakpoints: (
   xs: 0,
   sm: 576px,
@@ -14,6 +12,15 @@ $breakpoints: (
   lg: 992px,
   xl: 1200px,
 );
+
+$layout-color: var(--layout-color);
+
+:root {
+    --layout-color: #f8f8f8;
+    &[data-theme="dark"]{
+        --layout-color: #2b2a2a;
+    }
+}
 
 @mixin media($keys...){
     @each $key in $keys { 
