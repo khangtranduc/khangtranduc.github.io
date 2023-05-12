@@ -60,7 +60,7 @@
         justify-content: center;
         align-items: start;
         margin-top: 5rem;
-        
+
         > div, 
         > section {
             height: 100%;
