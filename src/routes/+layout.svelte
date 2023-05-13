@@ -16,15 +16,18 @@
                 <strong>Khang Tran</strong>
             </li>
         </ul>
+        <!-- svelte-ignore a11y-unknown-role -->
         <ul role="brands">
           <li><iconify-icon icon="fa6-brands:whatsapp" width="25"/></li>
           <li><iconify-icon icon="fa6-brands:telegram" width="25"/></li>
           <li><iconify-icon icon="fa6-brands:github" width="25"/></li>
           <li><iconify-icon icon="lucide:mail" width="25"/></li>
           <li><Darkmode /></li>
+          <!-- svelte-ignore a11y-click-events-have-key-events -->
           <li role="hamburger" on:click={() => isOpen = !isOpen}><iconify-icon icon="lucide:align-justify"/></li>
         </ul>
     </nav>
+    <!-- svelte-ignore a11y-unknown-role -->
     {#if isOpen}
     <ul role="drawer" transition:slide>
         <li role="label"><b>Contact Me!</b></li>
