@@ -48,7 +48,10 @@
         border-radius: 100%;
     }
     main {
+        position: sticky;
+        top: 0;
         background-color: $layout-color;
+        z-index: 1;
     }
     li {
         display: flex;

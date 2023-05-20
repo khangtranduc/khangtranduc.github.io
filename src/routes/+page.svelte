@@ -54,17 +54,20 @@
     </catalog>
 </main>
 
-
 <style lang="scss">
     main {
         width: 100vw;
-        height: 100vh;
+        height: 92vh;
     }
     clicker {
         width: 100%;
         display: flex;
-        margin-top: 2rem;
         gap: .5rem;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+        @include media(xl) {
+            margin-bottom: 0;
+        }
         div {
             box-shadow: 0 5px 5px $shadow;
             border-radius: 20px;
@@ -87,11 +90,15 @@
         display: flex;
         flex-wrap: wrap;
         gap: .3rem;
-        margin-left: 3rem;
-        margin-right: 3rem;
+        margin-left: .7rem;
+        margin-right: .7rem;
+        @include media(xl) {
+            margin-left: 3rem;
+            margin-right: 3rem;
+        }
     }
     article {
-        width: calc(100%/3 - .3rem);
+        width: 100%;
         display: flex;
         flex-direction: column;
         transition: .3s;
@@ -108,10 +115,16 @@
             transform: scale(1.05);
         }
         > img {
-            height: 21rem;
-            padding-left: 3rem;
-            padding-right: 3rem;
+            height: 10rem;
             object-fit: cover;
+        }
+        @include media(xl) {
+            width: calc(100%/3 - .3rem);
+            > img {
+                height: 21rem;
+                padding-left: 3rem;
+                padding-right: 3rem;
+            }
         }
         > hgroup {
             margin: .3rem;
@@ -172,7 +185,7 @@
     }
     h2 {
         font-size: 2.5rem;
-        margin-bottom: 2rem;
+        margin-bottom: .5rem;
         @include media(xl) {
             margin-left: 1rem;
             font-size: 3rem;
