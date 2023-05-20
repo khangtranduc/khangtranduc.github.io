@@ -69,7 +69,7 @@
             margin-bottom: 0;
         }
         div {
-            box-shadow: 0 5px 5px $shadow;
+            box-shadow: var(--card-box-shadow);
             border-radius: 20px;
             border: solid .01rem;
             padding: .5rem;
