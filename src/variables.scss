@@ -14,11 +14,24 @@ $breakpoints: (
 );
 
 $layout-color: var(--layout-color);
+$end-point: var(--end-point);
+$mid-point: var(--mid-point);
+$var-green: var(--var-green);
+$var-gray: var(--var-gray);
+$shadow: var(--shadow);
 
 :root {
     --layout-color: #f8f8f8;
+    --end-point: #fffe;
+    --mid-point: #fff8;
+    --var-green: rgb(135, 218, 135);
+    --var-gray: rgb(199, 199, 199);
+    --shadow: var(--var-gray);
     &[data-theme="dark"]{
         --layout-color: #2b2a2a;
+        --end-point: #222c;
+        --mid-point: #2228;
+        --shadow: rgb(239, 136, 138);
     }
 }
 

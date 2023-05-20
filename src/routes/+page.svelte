@@ -1,19 +1,140 @@
-<main>
+<script lang="ts">
+    import { goto } from '$app/navigation';
+    import { page } from '$app/stores';
+    import { Status, type Project } from '$lib/types';
+    let projects: Project[] = $page.data.projects;
+    let pointer = 0;
+</script>
+
+<bg>
     <hgroup>
         <h1>Tran Duc Khang</h1>
         <div>
+            <!-- svelte-ignore a11y-unknown-role -->
             <kbd role="template"/>
             <kbd/>
         </div>
     </hgroup>
+</bg>
+
+<main>
+    <h2>Projects</h2>
+    <catalog>
+        {#each projects.slice(pointer * 3, (pointer * 3) + 3) as project, i}
+        <article on:keydown on:click={() => goto(`/project/${3 * pointer + i}`)}>
+            <hgroup>
+                <h3>{project.name}</h3>
+                <h4>Status: <mark role={Status[project.status].toLowerCase()}>{Status[project.status]}</mark></h4>
+            </hgroup>
+            {#if project.src}
+                <img alt="" src={project.src}/>
+            {:else}
+                <img alt="" src="/waves.gif"/>
+            {/if}
+            <hgroup>
+                <h3>Description</h3>
+                {#if project.desc}
+                    <p>{project.desc}</p>
+                {:else}
+                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sequi, accusantium voluptas. Repellendus maiores aut alias ipsum rem, quam quibusdam quis commodi dicta maxime minima quasi. Facilis possimus delectus consectetur soluta!</p>
+                {/if}
+            </hgroup>
+        </article>
+        {/each}
+        <clicker>
+            <!-- svelte-ignore a11y-unknown-role -->
+            <div role="left" on:keydown on:click={() => pointer = ((pointer - 1) + 3) % 3}>
+                <iconify-icon icon="lucide:chevron-left"/>
+            </div>
+            <!-- svelte-ignore a11y-unknown-role -->
+            <div role="right" on:keydown on:click={() => pointer = (pointer + 1) % 3}>
+                <iconify-icon icon="lucide:chevron-right"/>
+            </div>
+        </clicker>
+    </catalog>
 </main>
-
-<h2>Projects</h2>
-
 
 
 <style lang="scss">
     main {
+        width: 100vw;
+        height: 100vh;
+    }
+    clicker {
+        width: 100%;
+        display: flex;
+        margin-top: 2rem;
+        gap: .5rem;
+        div {
+            box-shadow: 0 5px 5px $shadow;
+            border-radius: 20px;
+            border: solid .01rem;
+            padding: .5rem;
+            flex: 1;
+            transition: .3s;
+            &:hover {
+                transition: .3s;
+                &[role="right"]{
+                    transform: translateX(10px);
+                }
+                &[role="left"]{
+                    transform: translateX(-10px);
+                }
+            }
+        }
+    }
+    catalog {
+        display: flex;
+        flex-wrap: wrap;
+        gap: .3rem;
+        margin-left: 3rem;
+        margin-right: 3rem;
+    }
+    article {
+        width: calc(100%/3 - .3rem);
+        display: flex;
+        flex-direction: column;
+        transition: .3s;
+        margin: 0;
+        padding: .3rem;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        border: solid .01rem $layout-color;
+        background-image: linear-gradient(to bottom, $end-point 20%, $mid-point 50%, $end-point 80%),
+        url('/waves.gif');
+        background-size: cover;
+        &:hover {
+            transition: .3s;
+            transform: scale(1.05);
+        }
+        > img {
+            height: 21rem;
+            padding-left: 3rem;
+            padding-right: 3rem;
+            object-fit: cover;
+        }
+        > hgroup {
+            margin: .3rem;
+        }
+        mark {
+            border-radius: 5px;
+            &[role="completed"] {
+                background-color: $var-green;
+            }
+            &[role="sidelined"] {
+                background-color: $var-gray;
+            }
+        }
+        p {
+            margin: 0;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    }
+    bg {
         display: flex;
         width: 100vw;
         height: 91.5vh;
@@ -22,11 +143,11 @@
         background-position-y: 75%;
         align-items: center;
         justify-content: center;
-    }
-    hgroup {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+        hgroup {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
     }
     h1, h2 {
         background-size: cover;
@@ -51,6 +172,7 @@
     }
     h2 {
         font-size: 2.5rem;
+        margin-bottom: 2rem;
         @include media(xl) {
             margin-left: 1rem;
             font-size: 3rem;

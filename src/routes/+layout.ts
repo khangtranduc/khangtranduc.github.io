@@ -1,1 +1,18 @@
+import { Status, type Project } from '$lib/types';
+
 export const prerender = true;
+
+export const load = async () => {
+    return {
+        projects: (<Project[]>
+            [
+                {name: "Project 1", status: Status.Ongoing, desc:"Cock", src: "/wave.gif"},
+                {name: "Project 2", status: Status.Completed},
+                {name: "Project 3", status: Status.Ongoing},
+                {name: "Project 4", status: Status.Completed},
+                {name: "Project 5", status: Status.Sidelined},
+                {name: "Project 6", status: Status.Completed},
+                {name: "Project 7", status: Status.Sidelined}
+            ]).sort((a, b) => {return a.status - b.status})
+    }
+}
