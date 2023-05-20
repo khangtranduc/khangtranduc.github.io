@@ -74,6 +74,7 @@
         &[role="drawer"] {
             display: flex;
             justify-content: space-around;
+            margin: 0;
             width: 100%;
         }
         &[role="brands"] {
