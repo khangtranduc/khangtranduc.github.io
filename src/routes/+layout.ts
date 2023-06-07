@@ -6,8 +6,15 @@ export const load = async () => {
     return {
         projects: (<Project[]>
             [
-                {name: "Project 1", status: Status.Ongoing, desc:"Cock", src: "/wave.gif"},
-                {name: "Project 2", status: Status.Completed},
+                {name: "Signal Noise Suppression in Portable MRI", status: Status.Ongoing, desc:"mri.html", src: "/images/mri.jpg"
+                    , att: [
+                        {
+                            name: "Download PDF",
+                            icon: "lucide:download",
+                            href: "#"
+                        }
+                    ]},
+                {name: "Project 1", status: Status.Ongoing, desc:"Gamer", src: "/wave.gif"},
                 {name: "Project 3", status: Status.Ongoing},
                 {name: "Project 4", status: Status.Completed},
                 {name: "Project 5", status: Status.Sidelined},

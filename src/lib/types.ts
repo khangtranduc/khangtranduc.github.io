@@ -7,6 +7,13 @@ export enum Status {
 export type Project = {
     name: string,
     status: Status,
+    att: Attachment[]
     desc?: string,
-    src?: string
+    src?: string,
+}
+
+export type Attachment = {
+    name: string,
+    icon: string,
+    href: string
 }

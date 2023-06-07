@@ -1,5 +1,6 @@
 <script lang="ts">
     import "@picocss/pico/scss/pico.scss";
+    import "../app.scss";
     import "iconify-icon";
     import { goto } from '$app/navigation';
     import Darkmode from './darkmode.svelte';

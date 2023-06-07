@@ -2,6 +2,7 @@
     import { goto } from '$app/navigation';
     import { page } from '$app/stores';
     import { Status, type Project } from '$lib/types';
+    import { getDesc } from '$lib/funcs';
     let projects: Project[] = $page.data.projects;
     let pointer = 0;
 </script>
@@ -21,7 +22,7 @@
     <h2>Projects</h2>
     <catalog>
         {#each projects.slice(pointer * 3, (pointer * 3) + 3) as project, i}
-        <article on:keydown on:click={() => goto(`/project/${3 * pointer + i}`)}>
+        <article data-tooltip={project.name} on:keydown on:click={() => goto(`/project/${3 * pointer + i}`)}>
             <hgroup>
                 <h3>{project.name}</h3>
                 <h4>Status: <mark role={Status[project.status].toLowerCase()}>{Status[project.status]}</mark></h4>
@@ -33,11 +34,13 @@
             {/if}
             <hgroup>
                 <h3>Description</h3>
-                {#if project.desc}
-                    <p>{project.desc}</p>
-                {:else}
-                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sequi, accusantium voluptas. Repellendus maiores aut alias ipsum rem, quam quibusdam quis commodi dicta maxime minima quasi. Facilis possimus delectus consectetur soluta!</p>
-                {/if}
+                {#await getDesc(project.desc)}
+                    <p>...waiting</p>
+                {:then desc}
+                    <p>{desc}</p>
+                {:catch}
+                    <p><lorem/></p>
+                {/await}
             </hgroup>
         </article>
         {/each}
@@ -190,6 +193,11 @@
             margin-left: 1rem;
             font-size: 3rem;
         }
+    }
+    h3 {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
     }
     div {
         display: flex;
