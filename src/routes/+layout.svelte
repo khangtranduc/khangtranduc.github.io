@@ -23,6 +23,7 @@
           <li><iconify-icon icon="fa6-brands:telegram" width="25"/></li>
           <li><iconify-icon icon="fa6-brands:github" width="25"/></li>
           <li><iconify-icon icon="lucide:mail" width="25"/></li>
+          <li><iconify-icon on:keydown on:click={() => window.open("https://www.linkedin.com/in/khangtranduc", "_blank")} icon="fa6-brands:linkedin" width="25"/></li>
           <li><Darkmode /></li>
           <!-- svelte-ignore a11y-click-events-have-key-events -->
           <li role="hamburger" on:click={() => isOpen = !isOpen}><iconify-icon icon="lucide:align-justify"/></li>
@@ -31,11 +32,11 @@
     <!-- svelte-ignore a11y-unknown-role -->
     {#if isOpen}
     <ul role="drawer" transition:slide>
-        <li role="label"><b>Contact Me!</b></li>
         <li><iconify-icon icon="fa6-brands:whatsapp" width="25"/></li>
         <li><iconify-icon icon="fa6-brands:telegram" width="25"/></li>
         <li><iconify-icon icon="fa6-brands:github" width="25"/></li>
         <li><iconify-icon icon="lucide:mail" width="25"/></li>
+        <li><iconify-icon icon="fa6-brands:linkedin" width="25"></iconify-icon></li>
     </ul>
     {/if}
 </main>
@@ -77,9 +78,12 @@
             justify-content: space-around;
             margin: 0;
             width: 100%;
+            @include media(xl) {
+                display: none;
+            }
         }
         &[role="brands"] {
-            >li:nth-child(-n + 4) {
+            >li:nth-child(-n + 5) {
                 display: none;
                 @include media(xl) {
                     display: flex;

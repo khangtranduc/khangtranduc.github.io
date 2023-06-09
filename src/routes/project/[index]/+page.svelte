@@ -3,7 +3,6 @@
     import type { Project } from '$lib/types';
     import { getDesc } from '$lib/funcs';
     import { fly } from 'svelte/transition';
-    import { goto } from '$app/navigation';
     export let data;
     let project: Project = $page.data.projects[data.index];
 </script>
@@ -34,7 +33,7 @@
         </prizegroup>
         <buttongroup>
             {#each project.att ?? [] as att}
-            <a href={att.href} role="button" class="outline">
+            <a href={att.href} role="button" class="outline" target="_blank">
                 {att.name}
                 <iconify-icon icon={att.icon}/>
             </a>

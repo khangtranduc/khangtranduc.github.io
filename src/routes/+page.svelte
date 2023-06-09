@@ -18,7 +18,20 @@
     </hgroup>
 </bg>
 
-<main>
+<section class="container-fluid">
+    <h2>About Me</h2>
+    <cardbox>
+        <article>
+            <img src="/mug.jpg" alt=""/>
+            <vr/>
+            <p>
+                I am a Year 6 student in NUS High and I enjoy doing science and shit
+            </p>
+        </article>
+    </cardbox>
+</section>
+
+<main class="galaxy">
     <h2>Projects</h2>
     <catalog>
         {#each projects.slice(pointer * 3, (pointer * 3) + 3) as project, i}
@@ -35,7 +48,7 @@
             <hgroup>
                 <h3>Description</h3>
                 {#await getDesc(project.desc)}
-                    <p>...waiting</p>
+                    <p>...waiting<br><br><br></p>
                 {:then desc}
                     <p>{desc}</p>
                 {:catch}
@@ -58,9 +71,54 @@
 </main>
 
 <style lang="scss">
+    section {
+        // background-image: url('/waves.gif');
+        // background-size: cover;
+        // background-position-y: 75%;
+        margin: 0;
+        padding-bottom: 3.5rem;
+        cardbox {
+            display: flex;
+            width: 100%;
+            justify-content: center;
+        }
+        article {
+            display: flex;
+            transition: .1s;
+            align-items: center;
+            width: 95%;
+            @include media(xl) {
+                width: 40%;
+            }
+            margin: 0;
+            gap: .5rem;
+            > img {
+                width: 10rem;
+                aspect-ratio: 1;
+                border-radius: 100%;
+                object-fit: cover;
+                object-position: 0 -1%;
+            }
+            p {
+                height: fit-content;
+                margin: 0;
+            }
+            &:hover {
+                transform: rotate(-2deg) scale(1.01);
+            }
+        }
+    }
+    vr {
+        width: 0;
+        height: 100%;
+        border: solid .01rem;
+    }
     main {
         width: 100vw;
         height: 92vh;
+        background-image: url('/bg/galaxy.gif');
+        background-size: cover;
+        background-position-y: 50%;
     }
     clicker {
         width: 100%;
@@ -75,6 +133,7 @@
             box-shadow: var(--card-box-shadow);
             border-radius: 20px;
             border: solid .01rem;
+            background-color: $layout-color;
             padding: .5rem;
             flex: 1;
             transition: .3s;
@@ -99,55 +158,55 @@
             margin-left: 3rem;
             margin-right: 3rem;
         }
-    }
-    article {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        transition: .3s;
-        margin: 0;
-        padding: .3rem;
-        padding-left: 1rem;
-        padding-right: 1rem;
-        border: solid .01rem $layout-color;
-        background-image: linear-gradient(to bottom, $end-point 20%, $mid-point 50%, $end-point 80%),
-        url('/waves.gif');
-        background-size: cover;
-        &:hover {
+        >article {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
             transition: .3s;
-            transform: scale(1.05);
-        }
-        > img {
-            height: 10rem;
-            object-fit: cover;
-        }
-        @include media(xl) {
-            width: calc(100%/3 - .3rem);
-            > img {
-                height: 21rem;
-                padding-left: 3rem;
-                padding-right: 3rem;
-            }
-        }
-        > hgroup {
-            margin: .3rem;
-        }
-        mark {
-            border-radius: 5px;
-            &[role="completed"] {
-                background-color: $var-green;
-            }
-            &[role="sidelined"] {
-                background-color: $var-gray;
-            }
-        }
-        p {
             margin: 0;
-            display: -webkit-box;
-            -webkit-line-clamp: 3;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-            text-overflow: ellipsis;
+            padding: .3rem;
+            padding-left: 1rem;
+            padding-right: 1rem;
+            border: solid .01rem $layout-color;
+            background-image: linear-gradient(to bottom, $end-point 20%, $mid-point 50%, $end-point 80%);
+            background-color: transparent;
+            background-size: cover;
+            &:hover {
+                transition: .3s;
+                transform: scale(1.01);
+            }
+            > img {
+                height: 10rem;
+                object-fit: cover;
+            }
+            @include media(xl) {
+                width: calc(100%/3 - .3rem);
+                > img {
+                    height: 21rem;
+                    padding-left: 3rem;
+                    padding-right: 3rem;
+                }
+            }
+            > hgroup {
+                margin: .3rem;
+            }
+            mark {
+                border-radius: 5px;
+                &[role="completed"] {
+                    background-color: $var-green;
+                }
+                &[role="sidelined"] {
+                    background-color: $var-gray;
+                }
+            }
+            p {
+                margin: 0;
+                display: -webkit-box;
+                -webkit-line-clamp: 3;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
         }
     }
     bg {

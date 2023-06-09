@@ -11,7 +11,7 @@ export const load = async () => {
                         {
                             name: "Download PDF",
                             icon: "lucide:download",
-                            href: "#"
+                            href: "/downloads/mri_noise_proj.pdf"
                         }
                     ]},
                 {name: "Project 1", status: Status.Ongoing, desc:"Gamer", src: "/wave.gif"},
