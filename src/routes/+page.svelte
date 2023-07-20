@@ -303,7 +303,7 @@
         0% {content: "Computer Scientist"}
         25% {content: "Physicist"}
         50% {content: "Engineer"}
-        75% {content: "Epic Gamer"}
+        75% {content: "Videographer"}
         100% {content: "Computer Scientist"}
     }
 </style>

@@ -1,0 +1,117 @@
+{
+  "version": "https://schema.openattestation.com/2.0/schema.json",
+  "data": {
+    "id": "aa246fd1-dcec-45da-b6e7-cd946baa1d28:string:NUSTS-A0242247J-NGRD-2-20230612",
+    "$template": {
+      "name": "26a089ae-e6c0-4eb7-b529-b58547e49f3e:string:NUSTS-GENERAL-2019",
+      "type": "5cf403cc-a959-4dc6-b873-e0216ed22fff:string:EMBEDDED_RENDERER",
+      "url": "544c6c1f-6c3a-4618-b756-add46218211e:string:https://opencerts.nus.edu.sg"
+    },
+    "issuedOn": "9008954c-dc94-4e1c-87a7-44a3dd62161c:string:2023-06-12T22:28:18+08:00",
+    "name": "9aaa831c-0096-4183-832e-83045f934829:string:Non-graduating Official Transcript",
+    "issuers": [
+      {
+        "id": "d55037eb-18ab-430a-9c36-49b3e59862d0:string:did:ethr:0x253b74046d0d0d9efe214212f7900ae8b4f78f39",
+        "issuerName": "3ac8834e-9951-4ec5-8023-ad4fcf04905d:string:National University of Singapore",
+        "name": "b88e68e1-351f-43eb-b694-2c9f7803656f:string:National University of Singapore",
+        "revocation": {
+          "type": "59d2604a-95ad-453f-87e7-775136dc5739:string:REVOCATION_STORE",
+          "location": "f30e6802-cbd1-4f8c-93c3-d7cba46cfc2b:string:0x66671988ee465b5c23ef18838b32b1666d0ec8d6"
+        },
+        "identityProof": {
+          "type": "ad7da9a7-0314-42e8-ac1e-9591326242be:string:DNS-DID",
+          "key": "3e70695a-acdd-4011-b0c8-7294aa5a35b7:string:did:ethr:0x253b74046d0d0d9efe214212f7900ae8b4f78f39#controller",
+          "location": "72986e16-47c7-4596-bfd6-ef7f98ecea18:string:nus.edu.sg"
+        }
+      }
+    ],
+    "recipient": {
+      "name": "60f7863d-4be1-4033-883f-b674f649f793:string:TRAN DUC KHANG",
+      "studentId": "7c9a153b-a95c-4a83-bcea-b2b1e57d6cd0:string:A0242247J",
+      "dateOfBirth": "64ef608e-df52-4070-aa71-525d02c85508:string:2005-02-11"
+    },
+    "transcript": [
+      {
+        "name": "e4c3a014-ef3c-4058-b1f6-d7fe014a3751:string:Engineering Principles and Practice II",
+        "courseCode": "a200e145-28b3-4b9d-bba0-6be1258974a4:string:CG2111A",
+        "grade": "aada2003-500a-4b59-ba95-66fa46b8dfac:string:A-",
+        "courseCredit": "fcd13a0f-c36f-45a5-880f-4b944ab44452:number:4",
+        "gradingBasis": "e7b812d3-cd37-44cc-b99b-11425e882fe0:string:GRD",
+        "includeInGPA": "7aec815e-cb0d-4074-adbd-837d122715f8:boolean:true",
+        "reportNo": "6b84c975-511e-45eb-99f5-97daac02b906:number:1",
+        "semester": "7fcaccd2-f477-431d-92b0-67e738edfaea:string:2220"
+      },
+      {
+        "name": "79091670-0555-4cf7-a74b-7d88f074c76f:string:Introduction to Operating Systems",
+        "courseCode": "03f9b54a-b568-4740-99cb-8e8dfcae8783:string:CS2106",
+        "grade": "f98261f5-5b78-4447-b1ea-9a445bae7810:string:A",
+        "courseCredit": "e6c9c2da-6de6-45b5-80fe-e74b59fcb8a4:number:4",
+        "gradingBasis": "b3710861-1cf6-47fc-a0e4-77f1c8b421d4:string:GRD",
+        "includeInGPA": "31b12169-038e-4aa4-85b0-df03e35cb5a8:boolean:true",
+        "reportNo": "2f3f42db-dafa-45ce-b41d-37787762a92c:number:1",
+        "semester": "99406fee-e279-4962-a64c-a088785bd40c:string:2220"
+      }
+    ],
+    "additionalData": {
+      "transcriptType": "de5570e3-dd27-44e3-b1f7-f6b30d75e3e8:string:NGOF",
+      "transcriptGroup": [
+        {
+          "name": "1707e865-c991-4833-8564-b81742d18755:string:2220",
+          "term": "eb19972a-01e4-4d03-9257-3a3d97672910:string:2022/2023 Semester 2",
+          "formOfStudy": "42db363b-e51c-4052-b237-d1c6b311dc0d:string:ENRL",
+          "fosPrintArea": "b68138e0-78ea-448f-bea9-513a978833ad:string:ND",
+          "summary": [
+            {
+              "programName": "6fea677a-99be-4b2d-8535-afb986916f02:string:Non Graduating (NGE & NGNE)",
+              "includeInGPA": "698c781c-038a-4244-80a2-799784eacb90:boolean:true",
+              "disableGPA": "af5f472e-c272-406b-a1fe-08404b525768:boolean:false",
+              "GPAName": "0222f54a-1d19-45d0-96f1-f6f49447399c:string:Cumulative Average Point",
+              "GPA": "807598e7-af7d-42ff-8630-3c76d2d3be88:number:0"
+            }
+          ],
+          "reportNo": "325a2722-b2bd-4ba2-9eca-9f24215c7830:number:1"
+        }
+      ],
+      "programData": [
+        {
+          "programCode": "3518483b-2245-4628-85fa-e9221d2ea27d:string:N0015",
+          "programName": "8e6518dc-4e23-4d29-a091-ed65f558a809:string:Non Graduating (NGE & NGNE)",
+          "statusCode": "6ede39ae-0a92-4c13-849e-01854b697b18:string:CM",
+          "statusDescription": "ad7c174e-9e4c-48cb-bc23-5a1c2c2225a3:string:Completed Programme",
+          "effectiveDate": "e92fb19e-ae49-4510-848d-cb47d0c670d2:string:2023-05-31",
+          "admitTerm": "be76026d-5392-49e8-8a67-970dfb322f78:string:2220",
+          "reportNo": "2e646705-1058-4057-8a3c-e8c9d47b2e0b:number:1"
+        }
+      ],
+      "uniqueId": "b94d6093-1cf3-4b50-8da3-1cb16538378f:string:NUSTS-A0242247J-NGRD-2-R001842189-4-P15797108-20230612"
+    }
+  },
+  "schema": "https://raw.githubusercontent.com/OpenCerts/open-certificate/master/schema/transcripts/2.0/schema.json",
+  "signature": {
+    "type": "SHA3MerkleProof",
+    "targetHash": "1e3d3915763292a0a2065796ea376254a4ddb66b0cb581719f7c1dd42b28de1f",
+    "proof": [
+      "eda026fc12dbaef0a88d74a5dbc78f6b950dc4fc82daffde3364ed20fab92973",
+      "9faae48cf35bb39e3f8021bdc03835511f5e1f4563be301cf1952fb8fa059b62",
+      "3c07c06f6540a81552849d62eed1b981330bb5c6445e480b3aec03f34f3e5549",
+      "b993606011857366c49a34dea57b19c219672dae877d234786a53b87884a3a7b",
+      "1b441478ff6eae030d8c1a9b29df03fdd6ebae53a29d47e205632985c913e529",
+      "6f788bf548522e19f8919cc36b8cdc95c814830fc057300e70b017cb32e57f3c",
+      "aa6f8f06961e790ecce6a90cca450a31e84fa8b6828a60bb2444a5952afc4291",
+      "618cebbf529f241037de545e510e8ed698568b9026c31af9287d081004ec7ed7",
+      "5669c73b59d509280f28e408a477866d4808bdb402e288a45a1a447b03612115",
+      "07ce2eb1b5cab3250d0fa14ce9903a6679f33dda25ffbb6d712f22fb48248281",
+      "a140ff2a1317f149dfc1055ba2a9e1fccceefe2f0845f7c05ac506a923347c46"
+    ],
+    "merkleRoot": "5471afadd7acd6c252dac025fff2e210bcfa4fac4924709da23ab78cc542488c"
+  },
+  "proof": [
+    {
+      "type": "OpenAttestationSignature2018",
+      "created": "2023-06-14T00:48:31.931Z",
+      "proofPurpose": "assertionMethod",
+      "verificationMethod": "did:ethr:0x253b74046d0d0d9efe214212f7900ae8b4f78f39#controller",
+      "signature": "0xd62a6a3fd68642985d4a4d6f5dacfa567fd8417768fc851c7fef2432e24b505b692a4f65ebec41ba1d745c791b7886e499bbfefd889cc97511680beff92e66c41b"
+    }
+  ]
+}
