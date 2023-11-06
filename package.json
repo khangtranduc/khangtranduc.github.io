@@ -9,7 +9,8 @@
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
     "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
     "lint": "eslint .",
-    "push": "npm run build && git add -A && git commit -a -m \"%npm_config_message%\" && git push"
+    "test": "echo cum && echo \"eat shit %npm_config_foo%\" && echo cock",
+    "push": "npm run build && git add -A && git commit -a -m \"%npm_config_foo%\" && git push"
   },
   "devDependencies": {
     "@sveltejs/adapter-static": "^1.0.0-next.48",
