@@ -23,9 +23,9 @@
     <cardbox>
         <article>
             <img src="/mug.jpg" alt=""/>
-            <vr/>
+            <sep/>
             <p>
-                I am a Year 6 student in NUS High and I enjoy doing science and shit
+                <span>Hi!</span> I am <b>Khang</b>, a newly graduated scholar from NUS High. I am interested in Computer Science, Physics, and Engineering.
             </p>
         </article>
     </cardbox>
@@ -84,11 +84,14 @@
         }
         article {
             display: flex;
+            flex-direction: column;
             transition: .1s;
             align-items: center;
             width: 95%;
+            padding: 2.5rem 1.25rem 2.5rem 1.25rem;
             @include media(xl) {
                 width: 40%;
+                flex-direction: row;
             }
             margin: 0;
             gap: .5rem;
@@ -97,23 +100,32 @@
                 aspect-ratio: 1;
                 border-radius: 100%;
                 object-fit: cover;
-                object-position: 0 -1%;
+                object-position: 0 20%;
             }
             p {
                 height: fit-content;
                 margin: 0;
+            }
+            span {
+                font-size: 2rem;
             }
             &:hover {
                 transform: rotate(-2deg) scale(1.01);
             }
         }
     }
-    vr {
-        width: 0;
-        height: 100%;
+    sep {
+        width: 100%;
+        height: 0%;
         border: solid .01rem;
+        @include media(xl){
+            width: 0%;
+            height: 100%;
+        }
     }
     main {
+        display: flex;
+        flex-direction: column;
         width: 100vw;
         height: 92vh;
         background-image: url('/bg/galaxy.gif');
@@ -121,7 +133,10 @@
         background-position-y: 50%;
     }
     clicker {
+        display: flex;
+        align-items: center;
         width: 100%;
+        height: min-content;
         display: flex;
         gap: .5rem;
         margin-top: 1rem;
@@ -150,6 +165,7 @@
     }
     catalog {
         display: flex;
+        flex: 1;
         flex-wrap: wrap;
         gap: .3rem;
         margin-left: .7rem;
@@ -160,6 +176,7 @@
         }
         >article {
             width: 100%;
+            flex: 1;
             display: flex;
             flex-direction: column;
             transition: .3s;
@@ -224,7 +241,7 @@
             align-items: center;
         }
     }
-    h1, h2 {
+    h1, h2, span {
         background-size: cover;
         background-image: url('/wave.gif');
         background-clip: text;

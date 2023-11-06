@@ -14,7 +14,7 @@ export const load = async () => {
                             href: "/downloads/mri_noise_proj.pdf"
                         }
                     ]},
-                {name: "Project 1", status: Status.Ongoing, desc:"Gamer", src: "/wave.gif"},
+                {name: "Project 1", status: Status.Ongoing, src: "/wave.gif"},
                 {name: "Project 3", status: Status.Ongoing},
                 {name: "Project 4", status: Status.Completed},
                 {name: "Project 5", status: Status.Sidelined},
