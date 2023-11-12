@@ -7,9 +7,9 @@ export enum Status {
 export type Project = {
     name: string,
     status: Status,
-    att: Attachment[]
+    att: Attachment[],
     desc?: string,
-    src?: string,
+    src?: string
 }
 
 export type Attachment = {

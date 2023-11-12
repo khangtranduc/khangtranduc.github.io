@@ -5,6 +5,7 @@
     import { getDesc } from '$lib/funcs';
     let projects: Project[] = $page.data.projects;
     let pointer = 0;
+    let div = Math.ceil(projects.length/3);
 </script>
 
 <bg>
@@ -57,17 +58,17 @@
             </hgroup>
         </article>
         {/each}
-        <clicker>
-            <!-- svelte-ignore a11y-unknown-role -->
-            <div role="left" on:keydown on:click={() => pointer = ((pointer - 1) + 3) % 3}>
-                <iconify-icon icon="lucide:chevron-left"/>
-            </div>
-            <!-- svelte-ignore a11y-unknown-role -->
-            <div role="right" on:keydown on:click={() => pointer = (pointer + 1) % 3}>
-                <iconify-icon icon="lucide:chevron-right"/>
-            </div>
-        </clicker>
     </catalog>
+    <clicker>
+        <!-- svelte-ignore a11y-unknown-role -->
+        <div role="left" on:keydown on:click={() => pointer = ((pointer - 1) + div) % div}>
+            <iconify-icon icon="lucide:chevron-left"/>
+        </div>
+        <!-- svelte-ignore a11y-unknown-role -->
+        <div role="right" on:keydown on:click={() => pointer = (pointer + 1) % div}>
+            <iconify-icon icon="lucide:chevron-right"/>
+        </div>
+    </clicker>
 </main>
 
 <style lang="scss">
@@ -133,17 +134,14 @@
         background-position-y: 50%;
     }
     clicker {
-        display: flex;
-        align-items: center;
-        width: 100%;
-        height: min-content;
-        display: flex;
-        gap: .5rem;
-        margin-top: 1rem;
-        margin-bottom: 1rem;
-        @include media(xl) {
-            margin-bottom: 0;
+        display: none;
+        @include media(xl){
+            display: flex;
         }
+        align-items: center;
+        height: min-content;
+        gap: .5rem;
+        margin: 1rem 3rem 1rem 3rem;
         div {
             box-shadow: var(--card-box-shadow);
             border-radius: 20px;
@@ -175,9 +173,9 @@
             margin-right: 3rem;
         }
         >article {
-            width: 100%;
-            flex: 1;
+            width: 100%/5;
             display: flex;
+            flex: 1;
             flex-direction: column;
             transition: .3s;
             margin: 0;
