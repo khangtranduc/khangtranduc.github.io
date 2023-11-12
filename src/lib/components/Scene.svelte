@@ -1,16 +1,6 @@
 <script>
     import { T, useFrame } from '@threlte/core';
-    const fragmentShader = `
-        #ifdef GL_ES
-        precision mediump float;
-        #endif
-
-        uniform float u_time;
-
-        void main() {
-        gl_FragColor = vec4(abs(sin(u_time)),0.0,0.0,1.0);
-        }
-    `
+    import fragmentShader from '../../shaders/splash.frag?raw';
     const uniforms = {
       u_time: { value: 0.0 },
     }
@@ -18,9 +8,17 @@
       uniforms.u_time.value += delta;
     })
   </script>
+
+  <T.OrthographicCamera
+    makeDefault
+    position={[0,0,1]}
+    on:create={({ref}) => {
+        ref.lookAt(0,0,0)
+    }}
+  />
   
   <T.Mesh>
-    <T.BoxGeometry/>
+    <T.PlaneGeometry args={ [window.innerWidth, window.innerHeight * 0.915] }/>
     <T.ShaderMaterial
       {uniforms}
       {fragmentShader}
