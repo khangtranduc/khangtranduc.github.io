@@ -14,7 +14,7 @@
 </main>
 
 <style lang="scss">
-    @use 'typingkbd';
+    @use '../../static/scss/typingkbd';
 
     main {
         @include background();

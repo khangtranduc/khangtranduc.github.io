@@ -1,5 +1,5 @@
-export const getDesc = async (filename: any) => {
-    return await fetch(`/texts/${filename}`).then(async (res) => {
+export const getText = async (path: string) => {
+    return await fetch(path).then(async (res) => {
         if (res.ok) return await res.text();
         return "";
     })
