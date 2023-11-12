@@ -1,11 +1,19 @@
 <script lang="ts">
     import App from '$lib/components/App.svelte'
 
-    let innerWidth: number;
+    let devicePixelRatio: number;
     let innerHeight: number;
+    let innerWidth: number;
 </script>
 
-<svelte:window bind:innerWidth bind:innerHeight/>
+<svelte:window 
+    bind:devicePixelRatio
+    bind:innerHeight
+    bind:innerWidth
+    />
+
+{Math.floor(innerHeight * devicePixelRatio * 0.915)}
+{Math.floor(innerWidth * devicePixelRatio)}
 
 <main>
     <hgroup>
@@ -15,7 +23,6 @@
             <kbd role="template"/>
             <kbd/>
         </div>
-        {innerWidth}
     </hgroup>
 </main>
 
@@ -34,7 +41,7 @@
             align-items: center;
         }
     }
-    h1, h2 {
+    h1 {
         background-size: cover;
         background-image: url('/wave.gif');
         font-weight: 900;
@@ -48,12 +55,12 @@
             font-size: 5rem
         }
     }
-    h2 {
-        font-size: 2.5rem;
-        margin-bottom: .5rem;
-        @include media(xl) {
-            margin-left: 1rem;
-            font-size: 3rem;
-        }
-    }
+    // h2 {
+    //     font-size: 2.5rem;
+    //     margin-bottom: .5rem;
+    //     @include media(xl) {
+    //         margin-left: 1rem;
+    //         font-size: 3rem;
+    //     }
+    // }
 </style>
