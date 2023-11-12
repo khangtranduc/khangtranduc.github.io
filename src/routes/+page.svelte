@@ -1,6 +1,11 @@
 <script lang="ts">
     import App from '$lib/components/App.svelte'
+
+    let innerWidth: number;
+    let innerHeight: number;
 </script>
+
+<svelte:window bind:innerWidth bind:innerHeight/>
 
 <main>
     <hgroup>
@@ -10,6 +15,7 @@
             <kbd role="template"/>
             <kbd/>
         </div>
+        {innerWidth}
     </hgroup>
 </main>
 
