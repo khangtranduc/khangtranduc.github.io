@@ -4,16 +4,13 @@
     import "iconify-icon";
     import { goto } from '$app/navigation';
     import Darkmode from './darkmode.svelte';
-    import { slide } from 'svelte/transition';
-
-    let isOpen = false;
 </script>
 
 <main>
     <nav class="container-fluid">
         <ul on:click={() => goto('/')} on:keydown>
             <li>
-                <img src="/profile.jpg" alt=""/>
+                <img src="/favicon.png" alt=""/>
                 <strong>Khang Tran</strong>
             </li>
         </ul>
@@ -25,20 +22,8 @@
           <li><iconify-icon icon="lucide:mail" width="25"/></li>
           <li><iconify-icon on:keydown on:click={() => window.open("https://www.linkedin.com/in/khangtranduc", "_blank")} icon="fa6-brands:linkedin" width="25"/></li>
           <li><Darkmode /></li>
-          <!-- svelte-ignore a11y-click-events-have-key-events -->
-          <li role="hamburger" on:click={() => isOpen = !isOpen}><iconify-icon icon="lucide:align-justify"/></li>
         </ul>
     </nav>
-    <!-- svelte-ignore a11y-unknown-role -->
-    {#if isOpen}
-    <ul role="drawer" transition:slide>
-        <li><iconify-icon icon="fa6-brands:whatsapp" width="25"/></li>
-        <li><iconify-icon icon="fa6-brands:telegram" width="25"/></li>
-        <li><iconify-icon icon="fa6-brands:github" width="25"/></li>
-        <li><iconify-icon icon="lucide:mail" width="25"/></li>
-        <li><iconify-icon icon="fa6-brands:linkedin" width="25"></iconify-icon></li>
-    </ul>
-    {/if}
 </main>
 
 <slot/>
@@ -60,28 +45,12 @@
         align-items: center;
         gap: .5rem;
         transition: .3s;
-        &[role="hamburger"] {
-            @include media(xl) {
-                display: none;
-            }
-        }
-        &:not([role="label"]){
-            &:hover {
-                transition: .3s;
-                transform: scale(1.1);
-            }
+        &:hover {
+            transition: .3s;
+            transform: scale(1.1);
         }
     }
     ul{
-        &[role="drawer"] {
-            display: flex;
-            justify-content: space-around;
-            margin: 0;
-            width: 100%;
-            @include media(xl) {
-                display: none;
-            }
-        }
         &[role="brands"] {
             >li:nth-child(-n + 5) {
                 display: none;

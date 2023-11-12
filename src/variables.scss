@@ -42,3 +42,23 @@ $shadow: var(--shadow);
       } 
     }
 }
+
+@mixin background($bg: "/wave.gif"){
+  display: flex;
+  width: 100vw;
+  height: 91.5vh;
+  background-image: url($bg);
+  background-size: cover;
+  background-position-y: 75%;
+  align-items: center;
+  justify-content: center;
+
+}
+
+@mixin clear-text(){
+  background-clip: text;
+  color: transparent;
+  -webkit-background-clip: text;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: white;
+}
