@@ -1,4 +1,5 @@
 /* Variables and mixins declared here will be available in all other SCSS files */
+/* Variables and mixins declared here will be available in all other SCSS files */
 $primary-300: #00d4bf;
 $primary-400: #00beab;
 $primary-500: #009688;
@@ -21,29 +22,29 @@ $var-gray: var(--var-gray);
 $shadow: var(--shadow);
 
 :root {
-    --layout-color: #f8f8f8;
-    --end-point: #fffe;
-    --mid-point: #fff8;
-    --var-green: rgb(135, 218, 135);
-    --var-gray: rgb(199, 199, 199);
-    --shadow: var(--var-gray);
-    &[data-theme="dark"]{
-        --layout-color: #2b2a2a;
-        --end-point: #222c;
-        --mid-point: #2228;
-        --shadow: rgb(239, 136, 138);
-    }
+  --layout-color: #f8f8f8;
+  --end-point: #fffe;
+  --mid-point: #fff8;
+  --var-green: rgb(135, 218, 135);
+  --var-gray: rgb(199, 199, 199);
+  --shadow: var(--var-gray);
+  &[data-theme="dark"] {
+    --layout-color: #2b2a2a;
+    --end-point: #222c;
+    --mid-point: #2228;
+    --shadow: rgb(239, 136, 138);
+  }
 }
 
-@mixin media($keys...){
-    @each $key in $keys { 
-      @media (min-width: map-get($breakpoints, $key)){
-        @content
-      } 
+@mixin media($keys...) {
+  @each $key in $keys {
+    @media (min-width: map-get($breakpoints, $key)) {
+      @content;
     }
+  }
 }
 
-@mixin background($bg: "/wave.gif"){
+@mixin background($bg: "/wave.gif") {
   display: flex;
   width: 100vw;
   height: 91.5vh;
@@ -52,10 +53,9 @@ $shadow: var(--shadow);
   background-position-y: 75%;
   align-items: center;
   justify-content: center;
-
 }
 
-@mixin clear-text(){
+@mixin clear-text() {
   background-clip: text;
   color: transparent;
   -webkit-background-clip: text;

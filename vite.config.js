@@ -11,6 +11,9 @@ const config = {
       },
     },
   },
+  ssr: {
+    noExternal: ['three']
+  }
 };
 
 export default config;

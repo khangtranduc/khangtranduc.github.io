@@ -1,3 +1,4 @@
+import { vitePreprocess } from "@sveltejs/kit/vite";
 import adapter from "@sveltejs/adapter-static";
 import preprocess from "svelte-preprocess";
 
@@ -11,12 +12,13 @@ const config = {
         prependData: '@use "src/variables.scss" as *;',
       },
     }),
+    vitePreprocess({}),
   ],
 
   kit: {
     adapter: adapter({
       pages: "docs",
-      assets: "docs"
+      assets: "docs",
     }),
   },
 };

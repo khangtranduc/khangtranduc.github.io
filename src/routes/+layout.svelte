@@ -1,4 +1,5 @@
 <script lang="ts">
+    import "../app.scss";
     import "@picocss/pico/scss/pico.scss";
     import "../app.scss";
     import "iconify-icon";
@@ -8,25 +9,27 @@
 
 <main>
     <nav class="container-fluid">
+        <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
         <ul on:click={() => goto('/')} on:keydown>
             <li>
-                <img src="/favicon.png" alt=""/>
+                <img src="/favicon.png" alt="">
                 <strong>Khang Tran</strong>
             </li>
         </ul>
         <!-- svelte-ignore a11y-unknown-role -->
         <ul role="brands">
-          <li><iconify-icon icon="fa6-brands:whatsapp" width="25"/></li>
-          <li><iconify-icon icon="fa6-brands:telegram" width="25"/></li>
-          <li><iconify-icon icon="fa6-brands:github" width="25"/></li>
-          <li><iconify-icon icon="lucide:mail" width="25"/></li>
-          <li><iconify-icon on:keydown on:click={() => window.open("https://www.linkedin.com/in/khangtranduc", "_blank")} icon="fa6-brands:linkedin" width="25"/></li>
-          <li><Darkmode /></li>
+          <li><iconify-icon icon="fa6-brands:whatsapp" width="25"></iconify-icon></li>
+          <li><iconify-icon icon="fa6-brands:telegram" width="25"></iconify-icon></li>
+          <li><iconify-icon icon="fa6-brands:github" width="25"></iconify-icon></li>
+          <li><iconify-icon icon="lucide:mail" width="25"></iconify-icon></li>
+          <!-- svelte-ignore a11y-no-static-element-interactions -->
+          <li><iconify-icon on:keydown on:click={() => window.open("https://www.linkedin.com/in/khangtranduc", "_blank")} icon="fa6-brands:linkedin" width="25"></iconify-icon></li>
+          <li><Darkmode></Darkmode></li>
         </ul>
     </nav>
 </main>
 
-<slot/>
+<slot></slot>
 
 <style lang="scss">
     img {

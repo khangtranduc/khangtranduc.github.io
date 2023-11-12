@@ -11,6 +11,7 @@
     }
 </script>
 
+<!-- svelte-ignore a11y-no-static-element-interactions -->
 <div on:click={toggle} on:keydown>
     <iconify-icon icon="lucide:{icon}"></iconify-icon>
 </div>
