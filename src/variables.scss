@@ -44,15 +44,10 @@ $shadow: var(--shadow);
   }
 }
 
-@mixin background($bg: "/wave.gif") {
-  display: flex;
-  width: 100vw;
-  height: 91.5vh;
+@mixin background($bg: "/wave.gif", $posY: 75%) {
   background-image: url($bg);
   background-size: cover;
-  background-position-y: 75%;
-  align-items: center;
-  justify-content: center;
+  background-position-y: $posY;
 }
 
 @mixin clear-text() {

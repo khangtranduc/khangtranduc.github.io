@@ -1,21 +1,19 @@
 <script lang="ts">
     import App from '$lib/components/App.svelte'
-
-    let devicePixelRatio: number;
-    let innerHeight: number;
-    let innerWidth: number;
+//     <main>
+//     <hgroup>
+//         <h1>Tran Duc Khang</h1>
+//         <div>
+//             <!-- svelte-ignore a11y-unknown-role -->
+//             <kbd role="template"/>
+//             <kbd/>
+//         </div>
+//     </hgroup>
+//     </main>
 </script>
 
-<svelte:window 
-    bind:devicePixelRatio
-    bind:innerHeight
-    bind:innerWidth
-    />
-
-{Math.floor(innerHeight * devicePixelRatio * 0.915)}
-{Math.floor(innerWidth * devicePixelRatio)}
-
 <main>
+    <App />
     <hgroup>
         <h1>Tran Duc Khang</h1>
         <div>
@@ -26,16 +24,18 @@
     </hgroup>
 </main>
 
-<main>
-    <App />
-</main>
-
 <style lang="scss">
     @use '../../static/scss/typingkbd';
-
     main {
-        @include background();
+        //This does not work for zoomed screens
+        width: 100vw;
+        height: 91.5vh;
+        position: relative;
         hgroup {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             display: flex;
             flex-direction: column;
             align-items: center;
