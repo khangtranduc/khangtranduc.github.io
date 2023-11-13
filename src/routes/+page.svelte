@@ -42,8 +42,6 @@
         }
     }
     h1 {
-        background-size: cover;
-        background-image: url('/wave.gif');
         font-weight: 900;
         text-align: center;
         @include clear-text();
