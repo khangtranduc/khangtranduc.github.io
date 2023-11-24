@@ -1,19 +1,9 @@
 <script lang="ts">
-    import App from '$lib/components/App.svelte'
-//     <main>
-//     <hgroup>
-//         <h1>Tran Duc Khang</h1>
-//         <div>
-//             <!-- svelte-ignore a11y-unknown-role -->
-//             <kbd role="template"/>
-//             <kbd/>
-//         </div>
-//     </hgroup>
-//     </main>
+    import GLSLCanvas from '$lib/components/GLSLCanvas.svelte'
 </script>
 
 <main>
-    <App />
+    <GLSLCanvas shader='splash'/>
     <hgroup>
         <h1>Tran Duc Khang</h1>
         <div>
@@ -33,6 +23,7 @@
         position: relative;
         hgroup {
             position: absolute;
+            width: 100%;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
@@ -42,23 +33,13 @@
         }
     }
     h1 {
+        font-size: 2.3rem;
         font-weight: 900;
         text-align: center;
-        @include clear-text();
-    }
-    h1 {
-        font-size: 2.9rem;
         filter: grayscale(.7);
+        @include clear-text();
         @include media(xl) {
             font-size: 5rem
         }
     }
-    // h2 {
-    //     font-size: 2.5rem;
-    //     margin-bottom: .5rem;
-    //     @include media(xl) {
-    //         margin-left: 1rem;
-    //         font-size: 3rem;
-    //     }
-    // }
 </style>

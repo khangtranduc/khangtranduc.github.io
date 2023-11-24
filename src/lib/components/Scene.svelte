@@ -1,12 +1,14 @@
 <script lang="ts">
   import { T, useFrame, useThrelte } from '@threlte/core';
-  import fragmentShader from '../../shaders/splash.frag?raw';
+  import { getText } from '$lib/funcs';
 
   let innerWidth: number;
   let innerHeight: number;
   let height: number;
   let width: number;
   let devicePixelRatio: number;
+
+  export let shader: string;
 
   const uniforms = {
     u_resolution: { value: { x: 0.0, y: 0.0 } },
@@ -32,8 +34,6 @@
   on:mousemove={(e) => {
     uniforms.u_mouse.value.x = Math.floor(e.clientX * devicePixelRatio);
     uniforms.u_mouse.value.y = Math.floor((height - e.clientY) * devicePixelRatio);
-    console.log(e.clientX/width);
-    console.log(1 - e.clientY/height);
   }}/>
 
 <T.OrthographicCamera
@@ -45,13 +45,15 @@
   }}
 />
 
-<T.Mesh>
-  <T.PlaneGeometry 
-    on:change={invalidate}
-    args={ [width, height] }
+{#await getText(`/shaders/${shader}.frag`) then fragmentShader}
+  <T.Mesh>
+    <T.PlaneGeometry
+      on:change={invalidate}
+      args={ [width, height] }
+      />
+    <T.ShaderMaterial
+      {uniforms}
+      {fragmentShader}
     />
-  <T.ShaderMaterial
-    {uniforms}
-    {fragmentShader}
-  />
-</T.Mesh>
+  </T.Mesh>
+{/await}
