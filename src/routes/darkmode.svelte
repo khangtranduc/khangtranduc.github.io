@@ -1,11 +1,11 @@
 <script lang="ts">
-    let dark = false;
+    import { dark } from '$lib/stores';
 
-    $: icon = dark ? "sun" : "moon";
+    $: icon = $dark ? "sun" : "moon";
 
     const toggle = () => {
-        dark = !dark;
-        dark
+        $dark = !$dark;
+        $dark
             ? document.documentElement.setAttribute("data-theme", "dark")
             : document.documentElement.setAttribute("data-theme", "light");
     }

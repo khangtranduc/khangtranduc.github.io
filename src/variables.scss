@@ -19,7 +19,6 @@ $end-point: var(--end-point);
 $mid-point: var(--mid-point);
 $var-green: var(--var-green);
 $var-gray: var(--var-gray);
-$shadow: var(--shadow);
 
 :root {
   --layout-color: #f8f8f8;
@@ -32,7 +31,6 @@ $shadow: var(--shadow);
     --layout-color: #2b2a2a;
     --end-point: #222c;
     --mid-point: #2228;
-    --shadow: rgb(239, 136, 138);
   }
 }
 
@@ -55,5 +53,5 @@ $shadow: var(--shadow);
   color: transparent;
   -webkit-background-clip: text;
   -webkit-text-stroke-width: 1px;
-  -webkit-text-stroke-color: white;
+  -webkit-text-stroke-color: $layout-color;
 }

@@ -1,5 +1,5 @@
 <script lang="ts">
-    import GLSLCanvas from '$lib/components/GLSLCanvas.svelte'
+    import GLSLCanvas from '$lib/components/GLSLCanvas.svelte';
 </script>
 
 <main>

@@ -1,6 +1,7 @@
 <script lang="ts">
   import { T, useFrame, useThrelte } from '@threlte/core';
   import { getText } from '$lib/funcs';
+  import { dark } from '$lib/stores';
 
   let innerWidth: number;
   let innerHeight: number;
@@ -14,6 +15,7 @@
     u_resolution: { value: { x: 0.0, y: 0.0 } },
     u_time: { value: 0.0 },
     u_mouse: { value: { x: 0.0, y: 0.0 } },
+    u_dark: { value: 0.0 }
   }
 
   const { invalidate } = useThrelte();
@@ -25,6 +27,7 @@
   $: width = innerWidth;
   $: uniforms.u_resolution.value.x = Math.floor(width * devicePixelRatio);
   $: uniforms.u_resolution.value.y = Math.floor(height * devicePixelRatio);
+  $: uniforms.u_dark.value = $dark ? 1 : 0;
 </script>
 
 <svelte:window 

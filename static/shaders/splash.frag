@@ -8,8 +8,10 @@ precision mediump float;
 uniform vec2 u_resolution;
 uniform vec2 u_mouse;
 uniform float u_time;
+uniform float u_dark;
 
 float wave( in vec2 st , in float a , in float phase ) {
+
     return .1 * cos(2. * PI * f/3. * st.x + u_time + phase) * pow(sin(2. * PI * f * st.x + phase), 2.) + a;
 }
 
@@ -31,6 +33,8 @@ void main() {
     color.r -= (st.y + grad) * (.6 - step(wave(st, offset, 0.), st.y));
     color.g -= (st.y + grad) * (.7 - step(wave(st, offset - g_delta, .8), st.y));
     color.b -= (st.y + grad) * (.3 - step(wave(st, offset + b_delta, -1.6), st.y));
+
+    color = u_dark + (-2. * u_dark + 1.) * color;
 
     gl_FragColor = vec4(color, 1.);
 }
