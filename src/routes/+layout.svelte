@@ -18,13 +18,16 @@
         </ul>
         <!-- svelte-ignore a11y-unknown-role -->
         <ul role="brands">
-          <li><iconify-icon icon="fa6-brands:whatsapp" width="25"></iconify-icon></li>
-          <li><iconify-icon icon="fa6-brands:telegram" width="25"></iconify-icon></li>
-          <li><iconify-icon icon="fa6-brands:github" width="25"></iconify-icon></li>
-          <li><iconify-icon icon="lucide:mail" width="25"></iconify-icon></li>
-          <!-- svelte-ignore a11y-no-static-element-interactions -->
-          <li><iconify-icon on:keydown on:click={() => window.open("https://www.linkedin.com/in/khangtranduc", "_blank")} icon="fa6-brands:linkedin" width="25"></iconify-icon></li>
-          <li><Darkmode></Darkmode></li>
+            <li><a href="mailto:khangtranduc6@gmail.com">
+                <iconify-icon icon="lucide:mail" width="25"/>
+            </a></li>
+            <li><a href="https://github.com/khangtranduc" target="_blank">
+                <iconify-icon icon="lucide:github" width="25"/>
+            </a></li>
+            <li><a href="https://www.linkedin.com/in/khangtranduc" target="_blank">
+                <iconify-icon icon="lucide:linkedin" width="25"/>
+            </a></li>
+            <li><Darkmode></Darkmode></li>
         </ul>
     </nav>
 </main>
@@ -32,6 +35,11 @@
 <slot></slot>
 
 <style lang="scss">
+    a {
+        all: unset;
+        display: flex;
+        align-items: center;
+    }
     img {
         width: 2rem;
         height: 2rem;
