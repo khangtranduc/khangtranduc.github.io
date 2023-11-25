@@ -24,18 +24,20 @@ void main() {
     vec2 st = gl_FragCoord.xy/vec2(2560, u_resolution.y);
     vec3 color = vec3(0.);
 
-    color = vec3(rgb(250., 243., 225.));
+    color = vec3(0.);
 
     float offset = .7;
     float g_delta = .03;
     float b_delta = .02;
     float grad = .7;
 
-    color.r -= (st.y + grad) * (.6 - step(wave(st, offset, 0.), st.y));
-    color.g -= (st.y + grad) * (.7 - step(wave(st, offset - g_delta, .8), st.y));
-    color.b -= (st.y + grad) * (.3 - step(wave(st, offset + b_delta, -1.6), st.y));
+    color.r -= (.6 - step(wave(st, offset, 0.), st.y));
+    color.g -= (.7 - step(wave(st, offset - g_delta, .8), st.y));
+    color.b -= (.3 - step(wave(st, offset + b_delta, -1.6), st.y));
 
-    color = u_dark + (-2. * u_dark + 1.) * color;
+    // color *= st.y + grad;
+
+    color = u_dark + (-2. * u_dark + 1.) * (color + rgb(250., 243., 225.));
 
     gl_FragColor = vec4(color, 1.);
 }

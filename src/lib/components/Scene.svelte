@@ -15,7 +15,7 @@
     u_resolution: { value: { x: 0.0, y: 0.0 } },
     u_time: { value: 0.0 },
     u_mouse: { value: { x: 0.0, y: 0.0 } },
-    u_dark: { value: 0.0 }
+    u_dark: { value: 0.0 },
   }
 
   const { invalidate } = useThrelte();
