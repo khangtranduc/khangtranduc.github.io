@@ -20,7 +20,8 @@ vec3 rgb(in float r, in float g, in float b){
 }
 
 void main() {
-    vec2 st = gl_FragCoord.xy/u_resolution;
+    // Modified st
+    vec2 st = gl_FragCoord.xy/vec2(2560, u_resolution.y);
     vec3 color = vec3(0.);
 
     color = vec3(rgb(250., 243., 225.));
