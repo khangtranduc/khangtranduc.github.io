@@ -7,4 +7,4 @@
 
 <Canvas>
     <Scene {shader}/>
-</Canvas>  
+</Canvas>

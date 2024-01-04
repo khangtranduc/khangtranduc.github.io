@@ -5,9 +5,15 @@
 
 <svelte:window bind:scrollY/>
 
+<!-- <h3>{scrollY}</h3> -->
+
 <main>
     <GLSLCanvas shader='splash'/>
-    <hgroup class="name">
+    <hgroup class="name" 
+        style="
+            opacity: {(300-scrollY)/300}; 
+            transform: translate(-50%, {-50+scrollY/15}%);
+        ">
         <h1>Tran Duc Khang</h1>
         <div>
             <!-- svelte-ignore a11y-unknown-role -->
@@ -19,8 +25,14 @@
 
 <main>
     <GLSLCanvas shader='under'/>
-    <hgroup>
-        <h2>Projects</h2>
+    <hgroup
+        style="
+            opacity: {(scrollY-750)/100}
+        ">
+        <h2>What I Do</h2>
+        <!-- Fade in when the scroll reaches a certain section (bottom perhaps) -->
+        <!-- Change to "what i did" when scrolling over past projects -->
+        <!-- Each page in the carousel is one project -->
     </hgroup>
 </main>
 
@@ -46,6 +58,12 @@
                 justify-content: center;
             }
         }
+    }
+    h3{
+        position: fixed;
+        z-index: 2;
+        bottom: 50%;
+        left: 50%;
     }
     h1, h2 {
         font-weight: 900;
