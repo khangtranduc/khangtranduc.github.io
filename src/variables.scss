@@ -34,6 +34,10 @@ $var-gray: var(--var-gray);
   }
 }
 
+:root {
+  overscroll-behavior: none;
+}
+
 @mixin media($keys...) {
   @each $key in $keys {
     @media (min-width: map-get($breakpoints, $key)) {
