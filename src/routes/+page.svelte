@@ -3,11 +3,11 @@
     import { onMount } from 'svelte';
     let scrollY: number;
     let maxY: number;
-    let box = {height: 60, width: 400};
+    let colors = ["white", "red", "blue", "green", "orange", "purple", "gray", "cyan"]
+    let box = {height: 90, width: colors.length * 100};
     let deltaY = 0;
     let initial_left = box.width/2;
     let left = initial_left;
-    
 
     const horizontalScroll = (event: WheelEvent) => {
         left = initial_left - deltaY/10;
@@ -19,7 +19,7 @@
             }
         }
         if (deltaY < 0 && left < (initial_left + 10) && event.deltaY < 0) deltaY = 0;
-        if (left < -0.25 * box.width) left = -0.25 * box.width;
+        if (left < -(colors.length/2 - 1) * 100) left = -(colors.length/2 - 1) * 100;
         //Pac-Man effect
         // if ((left <= -box.width/2 && event.deltaY > 0) || (left >= 100 + box.width/2 && event.deltaY < 0)) deltaY = 10 * initial_left-deltaY;
     }
@@ -34,6 +34,7 @@
 <!-- <h3>
     {deltaY}
     {left}
+    {box.width}
 </h3> -->
 
 <main>
@@ -68,12 +69,18 @@
         style="
             height: {box.height}%;
             width: {box.width}%;
-            left: {left}%
+            left: {left}%;
+            opacity: {(scrollY-(maxY-400))/400};
+            transform: translate(-50%, -{50+(maxY-scrollY)/15}%)
         ">
-        <innerbox style="background-color: white"/>
-        <innerbox style="background-color: red"/>
-        <innerbox style="background-color: blue"/>
-        <innerbox style="background-color: green"/>
+        <!-- Add a Svelte for loop here, use the number of cards to scale box container -->
+        {#each colors as color, _}
+        <innerbox>
+            <article style="background-color: {color}">
+                <h1>{color}</h1>
+            </article>
+        </innerbox>
+        {/each}
     </box>
     <cover on:wheel={horizontalScroll}/>
 </main>
@@ -101,15 +108,36 @@
                 align-items: center;
                 justify-content: center;
             }
+            h1, h2 {
+                font-weight: 900;
+                @include clear-text();
+            }
+            h1 {
+                font-size: 2.3rem;
+                @include media(xl) {
+                    font-size: 5rem;
+                }
+            }
+            h2 {
+                font-size: 1.7rem;
+                padding: 0 0 0 1rem;
+                @include media(xl) {
+                    font-size: 3rem;
+                }
+            }
         }
         box {
             display: flex;
-            // background: linear-gradient(to right, white, gray);
-            // border-radius: 7px;
             innerbox {
-                border-radius: 7px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex: 1;
                 height: 100%;
-                width: 25%;
+                article {
+                    height: 80%;
+                    width: 80%;
+                }
             }
         }
     }
@@ -118,22 +146,5 @@
         z-index: 2;
         bottom: 50%;
         left: 50%;
-    }
-    h1, h2 {
-        font-weight: 900;
-        @include clear-text();
-    }
-    h1 {
-        font-size: 2.3rem;
-        @include media(xl) {
-            font-size: 5rem;
-        }
-    }
-    h2 {
-        font-size: 1.7rem;
-        padding: 0 0 0 1rem;
-        @include media(xl) {
-            font-size: 3rem;
-        }
     }
 </style>
