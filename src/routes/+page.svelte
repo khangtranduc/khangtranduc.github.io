@@ -1,13 +1,24 @@
 <script lang="ts">
     import GLSLCanvas from '$lib/components/GLSLCanvas.svelte';
     import { onMount } from 'svelte';
-    let scrollY: number;
+    import { cubicOut } from 'svelte/easing';
+    import { tweened, type Tweened } from 'svelte/motion';
+
+    let scrollY: number = 0;
     let maxY: number;
     let colors = ["white", "red", "blue", "green", "orange", "purple", "gray", "cyan"]
     let box = {height: 90, width: colors.length * 100};
     let deltaY = 0;
     let initial_left = box.width/2;
     let left = initial_left;
+    // Tweens
+    let leftTweened = tweened(left, {duration: 300, easing: cubicOut})
+    let nameOpacityTweened = tweened((300-scrollY)/300, {duration: 400, easing: cubicOut});
+    let nameVerticalTweened = tweened(-50+scrollY/15, {duration: 400, easing: cubicOut});
+
+    $: $nameOpacityTweened = (300-scrollY)/300;
+    $: $nameVerticalTweened = -50+scrollY/10;
+    $: $leftTweened = left;
 
     const horizontalScroll = (event: WheelEvent) => {
         left = initial_left - deltaY/10;
@@ -25,24 +36,22 @@
     }
     
     onMount(() => {
-        maxY = (document.documentElement.scrollHeight - document.documentElement.clientHeight)
+        maxY = (document.documentElement.scrollHeight - document.documentElement.clientHeight);
     })
 </script>
 
 <svelte:window bind:scrollY/>
 
-<!-- <h3>
-    {deltaY}
-    {left}
-    {box.width}
-</h3> -->
+<h3>
+    
+</h3>
 
 <main>
     <GLSLCanvas shader='splash'/>
     <hgroup class="name" 
         style="
-            opacity: {(300-scrollY)/300};
-            transform: translate(-50%, {-50+scrollY/15}%);
+            opacity: {$nameOpacityTweened};
+            transform: translate(-50%, {$nameVerticalTweened}%);
         ">
         <h1>Tran Duc Khang</h1>
         <div>
@@ -69,7 +78,7 @@
         style="
             height: {box.height}%;
             width: {box.width}%;
-            left: {left}%;
+            left: {$leftTweened}%;
             opacity: {(scrollY-(maxY-400))/400};
             transform: translate(-50%, -{50+(maxY-scrollY)/15}%)
         ">
