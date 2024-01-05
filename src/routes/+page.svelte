@@ -3,40 +3,37 @@
     import { onMount } from 'svelte';
     let scrollY: number;
     let maxY: number;
-    let innerWidth: number;
-    let right: number;
-    let left: number;
-    let box: HTMLElement;
-    
+    let box = {height: 60, width: 400};
     let deltaY = 0;
+    let initial_left = box.width/2;
+    let left = initial_left;
+    
 
     const horizontalScroll = (event: WheelEvent) => {
-        right = box?.getBoundingClientRect().right
-        left = box?.getBoundingClientRect().left
+        left = initial_left - deltaY/10;
         if (Math.abs(scrollY - maxY) < .5) {
-            if (right > 0 || event.deltaY < 0) deltaY += event.deltaY
-            if (deltaY > 0 || left + right > innerWidth) {
+            if (left > -box.width/2 || event.deltaY < 0) deltaY += event.deltaY;
+            if (deltaY > 0 || left > initial_left) {
                 event.preventDefault();
                 event.stopPropagation();
             }
         }
-        if (deltaY < 0 && left + right < innerWidth && event.deltaY < 0) deltaY = 0
-        if ((right <= 0 && event.deltaY > 0) || (left >= innerWidth && event.deltaY < 0)) deltaY = -deltaY
+        if (deltaY < 0 && left < (initial_left + 10) && event.deltaY < 0) deltaY = 0;
+        if (left < -0.25 * box.width) left = -0.25 * box.width;
+        //Pac-Man effect
+        // if ((left <= -box.width/2 && event.deltaY > 0) || (left >= 100 + box.width/2 && event.deltaY < 0)) deltaY = 10 * initial_left-deltaY;
     }
-
     
     onMount(() => {
         maxY = (document.documentElement.scrollHeight - document.documentElement.clientHeight)
     })
 </script>
 
-<svelte:window bind:scrollY bind:innerWidth/>
+<svelte:window bind:scrollY/>
 
 <!-- <h3>
-    {-50-deltaY/10}
-    {(right + left)/2}
+    {deltaY}
     {left}
-    {innerWidth/2}
 </h3> -->
 
 <main>
@@ -69,11 +66,14 @@
     </hgroup>
     <box
         style="
-            transform: translate({-50-deltaY/10}%, -50%)
-        " bind:this={box}>
-        <innerbox style="background-color: blue"/>
-        <innerbox style="background-color: transparent"/>
+            height: {box.height}%;
+            width: {box.width}%;
+            left: {left}%
+        ">
+        <innerbox style="background-color: white"/>
         <innerbox style="background-color: red"/>
+        <innerbox style="background-color: blue"/>
+        <innerbox style="background-color: green"/>
     </box>
     <cover on:wheel={horizontalScroll}/>
 </main>
@@ -93,6 +93,8 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
+        }
+        hgroup {
             &.name {
                 display: flex;
                 flex-direction: column;
@@ -102,16 +104,12 @@
         }
         box {
             display: flex;
-            width: fit-content;
-            height: 50%;
-            border: solid;
-            // width: fit-content;
-            // border-right: solid red;
-            // border-left: solid red;
+            // background: linear-gradient(to right, white, gray);
+            // border-radius: 7px;
             innerbox {
-                width: 100vw;
+                border-radius: 7px;
                 height: 100%;
-                border-left: solid white;
+                width: 25%;
             }
         }
     }
