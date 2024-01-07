@@ -2,7 +2,7 @@
     import GLSLCanvas from '$lib/components/GLSLCanvas.svelte';
     import { onMount } from 'svelte';
     import { cubicOut } from 'svelte/easing';
-    import { tweened, type Tweened } from 'svelte/motion';
+    import { tweened } from 'svelte/motion';
 
     let scrollY: number = 0;
     let maxY: number;
@@ -42,9 +42,9 @@
 
 <svelte:window bind:scrollY/>
 
-<h3>
+<!-- <h3>
     
-</h3>
+</h3> -->
 
 <main>
     <GLSLCanvas shader='splash'/>
@@ -62,7 +62,7 @@
     </hgroup>
 </main>
 
-<main>
+<main on:wheel={horizontalScroll}>
     <GLSLCanvas shader='under'/>
     <hgroup
         style="
@@ -70,10 +70,8 @@
             transform: translate(-50%, -{50+(maxY-scrollY)/10}%)
         ">
         <h2>What I Do</h2>
-        <!-- Fade in when the scroll reaches a certain section (bottom perhaps) -->
-        <!-- Change to "what i did" when scrolling over past projects -->
-        <!-- Each page in the carousel is one project -->
     </hgroup>
+    {#if scrollY > maxY/2}
     <box
         style="
             height: {box.height}%;
@@ -82,16 +80,17 @@
             opacity: {(scrollY-(maxY-400))/400};
             transform: translate(-50%, -{50+(maxY-scrollY)/15}%)
         ">
-        <!-- Add a Svelte for loop here, use the number of cards to scale box container -->
         {#each colors as color, _}
         <innerbox>
-            <article style="background-color: {color}">
-                <h1>{color}</h1>
-            </article>
+            <a href="/project/{color}">
+                <article style="background-color: {color}" style:--card="{color}">
+                    <h1>{color}</h1>
+                </article>
+            </a>
         </innerbox>
         {/each}
     </box>
-    <cover on:wheel={horizontalScroll}/>
+    {/if}
 </main>
 
 <style lang="scss">
@@ -101,7 +100,7 @@
         width: 100vw;
         height: 91.5vh;
         position: relative;
-        hgroup, cover, box {
+        hgroup, box {
             all: unset;
             position: absolute;
             height: 100%;
@@ -143,9 +142,20 @@
                 justify-content: center;
                 flex: 1;
                 height: 100%;
-                article {
+                a {
+                    transition: .3s;
                     height: 80%;
                     width: 80%;
+                    &:hover {
+                        text-decoration: none;
+                        transition: .3s;
+                        transform: scale(1.01);
+                    }
+                    article {
+                        margin: none;
+                        height: 100%;
+                        view-transition-name: var(--card);
+                    }
                 }
             }
         }

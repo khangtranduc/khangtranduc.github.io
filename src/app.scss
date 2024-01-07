@@ -3,3 +3,18 @@
 lorem::before {
   content: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Deserunt quisquam, exercitationem natus culpa illum odit alias voluptatem vero possimus quo ad accusamus repudiandae enim laborum doloribus earum aut dignissimos asperiores?";
 }
+
+:root {
+  overscroll-behavior: none;
+  overflow-x: hidden;
+  scrollbar-width: none;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: .3s;
+}

@@ -1,20 +1,33 @@
 <script lang="ts">
     import "../app.scss";
     import "@picocss/pico/scss/pico.scss";
-    import "../app.scss";
     import "iconify-icon";
-    import { goto } from '$app/navigation';
+    import { onNavigate } from '$app/navigation';
     import Darkmode from './darkmode.svelte';
+
+    onNavigate((navigation) => {
+        // @ts-ignore
+        if (!document.startViewTransition) return;
+
+        return new Promise((resolve) => {
+            // @ts-ignore
+            document.startViewTransition(async () => {
+                resolve();
+                await navigation.complete;
+            });
+        });
+    });
 </script>
 
 <main>
     <nav class="container-fluid">
-        <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
-        <ul on:click={() => goto('/')} on:keydown>
-            <li>
-                <img src="/favicon.png" alt="">
-                <strong>Khang Tran</strong>
-            </li>
+        <ul>
+            <a href="/">
+                <li>
+                    <img src="/favicon.png" alt="">
+                    <strong>Khang Tran</strong>
+                </li>
+            </a>
         </ul>
         <!-- svelte-ignore a11y-unknown-role -->
         <ul role="brands">
@@ -32,7 +45,7 @@
     </nav>
 </main>
 
-<slot></slot>
+<slot/>
 
 <style lang="scss">
     a {
