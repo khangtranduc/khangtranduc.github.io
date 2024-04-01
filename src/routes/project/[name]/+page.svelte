@@ -2,20 +2,14 @@
     export let data;
 </script>
 
-<main>
-    <article style:--card="{data.name}" style="background-color: {data.name}">
-        <h1>{data.name}</h1>
-    </article>
+<main style="background-color: {data.name}" style:--card="{data.name}">
+    <h1>{data.name}</h1>
 </main>
 
 <style lang="scss">
     main {
         width: 100vw;
         height: 91.5vh;
-        article {
-            margin: none;
-            height: 100%;
-            view-transition-name: var(--card);
-        }
+        view-transition-name: var(--card);
     }
 </style>

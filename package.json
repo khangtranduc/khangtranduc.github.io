@@ -12,6 +12,7 @@
     "push": "npm run build && git add -A && git commit -a -m \"%npm_config_foo%\" && git push"
   },
   "devDependencies": {
+    "@picocss/pico": "^2.0.6",
     "@sveltejs/adapter-auto": "^2.0.0",
     "@sveltejs/kit": "^1.20.4",
     "@threlte/core": "^6.1.0",
@@ -30,7 +31,6 @@
   },
   "type": "module",
   "dependencies": {
-    "@picocss/pico": "^1.5.10",
     "@sveltejs/adapter-static": "^2.0.3",
     "iconify-icon": "^1.0.8"
   }

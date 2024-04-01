@@ -99,6 +99,7 @@
         //This does not work for zoomed screens
         width: 100vw;
         height: 91.5vh;
+        border: solid red;
         position: relative;
         hgroup, box {
             all: unset;

@@ -1,6 +1,6 @@
 export const entries = () => {
     return [
-        { name: '0' }
+        { name: 'white' }
     ]
 }
 

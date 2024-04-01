@@ -1,0 +1,1 @@
+:root{--layout-color:#f8f8f8;--end-point:#fffe;--mid-point:#fff8;--var-green:rgb(135, 218, 135);--var-gray:rgb(199, 199, 199);--shadow:var(--var-gray)}:root[data-theme=dark]{--layout-color:#2b2a2a;--end-point:#222c;--mid-point:#2228}main.svelte-14kk61s{width:100vw;height:91.5vh;view-transition-name:var(--card)}
