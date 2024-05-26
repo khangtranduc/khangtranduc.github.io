@@ -1,15 +1,107 @@
 <script lang="ts">
+    import { fade } from "svelte/transition";
+
     let innerHeight: number
     let innerWidth: number
+    const links = [
+        "projects",
+        "blog"
+    ]
+    const icons = [
+        "github", "mail", "linkedin", 
+        "instagram", "shield", "twitter"
+    ]
+    let showContacts = false;
+    let maintain = false;
 </script>
 
 <svelte:window bind:innerHeight bind:innerWidth/>
 
 <canvas class="glsl-canvas" data-fragment-url="solid.frag" width={innerWidth} height={innerHeight}/>
 
+<div class="ver">
+    <h1 class="hi">HI, <span>i'm <mark>khang</mark></span></h1>
+
+    <div class="hor">
+        {#each links as link, i}
+        <h2><a href={"#"} class="contrast">{link}</a></h2>
+        {#if i < links.length - 1}
+        <h2>|</h2>
+        {/if}
+        {/each}
+        <h2>|</h2>
+        <h2><a href={"#"}
+            class="contrast"
+            on:mouseenter={() => showContacts = true}
+            on:mouseleave={() => setTimeout(() => showContacts = false, 100)}>contacts</a></h2>
+    </div>
+    <div class="contacts" role="banner"
+        on:mouseenter={() => maintain = showContacts}
+        on:mouseleave={() => maintain = false}>
+        {#if showContacts || maintain}
+        {#each icons as icon, i}
+        <iconify-icon 
+                in:fade|global={{ delay: (icons.length - i) * 100, duration: 300 }} 
+                out:fade|global={{ delay: i * 100, duration: 300 }}
+                width="30" icon="lucide:{icon}"/>
+        {/each}
+        {/if}
+    </div>
+</div>
+
+
 <style lang="scss">
-    canvas {
+    canvas, main {
         width: 100vw;
         height: 100vh;
+        background: $grey-50;
+    }
+    h1 {
+        font-size: 3.5rem;
+        font-weight: 900;
+        span {
+            font-size: 3.5rem;
+            font-weight: bold;
+        }
+    }
+    h2 {
+        color: $grey-600
+    }
+    a {
+        color: $grey-600;
+        text-decoration: none;
+        &:hover {
+            color: $black;
+        }
+    }
+    .contacts {
+        width: 100%;
+        height: 1.5rem;
+        align-items: center;
+        display: flex;
+        gap: 1rem;
+        justify-content: end;
+        iconify-icon {
+            color: $grey-600;
+            transition: .3s;
+            &:hover {
+                color: $black;
+                transition: .3s;
+            }
+        }
+    }
+    .hor {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+    }
+    .ver {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
     }
 </style>
