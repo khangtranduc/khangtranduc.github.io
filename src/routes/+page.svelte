@@ -3,10 +3,10 @@
 
     let innerHeight: number
     let innerWidth: number
-    const links = [
-        "projects",
-        "blog"
-    ]
+    const links = Object.entries({
+        "projects": "/projects",
+        "resume": "/resume.pdf"
+    })
     const icons = Object.entries({
         "mdi:github": "https://github.com/khangtranduc", 
         "mdi:gmail": "mailto:khangductran@duck.com",
@@ -19,14 +19,15 @@
 
 <svelte:window bind:innerHeight bind:innerWidth/>
 
-<canvas class="glsl-canvas" data-fragment-url="solid.frag" width={innerWidth} height={innerHeight}/>
+<!-- <canvas class="glsl-canvas" data-fragment-url="solid.frag" width={innerWidth} height={innerHeight}/> -->
+<!-- <main/> -->
 
 <div class="ver">
     <h1>HI, <span>i'm <mark>khang</mark></span></h1>
 
     <div class="links">
-        {#each links as link, i}
-        <h2><a href={"#"} class="contrast">{link}</a></h2>
+        {#each links as [label, link], i}
+        <h2><a href={link} class="contrast">{label}</a></h2>
         {#if i < links.length - 1}
         <h2>|</h2>
         {/if}
@@ -54,7 +55,7 @@
 
 
 <style lang="scss">
-    canvas, main {
+    canvas {
         width: 100vw;
         height: 100vh;
         background: $grey-50;
@@ -130,9 +131,9 @@
     @keyframes intro {
         0% {transform: translate(0, 100%);
             clip-path: polygon(0 110%, 0 110%, 100% 110%, 100% 110%);}
-        17% {transform: translate(0, 100%);
+        25% {transform: translate(0, 100%);
             clip-path: polygon(0 110%, 0 110%, 100% 110%, 100% 110%);}
-        33% {transform: translate(0, 100%);
+        50% {transform: translate(0, 100%);
             clip-path: polygon(0 110%, 0 0, 100% 0, 100% 110%);}
         100% {transform: translate(0, 0);}
     }
