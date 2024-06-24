@@ -1,5 +1,6 @@
 <script lang="ts">
     import { fade } from "svelte/transition";
+    import { loadIcon } from "iconify-icon";
 
     let innerHeight: number
     let innerWidth: number
@@ -46,7 +47,12 @@
         <a href="{link}" target="_blank"
             in:fade|global={{ delay: (icons.length - i) * 100, duration: 300 }} 
             out:fade|global={{ delay: i * 100, duration: 300 }}>
-            <iconify-icon width="40" icon="{icon}"/>
+            <!-- svelte-ignore empty-block -->
+            {#await loadIcon(icon) then _}
+            <iconify-icon inline width="40" icon="{icon}"/>
+            {:catch}
+            {icon.split(":")[1]}
+            {/await}
         </a>
         {/each}
         {/if}
