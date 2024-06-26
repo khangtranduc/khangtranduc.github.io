@@ -6,7 +6,7 @@
     let innerWidth: number
     const links = Object.entries({
         "projects": "/projects",
-        "resume": "/resume.pdf"
+        "resume": "/downloads/khang-tran-resume.pdf"
     })
     const icons = Object.entries({
         "mdi:github": "https://github.com/khangtranduc", 
