@@ -6,7 +6,8 @@
     let innerWidth: number
     const links = Object.entries({
         "projects": "/projects",
-        "resume": "/downloads/khang-tran-resume.pdf"
+        "resume": "/downloads/khang-tran-resume.pdf",
+        "posts": "/posts"
     })
     const icons = Object.entries({
         "mdi:github": "https://github.com/khangtranduc", 
@@ -21,7 +22,6 @@
 <svelte:window bind:innerHeight bind:innerWidth/>
 
 <!-- <canvas class="glsl-canvas" data-fragment-url="solid.frag" width={innerWidth} height={innerHeight}/> -->
-<!-- <main/> -->
 
 <div class="ver">
     <h1>HI, <span>i'm <mark>khang</mark></span></h1>
@@ -117,6 +117,7 @@
         justify-content: space-between;
         animation-name: links;
         animation-duration: 5s;
+        gap: .3rem;
     }
     .ver {
         display: flex;
