@@ -1,39 +1,42 @@
-@import "open-props/style";
-@import "open-props/colors-hsl";
+@import 'open-props/style';
+@import 'open-props/colors-hsl';
 
 :root {
-    --font-size-fluid-4: clamp(3rem, 9vw, 4.5rem);
-    --size-0: 0.1rem;
-    /* --bg-col: hsl(var(--stone-4-hsl) / 30%); */
-    --bg-col: var(--sand-0);
+	--font-size-fluid-4: clamp(3rem, 9vw, 4.5rem);
+	--size-0: 0.1rem;
+	/* --bg-col: hsl(var(--stone-4-hsl) / 30%); */
+	--bg-col: var(--sand-0);
 
-    font-family: var(--font-system-ui);
+	font-family: var(--font-system-ui);
 }
 
 main {
-    position: absolute;
-    top: var(--size-9);
-    left: 0;
+	position: absolute;
+	top: var(--size-9);
+	left: 0;
 
-    height: calc(100vh - var(--size-9));
-    width: 100vw;
+	height: calc(100vh - var(--size-9));
+	width: 100vw;
 
-    background-color: var(--bg-col);
+	background-color: var(--bg-col);
 }
 
 h1 {
-    font-weight: var(--font-weight-8);
-    font-size: var(--font-size-fluid-3);
-    letter-spacing: var(--font-letterspacing-2);
+	font-weight: var(--font-weight-8);
+	font-size: var(--font-size-fluid-3);
+	letter-spacing: var(--font-letterspacing-2);
 }
 
 h2 {
-    font-size: var(--font-size-fluid-1);
-    font-weight: var(--font-weight-6);
+	font-size: var(--font-size-fluid-1);
+	font-weight: var(--font-weight-6);
 }
 
-h1, h2, h3, p {
-    margin: 0;
+h1,
+h2,
+h3,
+p {
+	margin: 0;
 }
 
 .prose {
@@ -54,7 +57,7 @@ h1, h2, h3, p {
 	}
 
 	:is(ul, ol) {
-        margin-top: var(--size-00);
+		margin-top: var(--size-00);
 		padding-left: var(--size-5);
 	}
 

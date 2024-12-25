@@ -14,7 +14,7 @@ Hey friends! 👋
 
 ```ts
 function greet(name: string) {
-	console.log(`Hey ${name}! 👋`)
+	console.log(`Hey ${name}! 👋`);
 }
 ```
 
@@ -23,6 +23,7 @@ This is an image
 ![](/favicon.png)
 
 This is a list:
+
 - a
 - b
 
