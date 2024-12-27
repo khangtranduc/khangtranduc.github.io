@@ -1,1 +1,1 @@
-{"type":"data","nodes":[null,{"type":"data","data":[{"posts":1},[2],{"title":3,"description":4,"date":5,"tags":6,"published":9,"slug":10},"First Post","Lorem Ipsum among us sus baka.","2023-4-14",[7,8],"test1","test2",true,"test"],"uses":{}}]}
+{"type":"data","nodes":[null,null,{"type":"data","data":[{"posts":1},[2],{"published":3,"tags":4,"date":6,"description":7,"title":8,"slug":8},true,[5],"log","2024-12-26T00:00:00.000Z","finally figured out how to set this up","new blog!"],"uses":{}}]}

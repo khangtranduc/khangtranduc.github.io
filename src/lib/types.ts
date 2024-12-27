@@ -1,4 +1,4 @@
-export type Tag = 'test1' | 'test2';
+export type Tag = 'log' | 'engineering' | 'cs' | 'physics' | 'math';
 
 export type Post = {
 	title: string;
