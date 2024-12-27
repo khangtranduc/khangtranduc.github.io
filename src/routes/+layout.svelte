@@ -4,7 +4,7 @@
 </script>
 
 <nav>
-	<a href="/"><img src="favicon.png" alt="logo" /></a>
+	<a href="/"><img src="/favicon.png" alt="logo" /></a>
 </nav>
 
 <slot />
