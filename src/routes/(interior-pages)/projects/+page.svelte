@@ -1,5 +1,5 @@
 <script lang="ts">
-	let tabs = ['cs', 'physics', 'engineering'];
+	let tabs = ['cs', 'physics', 'engineering', 'math'];
 	let selected_tab = 'cs';
 </script>
 
