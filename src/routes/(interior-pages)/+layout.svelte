@@ -51,12 +51,12 @@
 	a {
 		font-weight: var(--font-weight-6);
 		text-decoration: none;
-		color: black;
+		color: var(--stone-8);
 
 		transition: .3s;
 
 		&:hover {
-			text-decoration: solid underline var(--border-size-2);
+			color: black;
 		}
 	}
 

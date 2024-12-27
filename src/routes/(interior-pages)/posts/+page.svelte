@@ -2,12 +2,23 @@
 	import { formatDate } from '$lib/utils';
 
 	let { data } = $props();
+
+	let tags = [...new Set(data.posts.map(post => post.tags).flat())];
+	let tagSelect = $state(new Array(tags.length).fill(true));
+
+	// preprocess tags -> post index table -> faster sorting
 </script>
 
 <main>
 	<hgroup>
 		<h1>posts</h1>
 		<p>Some filler text down here</p>
+		<div class="tag-select">
+			{#each tags as tag, i}
+				<button class={tagSelect[i] ? "selected" : ""}
+					onclick={() => tagSelect[i] = !tagSelect[i]}>{tag}</button>
+			{/each}
+		</div>
 	</hgroup>
 
 	<div class="posts">
@@ -16,6 +27,11 @@
 				<h2><a href="/posts/{post.slug}">{post.title}</a></h2>
 				<span>{formatDate(post.date, 'long')}</span>
 				<p>{post.description}</p>
+				<div class="tags">
+					{#each post.tags as tag}
+						<span>&num;{tag}</span>
+					{/each}
+				</div>
 			</div>
 		{/each}
 	</div>
@@ -31,9 +47,35 @@
 		margin-left: var(--size-6);
 	}
 
+	.tag-select { 
+		display: flex;
+		gap: var(--size-3);
+	}
+
+	.selected {
+		font-weight: var(--font-weight-6);
+	}
+
+	.tags {
+		display: flex;
+		gap: var(--size-3);
+
+		margin: 0;
+		margin-top: var(--size-1);
+
+		> * {
+			padding: var(--size-1) var(--size-2);
+			border-radius: var(--radius-round);
+			box-shadow: var(--shadow-2);
+			background-color: white;
+			/* border: var(--border-size-1) solid; */
+		}
+	}
+
 	.posts {
 		display: flex;
 		flex-direction: column;
+		gap: var(--size-3);
 
 		margin-left: var(--size-6);
 		margin-top: var(--size-6);

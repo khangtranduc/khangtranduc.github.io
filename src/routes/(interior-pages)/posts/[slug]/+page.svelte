@@ -51,7 +51,8 @@
 			padding: var(--size-2) var(--size-3);
 			border-radius: var(--radius-round);
 			box-shadow: var(--shadow-2);
-			border: var(---border-size-1) solid;
+			background-color: white;
+			/* border: var(--border-size-1) solid; */
 		}
 	}
 </style>

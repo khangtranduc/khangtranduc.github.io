@@ -2,6 +2,8 @@ import { mdsvex, escapeSvelte } from 'mdsvex';
 import { createHighlighter } from 'shiki';
 import adapter from '@sveltejs/adapter-static';
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
+import remarkMath from 'remark-math';
+import rehypeKatex from 'rehype-katex-svelte';
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -11,17 +13,21 @@ const config = {
 		vitePreprocess(),
 		mdsvex({
 			extensions: ['.md'],
+
 			highlight: {
 				highlighter: async (code, lang = 'text') => {
 					const highlighter = await createHighlighter({
 						themes: ['poimandres'],
 						langs: ['javascript', 'typescript']
 					});
-					await highlighter.loadLanguage('javascript', 'typescript');
+					await highlighter.loadLanguage('javascript', 'typescript', 'cpp');
 					const html = escapeSvelte(highlighter.codeToHtml(code, { lang, theme: 'poimandres' }));
 					return `{@html \`${html}\`}`;
 				}
-			}
+			},
+
+			remarkPlugins: [remarkMath],
+			rehypePlugins: [rehypeKatex]
 		})
 	],
 

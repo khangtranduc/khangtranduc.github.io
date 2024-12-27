@@ -7,6 +7,8 @@
 	--bg-col: var(--sand-0);
 
 	font-family: var(--font-system-ui);
+
+	background-color: var(--bg-col);
 }
 
 main {
@@ -14,10 +16,9 @@ main {
 	top: var(--size-9);
 	left: 0;
 
-	height: calc(100vh - var(--size-9));
 	width: 100vw;
 
-	background-color: var(--bg-col);
+	background-color: transparent;
 }
 
 h1 {
@@ -39,13 +40,10 @@ p {
 }
 
 .prose {
+
 	p {
 		margin-top: var(--size-3);
 		margin-bottom: var(--size-3);
-
-		:not(:is(h2, h3, h4, h5, h6) + p) {
-			margin-top: var(--size-7);
-		}
 
 		/* ignore paragraph tag around images */
 		&:has(img) {
