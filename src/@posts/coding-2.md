@@ -1,6 +1,6 @@
 ---
 title: coding-2
-description: Kattis Pivot
+description: Kattis -- pivot
 date: 2026-12-27
 tags:
   - cs
