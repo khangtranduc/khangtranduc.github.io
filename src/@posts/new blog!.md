@@ -1,13 +1,11 @@
 ---
 published: true
 tags:
-  - log
   - website-update
 date: 2024-12-26
 description: finally figured out how to set this up
 title: new blog!
 ---
-
 <script>
   import Youtube from '$lib/components/Youtube.svelte'
 </script>

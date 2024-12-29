@@ -3,7 +3,6 @@ title: coding-1
 description: Starting new series of posts. UVa 10978 write up.
 date: 2024-12-26
 tags:
-  - cs
   - daily-coding
 published: true
 ---

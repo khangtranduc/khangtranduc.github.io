@@ -3,7 +3,6 @@ title: coding-3
 description: Kattis - rings2
 date: 2024-12-29
 tags:
-  - cs
   - daily-coding
 published: true
 ---

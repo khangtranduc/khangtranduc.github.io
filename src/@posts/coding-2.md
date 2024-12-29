@@ -3,7 +3,6 @@ title: coding-2
 description: Kattis - pivot
 date: 2024-12-27
 tags:
-  - cs
   - daily-coding
 published: true
 ---

@@ -3,10 +3,14 @@
 
 	let { data } = $props();
 
+	// turn into dictionary ?
 	let tags = [...new Set(data.posts.map(post => post.tags).flat())];
 	let tagSelect = $state(new Array(tags.length).fill(true));
 
+	let currentTagSelection = $derived(tags.filter((id, idx, e) => tagSelect[idx]));
+
 	// preprocess tags -> post index table -> faster sorting
+	let posts = $derived(data.posts.filter(post => post.tags.some(t => currentTagSelection.includes(t))));
 </script>
 
 <main>
@@ -14,6 +18,7 @@
 		<h1>posts</h1>
 		<p>Some filler text down here</p>
 		<div class="tag-select">
+			Tags: 
 			{#each tags as tag, i}
 				<button class={tagSelect[i] ? "selected" : ""}
 					onclick={() => tagSelect[i] = !tagSelect[i]}>{tag}</button>
@@ -22,7 +27,7 @@
 	</hgroup>
 
 	<div class="posts">
-		{#each data.posts as post}
+		{#each posts as post}
 			<div class="post">
 				<h2><a href="/posts/{post.slug}">{post.title}</a></h2>
 				<span>{formatDate(post.date, 'long')}</span>
@@ -47,13 +52,31 @@
 		margin-left: var(--size-6);
 	}
 
+	button {
+		border-radius: var(--radius-round);
+		box-shadow: var(--shadow-1);
+		padding: var(--size-1) var(--size-2);
+		border: none;
+
+		font-size: var(--font-size-1);
+
+		background-color: white;
+
+		transition: .3s;
+
+		&:hover {
+			box-shadow: var(--shadow-3);
+			transform: scale(1.01);
+		}
+	}
+
 	.tag-select { 
 		display: flex;
 		gap: var(--size-3);
 	}
 
 	.selected {
-		font-weight: var(--font-weight-6);
+		background-color: var(--yellow-2);
 	}
 
 	.tags {
