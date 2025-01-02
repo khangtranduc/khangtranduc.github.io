@@ -6,8 +6,8 @@ tags:
   - daily-coding
 published: true
 ---
-# Kattis – magicsequence
-This took an especially long time due to Kattis hiding its test cases. This lead me to implementing wrong fixes. For example, I thought I needed to use `BigInteger`, so I ended up reimplementing the entire thing in java only to realize that it was unnecessary. Nevertheless, I learned quite a lot from this problem, namely.
+## Kattis – magicsequence
+This took an especially long time due to Kattis hiding its test cases. This lead me to implementing wrong fixes. For example, I thought I needed to use `BigInteger`, so I ended up reimplementing the entire thing in java only to realize that it was unnecessary. Nevertheless, I learned quite a lot from this problem.
 ## radix sort
 Counting sort but for each “digit”, in brackets because that depends on what base (or radix) is used. The formula for the `i`-th “digit” given a radix is quite simple:
 ```cpp
@@ -15,7 +15,7 @@ Counting sort but for each “digit”, in brackets because that depends on what
 ```
 
 After this, it is a matter of performing a **stable** counting sort on progressive more significant “digits”.
-## stable counting sort
+### stable counting sort
 I got this algorithm from Prof. Halim’s Competitive Programming I book. Essentially, it is counting sort with the following additions:
 - we convert the usual count array to a cumulative count.
 - using this cumulative count, we can insert the elements from the original array in the sorted order, while still preserving relative ordering between elements.
@@ -25,7 +25,7 @@ With the two above methods, even with a carefully chosen radix (as hinted in Pro
 After browsing the internet, I found a solution by [Rene Argento](https://github.com/reneargento/competitive-programming-4/blob/master/src/chapter2/section2/g/special/sorting/problems/MagicSequence.java) that employed an interesting way speed up the “digit”-extraction operation through bit-wise operations. This is quite clever and it got me over the TLE.
 
 He also implemented an array swapping procedure to not have to create a new `temp` array per radix sort, which would speed things up further, but it was not necessary for me to clear the TLE.
-# my solution
+## my solution
 ```cpp
 #include <bits/stdc++.h>
 

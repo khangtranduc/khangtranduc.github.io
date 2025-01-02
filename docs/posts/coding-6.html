@@ -11,12 +11,12 @@
 		<link href="../_app/immutable/assets/2.DLi_JnGM.css" rel="stylesheet">
 		<link href="../_app/immutable/assets/5.CBlNLnDe.css" rel="stylesheet">
 		<link href="../_app/immutable/assets/utils.RuDzfMCq.css" rel="stylesheet">
-		<link rel="modulepreload" href="../_app/immutable/entry/start.k0p79sh3.js">
-		<link rel="modulepreload" href="../_app/immutable/chunks/entry.CGmLlRri.js">
+		<link rel="modulepreload" href="../_app/immutable/entry/start.BmTfZr82.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/entry.DnqLtmZf.js">
 		<link rel="modulepreload" href="../_app/immutable/chunks/runtime.DNrlAA3c.js">
 		<link rel="modulepreload" href="../_app/immutable/chunks/control.CYgJF_JY.js">
 		<link rel="modulepreload" href="../_app/immutable/chunks/index-client.C6bnpTIx.js">
-		<link rel="modulepreload" href="../_app/immutable/entry/app.CLqDs4Jw.js">
+		<link rel="modulepreload" href="../_app/immutable/entry/app.Da_zelCE.js">
 		<link rel="modulepreload" href="../_app/immutable/chunks/preload-helper.BSIW6u5o.js">
 		<link rel="modulepreload" href="../_app/immutable/chunks/render.BrvNObUQ.js">
 		<link rel="modulepreload" href="../_app/immutable/chunks/disclose-version.yFYzY67q.js">
@@ -28,12 +28,12 @@
 		<link rel="modulepreload" href="../_app/immutable/chunks/app.CZYtsgA4.js">
 		<link rel="modulepreload" href="../_app/immutable/chunks/iconify-icon.DiWr_Qug.js">
 		<link rel="modulepreload" href="../_app/immutable/nodes/2.CvCWLZnV.js">
-		<link rel="modulepreload" href="../_app/immutable/nodes/5._xUoHdlG.js">
+		<link rel="modulepreload" href="../_app/immutable/nodes/5.39EnUZbe.js">
 		<link rel="modulepreload" href="../_app/immutable/chunks/attributes._McLmDcC.js">
 		<link rel="modulepreload" href="../_app/immutable/chunks/utils.CYVQJe4P.js"><!--[--><meta property="og:type" content="article"> <meta property="og:title" content="coding-6"><!--]--><title>coding-6</title>
 	</head>
 	<body data-sveltekit-preload-data="hover">
-		<div style="display: contents"><!--[--><!--[--><!----><nav class="svelte-nd50iq"><a href="/"><img src="/favicon.png" alt="logo" class="svelte-nd50iq"></a></nav> <!----><!--[--><!----><nav class="svelte-97m9fy"><a href="/" class="svelte-97m9fy"><img src="/favicon.png" alt="logo" class="svelte-97m9fy"></a> <div class="navbar svelte-97m9fy"><a href="/" class="svelte-97m9fy">home</a> <a href="/projects" class="svelte-97m9fy">projects</a> <a href="/downloads/khang-tran-resume.pdf" target="_blank" class="svelte-97m9fy">resume</a> <a href="/posts" class="svelte-97m9fy">posts</a></div></nav> <!----><!----><main class="svelte-wx15co"><hgroup class="svelte-wx15co"><h1>coding-6</h1> <p>Published at Jan 2, 2025</p> <div class="tags svelte-wx15co"><!--[--><span class="svelte-wx15co">#daily-coding</span><!--]--></div> <div class="prose"><!----><h1>Kattis – magicsequence</h1> <p>This took an especially long time due to Kattis hiding its test cases. This lead me to implementing wrong fixes. For example, I thought I needed to use <code>BigInteger</code>, so I ended up reimplementing the entire thing in java only to realize that it was unnecessary. Nevertheless, I learned quite a lot from this problem, namely.</p> <h2>radix sort</h2> <p>Counting sort but for each “digit”, in brackets because that depends on what base (or radix) is used. The formula for the <code>i</code>-th “digit” given a radix is quite simple:</p> <!----><pre class="shiki poimandres" style="background-color:#1b1e28;color:#a6accd" tabindex="0"><code><span class="line"><span style="color:#A6ACCD">(number </span><span style="color:#91B4D5">/</span><span style="color:#A6ACCD"> radix</span><span style="color:#91B4D5">^</span><span style="color:#A6ACCD">i) </span><span style="color:#91B4D5">%</span><span style="color:#A6ACCD"> radix</span></span></code></pre><!----> <p>After this, it is a matter of performing a <strong>stable</strong> counting sort on progressive more significant “digits”.</p> <h2>stable counting sort</h2> <p>I got this algorithm from Prof. Halim’s Competitive Programming I book. Essentially, it is counting sort with the following additions:</p> <ul><li>we convert the usual count array to a cumulative count.</li> <li>using this cumulative count, we can insert the elements from the original array in the sorted order, while still preserving relative ordering between elements.</li></ul> <h2>bit-wise shenanigans</h2> <p>With the two above methods, even with a carefully chosen radix (as hinted in Prof. Halim’s book), I still got TLE.</p> <p>After browsing the internet, I found a solution by <a href="https://github.com/reneargento/competitive-programming-4/blob/master/src/chapter2/section2/g/special/sorting/problems/MagicSequence.java" rel="nofollow">Rene Argento</a> that employed an interesting way speed up the “digit”-extraction operation through bit-wise operations. This is quite clever and it got me over the TLE.</p> <p>He also implemented an array swapping procedure to not have to create a new <code>temp</code> array per radix sort, which would speed things up further, but it was not necessary for me to clear the TLE.</p> <h1>my solution</h1> <!----><pre class="shiki poimandres" style="background-color:#1b1e28;color:#a6accd" tabindex="0"><code><span class="line"><span style="color:#A6ACCD">#include </span><span style="color:#A6ACCD">&#x3C;</span><span style="color:#5DE4C7">bits/stdc++.h</span><span style="color:#A6ACCD">></span></span>
+		<div style="display: contents"><!--[--><!--[--><!----><nav class="svelte-nd50iq"><a href="/"><img src="/favicon.png" alt="logo" class="svelte-nd50iq"></a></nav> <!----><!--[--><!----><nav class="svelte-97m9fy"><a href="/" class="svelte-97m9fy"><img src="/favicon.png" alt="logo" class="svelte-97m9fy"></a> <div class="navbar svelte-97m9fy"><a href="/" class="svelte-97m9fy">home</a> <a href="/projects" class="svelte-97m9fy">projects</a> <a href="/downloads/khang-tran-resume.pdf" target="_blank" class="svelte-97m9fy">resume</a> <a href="/posts" class="svelte-97m9fy">posts</a></div></nav> <!----><!----><main class="svelte-wx15co"><hgroup class="svelte-wx15co"><h1>coding-6</h1> <p>Published at Jan 2, 2025</p> <div class="tags svelte-wx15co"><!--[--><span class="svelte-wx15co">#daily-coding</span><!--]--></div> <div class="prose"><!----><h2>Kattis – magicsequence</h2> <p>This took an especially long time due to Kattis hiding its test cases. This lead me to implementing wrong fixes. For example, I thought I needed to use <code>BigInteger</code>, so I ended up reimplementing the entire thing in java only to realize that it was unnecessary. Nevertheless, I learned quite a lot from this problem.</p> <h2>radix sort</h2> <p>Counting sort but for each “digit”, in brackets because that depends on what base (or radix) is used. The formula for the <code>i</code>-th “digit” given a radix is quite simple:</p> <!----><pre class="shiki poimandres" style="background-color:#1b1e28;color:#a6accd" tabindex="0"><code><span class="line"><span style="color:#A6ACCD">(number </span><span style="color:#91B4D5">/</span><span style="color:#A6ACCD"> radix</span><span style="color:#91B4D5">^</span><span style="color:#A6ACCD">i) </span><span style="color:#91B4D5">%</span><span style="color:#A6ACCD"> radix</span></span></code></pre><!----> <p>After this, it is a matter of performing a <strong>stable</strong> counting sort on progressive more significant “digits”.</p> <h2>stable counting sort</h2> <p>I got this algorithm from Prof. Halim’s Competitive Programming I book. Essentially, it is counting sort with the following additions:</p> <ul><li>we convert the usual count array to a cumulative count.</li> <li>using this cumulative count, we can insert the elements from the original array in the sorted order, while still preserving relative ordering between elements.</li></ul> <h2>bit-wise shenanigans</h2> <p>With the two above methods, even with a carefully chosen radix (as hinted in Prof. Halim’s book), I still got TLE.</p> <p>After browsing the internet, I found a solution by <a href="https://github.com/reneargento/competitive-programming-4/blob/master/src/chapter2/section2/g/special/sorting/problems/MagicSequence.java" rel="nofollow">Rene Argento</a> that employed an interesting way speed up the “digit”-extraction operation through bit-wise operations. This is quite clever and it got me over the TLE.</p> <p>He also implemented an array swapping procedure to not have to create a new <code>temp</code> array per radix sort, which would speed things up further, but it was not necessary for me to clear the TLE.</p> <h2>my solution</h2> <!----><pre class="shiki poimandres" style="background-color:#1b1e28;color:#a6accd" tabindex="0"><code><span class="line"><span style="color:#A6ACCD">#include </span><span style="color:#A6ACCD">&#x3C;</span><span style="color:#5DE4C7">bits/stdc++.h</span><span style="color:#A6ACCD">></span></span>
 <span class="line"></span>
 <span class="line"><span style="color:#5DE4C7">using</span><span style="color:#91B4D5"> namespace</span><span style="color:#91B4D5"> std</span><span style="color:#A6ACCD">;</span></span>
 <span class="line"></span>
@@ -90,15 +90,15 @@
 			
 			<script>
 				{
-					__sveltekit_12u8etx = {
+					__sveltekit_1tzw5fg = {
 						base: new URL("..", location).pathname.slice(0, -1)
 					};
 
 					const element = document.currentScript.parentElement;
 
 					Promise.all([
-						import("../_app/immutable/entry/start.k0p79sh3.js"),
-						import("../_app/immutable/entry/app.CLqDs4Jw.js")
+						import("../_app/immutable/entry/start.BmTfZr82.js"),
+						import("../_app/immutable/entry/app.Da_zelCE.js")
 					]).then(([kit, app]) => {
 						kit.start(app, element, {
 							node_ids: [0, 2, 5],
