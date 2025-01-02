@@ -1,7 +1,7 @@
 ---
 title: coding-5
 description: Kattis - mali
-date: 2025-01-31
+date: 2025-01-01
 tags:
   - daily-coding
 published: true
