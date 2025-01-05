@@ -1,5 +1,5 @@
 ---
-title: MAT 217 Winter Notes!
+title: MAT 217 winter notes!
 description: I read up the first 2 chapters of Axler's "Linear Algebra Done Right" in preparation to take MAT 217 in the spring.
 date: 2025-01-04
 tags:
