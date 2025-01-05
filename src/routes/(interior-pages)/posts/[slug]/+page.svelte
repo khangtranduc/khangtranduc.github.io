@@ -36,9 +36,10 @@
 		display: flex;
 		flex-direction: column;
 		gap: 0.5rem;
-		width: 50%;
+		width: clamp(5rem, 100vw - var(--size-9), 55rem);
 
 		margin-left: var(--size-6);
+		margin-right: var(--size-6);
 	}
 
 	.tags {
