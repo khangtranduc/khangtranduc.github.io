@@ -17,12 +17,14 @@
 	<hgroup>
 		<h1>posts</h1>
 		<p>Some filler text down here</p>
-		<div class="tag-select">
-			Tags: 
-			{#each tags as tag, i}
-				<button class={tagSelect[i] ? "selected" : ""}
-					onclick={() => tagSelect[i] = !tagSelect[i]}>{tag}</button>
-			{/each}
+		<div class="tag-group">
+			Tags:
+			<div class="tag-select">
+				{#each tags as tag, i}
+					<button class={tagSelect[i] ? "selected" : ""}
+						onclick={() => tagSelect[i] = !tagSelect[i]}>{tag}</button>
+				{/each}
+			</div>
 		</div>
 	</hgroup>
 
@@ -47,9 +49,10 @@
 		display: flex;
 		flex-direction: column;
 		gap: 0.5rem;
-		width: 50%;
+		width: calc(100% - var(--size-9));
 
 		margin-left: var(--size-6);
+		margin-right: var(--size-6);
 	}
 
 	button {
@@ -58,7 +61,7 @@
 		padding: var(--size-1) var(--size-2);
 		border: none;
 
-		font-size: var(--font-size-1);
+		font-size: var(--font-size-fluid-0);
 
 		background-color: white;
 
@@ -70,7 +73,15 @@
 		}
 	}
 
+	.tag-group {
+		display: flex;
+		gap: var(--size-3);
+	}
+
 	.tag-select { 
+		width: 100%;
+		overflow: scroll;
+
 		display: flex;
 		gap: var(--size-3);
 	}
