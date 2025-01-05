@@ -9,10 +9,8 @@ published: true
 Since the problems today aren’t too hard, and I desperately want to move on to the next chapter, I have decided to do a 2-for-1 special for today.
 ## Kattis - delimitersoup
 Standard stack bracket matching problem, I used a map to match the different types of bracket for cleanliness.
-
 ## Kattis - teque
 A bit trickier, I used two deques to represent two halves of the array. I ran into quite a bit of trouble as I forgot to rebalance the deques after `push_front` or `push_back` only remembering to rebalance for `push_middle`. After figuring that out, I got the problem pretty quickly.
-
 ## my solution (delimiter soup)
 ```cpp
 #include <bits/stdc++.h>
@@ -58,7 +56,6 @@ int main() {
     return 0;
 }
 ```
-
 ## my solution (teque)
 ```cpp
 #include <bits/stdc++.h>
