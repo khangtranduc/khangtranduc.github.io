@@ -9,7 +9,6 @@
 
 	let currentTagSelection = $derived(tags.filter((id, idx, e) => tagSelect[idx]));
 
-	// preprocess tags -> post index table -> faster sorting
 	let posts = $derived(data.posts.filter(post => post.tags.some(t => currentTagSelection.includes(t))));
 </script>
 

@@ -1,0 +1,1 @@
+import"./disclose-version.CWdtGiuR.js";import"./legacy.BA43j2PR.js";/* empty css                                              */const p=(t,e="medium",r="en")=>{const a=new Date(t.split("T")[0].replaceAll("-","/"));return new Intl.DateTimeFormat(r,{dateStyle:e}).format(a)};export{p as f};

@@ -5,7 +5,9 @@ date: 2025-01-04
 tags:
   - winter-notes
   - weekly-projects
+  - math
 published: true
+image: /thumbs/axler.png
 ---
 
 <script>

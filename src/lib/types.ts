@@ -5,4 +5,5 @@ export type Post = {
 	date: string;
 	tags: string[];
 	published: boolean;
+	image?: string; // only here if it is project (normally)
 };

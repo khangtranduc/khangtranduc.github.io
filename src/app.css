@@ -3,7 +3,6 @@
 
 :root {
 	--font-size-fluid-4: clamp(3rem, 9vw, 4.5rem);
-	/* --bg-col: hsl(var(--stone-4-hsl) / 30%); */
 	--bg-col: var(--sand-0);
 
 	font-family: var(--font-system-ui);
@@ -35,6 +34,7 @@ h2 {
 h1,
 h2,
 h3,
+h4,
 p {
 	margin: 0;
 }
