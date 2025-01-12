@@ -1,8 +1,9 @@
 ---
 title: coding-14
 description: Kattis - awkwardparty & Kattis - compoundwords
-date: ""
-tags: 
+date: 2025-01-11
+tags:
+  - daily-coding
 published: true
 ---
 Today’s problems are a bit free, so I have decided to do 2 of them. They are: Kattis – awkwardparty and Kattis – compoundwords. The solution involves straightforward use of `unordered_map` and `set` (bBST) respectively.
