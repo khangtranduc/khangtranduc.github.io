@@ -1,7 +1,7 @@
 ---
 title: coding-14
 description: Kattis - awkwardparty & Kattis - compoundwords
-date: 2025-01-11
+date: 2025-01-10
 tags:
   - daily-coding
 published: true
