@@ -22,6 +22,7 @@ const config = {
 					});
 					await highlighter.loadLanguage('javascript', 'typescript', 'cpp');
 					const html = escapeSvelte(highlighter.codeToHtml(code, { lang, theme: 'poimandres' }));
+					highlighter.dispose();
 					return `{@html \`${html}\`}`;
 				}
 			},
