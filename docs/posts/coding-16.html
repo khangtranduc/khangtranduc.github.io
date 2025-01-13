@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" href="../favicon.png" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css" integrity="sha384-MlJdn/WNKDGXveldHDdyRP1R4CTHr3FeuDNfhsLPYrq2t0UBkUdK2jyTnXPEK1NQ" crossorigin="anonymous">
+		
+		<link href="../_app/immutable/assets/0.BYkjn869.css" rel="stylesheet">
+		<link href="../_app/immutable/assets/app.DzL7zd-v.css" rel="stylesheet">
+		<link href="../_app/immutable/assets/2.DLi_JnGM.css" rel="stylesheet">
+		<link href="../_app/immutable/assets/5.DjbeUfP5.css" rel="stylesheet">
+		<link href="../_app/immutable/assets/Youtube.ueDDkp2l.css" rel="stylesheet">
+		<link rel="modulepreload" href="../_app/immutable/entry/start.J1PdYh-l.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/entry.ClQOdpmi.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/runtime.BVfCZDAn.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/control.CYgJF_JY.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/index-client.CL_iTRJE.js">
+		<link rel="modulepreload" href="../_app/immutable/entry/app.BqWiXqDo.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/preload-helper.BdMQvodm.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/render.BGmhjbXs.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/disclose-version.CWdtGiuR.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/if.BIs2H7KS.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/proxy.aSRe3JN5.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/props.593ulvAR.js">
+		<link rel="modulepreload" href="../_app/immutable/nodes/0.NW_d-wcL.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/legacy.BA43j2PR.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/app.DOn4djsW.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/iconify-icon.DiWr_Qug.js">
+		<link rel="modulepreload" href="../_app/immutable/nodes/2.DXa6b3qH.js">
+		<link rel="modulepreload" href="../_app/immutable/nodes/5.B8zFf7aq.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/attributes.BK11UWLz.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/utils.BLsTH0hK.js"><!--[--><meta property="og:type" content="article"> <meta property="og:title" content="coding-16"><!--]--><title>coding-16</title>
+	</head>
+	<body data-sveltekit-preload-data="hover">
+		<div style="display: contents"><!--[--><!--[--><!----><nav class="svelte-nd50iq"><a href="/"><img src="/favicon.png" alt="logo" class="svelte-nd50iq"></a></nav> <!----><!--[--><!----><nav class="svelte-97m9fy"><a href="/" class="svelte-97m9fy"><img src="/favicon.png" alt="logo" class="svelte-97m9fy"></a> <div class="navbar svelte-97m9fy"><a href="/" class="svelte-97m9fy">home</a> <a href="/projects" class="svelte-97m9fy">projects</a> <a href="/downloads/khang-tran-resume.pdf" target="_blank" class="svelte-97m9fy">resume</a> <a href="/posts" class="svelte-97m9fy">posts</a></div></nav> <!----><!----><main class="svelte-6duwo1"><hgroup class="svelte-6duwo1"><h1>coding-16</h1> <p>Published at Jan 12, 2025</p> <div class="tags svelte-6duwo1"><!--[--><span class="svelte-6duwo1">#daily-coding</span><!--]--></div> <div class="prose"><!----><h2>Kattis – gcpc</h2> <p>Completed today’s daily coding a bit later than the others, which can all be attributed to waking up late (right now is 9:11pm). This problem is really interesting because I got to used a cool trick from halim. That is <strong>policy-based data structures</strong>.</p> <p>Essentially, this gives me an STL-like tree that also implements fast <code>select</code> and <code>rank</code> operations, called an “ordered statistics tree” by Halim.</p> <p>An example (from Halim’s book):</p> <!----><pre class="shiki poimandres" style="background-color:#1b1e28;color:#a6accd" tabindex="0"><code><span class="line"><span style="color:#A6ACCD">#include </span><span style="color:#A6ACCD">&#x3C;</span><span style="color:#5DE4C7">bits/stdc++.h</span><span style="color:#A6ACCD">></span><span style="color:#A6ACCD"> </span></span>
+<span class="line"><span style="color:#5DE4C7">using</span><span style="color:#91B4D5"> namespace</span><span style="color:#91B4D5"> std</span><span style="color:#A6ACCD">; </span></span>
+<span class="line"><span style="color:#A6ACCD">#include </span><span style="color:#A6ACCD">&#x3C;</span><span style="color:#5DE4C7">bits/extc++.h</span><span style="color:#A6ACCD">></span><span style="color:#767C9DB0;font-style:italic"> // pbds </span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#5DE4C7">using</span><span style="color:#91B4D5"> namespace</span><span style="color:#91B4D5"> __gnu_pbds</span><span style="color:#A6ACCD">; </span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#5DE4C7">typedef</span><span style="color:#A6ACCD"> tree</span><span style="color:#91B4D5">&#x3C;int</span><span style="color:#A6ACCD">, null_type, less</span><span style="color:#91B4D5">&#x3C;int></span><span style="color:#A6ACCD">,</span></span>
+<span class="line"><span style="color:#A6ACCD">			rb_tree_tag, tree_order_statistics_node_update</span><span style="color:#91B4D5">></span><span style="color:#A6ACCD"> ost; </span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#91B4D5">int</span><span style="color:#ADD7FF"> main</span><span style="color:#A6ACCD">() &#123; </span></span>
+<span class="line"><span style="color:#91B4D5">	int</span><span style="color:#A6ACCD"> n </span><span style="color:#91B4D5">=</span><span style="color:#5DE4C7"> 9</span><span style="color:#A6ACCD">; </span></span>
+<span class="line"><span style="color:#91B4D5">	int</span><span style="color:#A6ACCD"> A[] </span><span style="color:#91B4D5">=</span><span style="color:#A6ACCD"> &#123; </span><span style="color:#5DE4C7">2</span><span style="color:#A6ACCD">, </span><span style="color:#5DE4C7">4</span><span style="color:#A6ACCD">, </span><span style="color:#5DE4C7">7</span><span style="color:#A6ACCD">,</span><span style="color:#5DE4C7">10</span><span style="color:#A6ACCD">,</span><span style="color:#5DE4C7">15</span><span style="color:#A6ACCD">,</span><span style="color:#5DE4C7">23</span><span style="color:#A6ACCD">,</span><span style="color:#5DE4C7">50</span><span style="color:#A6ACCD">,</span><span style="color:#5DE4C7">65</span><span style="color:#A6ACCD">,</span><span style="color:#5DE4C7">71</span><span style="color:#A6ACCD">&#125;; </span></span>
+<span class="line"><span style="color:#767C9DB0;font-style:italic">	// as in Chapter 2 ost tree; </span></span>
+<span class="line"><span style="color:#A6ACCD">	for (</span><span style="color:#91B4D5">int</span><span style="color:#A6ACCD"> i </span><span style="color:#91B4D5">=</span><span style="color:#5DE4C7"> 0</span><span style="color:#A6ACCD">; i </span><span style="color:#91B4D5">&#x3C;</span><span style="color:#A6ACCD"> n; </span><span style="color:#91B4D5">++</span><span style="color:#A6ACCD">i)</span><span style="color:#767C9DB0;font-style:italic"> // O(n log n) </span></span>
+<span class="line"><span style="color:#E4F0FB">		tree</span><span style="color:#A6ACCD">.</span><span style="color:#ADD7FF">insert</span><span style="color:#A6ACCD">(</span><span style="color:#E4F0FB">A</span><span style="color:#A6ACCD">[i]);</span></span>
+<span class="line"><span style="color:#767C9DB0;font-style:italic">	// O(log n) select</span></span>
+<span class="line"><span style="color:#A6ACCD">	cout </span><span style="color:#91B4D5">&#x3C;&#x3C;</span><span style="color:#91B4D5"> *</span><span style="color:#E4F0FB">tree</span><span style="color:#A6ACCD">.</span><span style="color:#ADD7FF">find_by_order</span><span style="color:#A6ACCD">(</span><span style="color:#5DE4C7">0</span><span style="color:#A6ACCD">) </span><span style="color:#91B4D5">&#x3C;&#x3C;</span><span style="color:#A6ACCD"> "</span><span style="color:#5FB3A1">&#92;n</span><span style="color:#A6ACCD">"</span><span style="color:#A6ACCD">;</span><span style="color:#767C9DB0;font-style:italic"> // 1-smallest = 2 </span></span>
+<span class="line"><span style="color:#A6ACCD">	cout </span><span style="color:#91B4D5">&#x3C;&#x3C;</span><span style="color:#91B4D5"> *</span><span style="color:#E4F0FB">tree</span><span style="color:#A6ACCD">.</span><span style="color:#ADD7FF">find_by_order</span><span style="color:#A6ACCD">(n</span><span style="color:#91B4D5">-</span><span style="color:#5DE4C7">1</span><span style="color:#A6ACCD">) </span><span style="color:#91B4D5">&#x3C;&#x3C;</span><span style="color:#A6ACCD"> "</span><span style="color:#5FB3A1">&#92;n</span><span style="color:#A6ACCD">"</span><span style="color:#A6ACCD">;</span><span style="color:#767C9DB0;font-style:italic"> // 9-smallest/largest = 71 </span></span>
+<span class="line"><span style="color:#A6ACCD">	cout </span><span style="color:#91B4D5">&#x3C;&#x3C;</span><span style="color:#91B4D5"> *</span><span style="color:#E4F0FB">tree</span><span style="color:#A6ACCD">.</span><span style="color:#ADD7FF">find_by_order</span><span style="color:#A6ACCD">(</span><span style="color:#5DE4C7">4</span><span style="color:#A6ACCD">) </span><span style="color:#91B4D5">&#x3C;&#x3C;</span><span style="color:#A6ACCD"> "</span><span style="color:#5FB3A1">&#92;n</span><span style="color:#A6ACCD">"</span><span style="color:#A6ACCD">;</span><span style="color:#767C9DB0;font-style:italic"> // 5-smallest = 15 </span></span>
+<span class="line"><span style="color:#A6ACCD">	</span></span>
+<span class="line"><span style="color:#767C9DB0;font-style:italic">	// O(log n) rank </span></span>
+<span class="line"><span style="color:#A6ACCD">	cout </span><span style="color:#91B4D5">&#x3C;&#x3C;</span><span style="color:#E4F0FB"> tree</span><span style="color:#A6ACCD">.</span><span style="color:#ADD7FF">order_of_key</span><span style="color:#A6ACCD">(</span><span style="color:#5DE4C7">2</span><span style="color:#A6ACCD">) </span><span style="color:#91B4D5">&#x3C;&#x3C;</span><span style="color:#A6ACCD"> "</span><span style="color:#5FB3A1">&#92;n</span><span style="color:#A6ACCD">"</span><span style="color:#A6ACCD">;</span><span style="color:#767C9DB0;font-style:italic"> // index 0 (rank 1) </span></span>
+<span class="line"><span style="color:#A6ACCD">	cout </span><span style="color:#91B4D5">&#x3C;&#x3C;</span><span style="color:#E4F0FB"> tree</span><span style="color:#A6ACCD">.</span><span style="color:#ADD7FF">order_of_key</span><span style="color:#A6ACCD">(</span><span style="color:#5DE4C7">71</span><span style="color:#A6ACCD">) </span><span style="color:#91B4D5">&#x3C;&#x3C;</span><span style="color:#A6ACCD"> "</span><span style="color:#5FB3A1">&#92;n</span><span style="color:#A6ACCD">"</span><span style="color:#A6ACCD">;</span><span style="color:#767C9DB0;font-style:italic"> // index 8 (rank 9) </span></span>
+<span class="line"><span style="color:#A6ACCD">	cout </span><span style="color:#91B4D5">&#x3C;&#x3C;</span><span style="color:#E4F0FB"> tree</span><span style="color:#A6ACCD">.</span><span style="color:#ADD7FF">order_of_key</span><span style="color:#A6ACCD">(</span><span style="color:#5DE4C7">15</span><span style="color:#A6ACCD">) </span><span style="color:#91B4D5">&#x3C;&#x3C;</span><span style="color:#A6ACCD"> "</span><span style="color:#5FB3A1">&#92;n</span><span style="color:#A6ACCD">"</span><span style="color:#A6ACCD">;</span><span style="color:#767C9DB0;font-style:italic"> // index 4 (rank 5) </span></span>
+<span class="line"><span style="color:#A6ACCD">	return </span><span style="color:#5DE4C7">0</span><span style="color:#A6ACCD">; </span></span>
+<span class="line"><span style="color:#A6ACCD">&#125;</span></span></code></pre><!----> <h2>my solution</h2> <!----><pre class="shiki poimandres" style="background-color:#1b1e28;color:#a6accd" tabindex="0"><code><span class="line"><span style="color:#A6ACCD">#include </span><span style="color:#A6ACCD">&#x3C;</span><span style="color:#5DE4C7">bits/stdc++.h</span><span style="color:#A6ACCD">></span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#A6ACCD">#include </span><span style="color:#A6ACCD">&#x3C;</span><span style="color:#5DE4C7">bits/extc++.h</span><span style="color:#A6ACCD">></span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#5DE4C7">using</span><span style="color:#91B4D5"> namespace</span><span style="color:#91B4D5"> std</span><span style="color:#A6ACCD">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#5DE4C7">using</span><span style="color:#91B4D5"> namespace</span><span style="color:#91B4D5"> __gnu_pbds</span><span style="color:#A6ACCD">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#5DE4C7">typedef</span><span style="color:#A6ACCD"> tree</span><span style="color:#91B4D5">&#x3C;</span><span style="color:#A6ACCD">pair</span><span style="color:#91B4D5">&#x3C;</span><span style="color:#A6ACCD">pair</span><span style="color:#91B4D5">&#x3C;int</span><span style="color:#A6ACCD">, </span><span style="color:#91B4D5">int></span><span style="color:#A6ACCD">, </span><span style="color:#91B4D5">int></span><span style="color:#A6ACCD">, null_type, greater</span><span style="color:#91B4D5">&#x3C;</span><span style="color:#A6ACCD">pair</span><span style="color:#91B4D5">&#x3C;</span><span style="color:#A6ACCD">pair</span><span style="color:#91B4D5">&#x3C;int</span><span style="color:#A6ACCD">, </span><span style="color:#91B4D5">int></span><span style="color:#A6ACCD">, </span><span style="color:#91B4D5">int>></span><span style="color:#A6ACCD">, rb_tree_tag, </span></span>
+<span class="line"><span style="color:#A6ACCD">            tree_order_statistics_node_update</span><span style="color:#91B4D5">></span><span style="color:#A6ACCD"> ost;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#91B4D5">int</span><span style="color:#ADD7FF"> main</span><span style="color:#A6ACCD">() &#123;</span></span>
+<span class="line"><span style="color:#91B4D5">    int</span><span style="color:#A6ACCD"> n, m, i, b;</span></span>
+<span class="line"><span style="color:#ADD7FF">    scanf</span><span style="color:#A6ACCD">(</span><span style="color:#A6ACCD">"</span><span style="color:#E4F0FB">%d</span><span style="color:#E4F0FB"> %d</span><span style="color:#A6ACCD">"</span><span style="color:#A6ACCD">, </span><span style="color:#91B4D5">&#x26;</span><span style="color:#A6ACCD">n, </span><span style="color:#91B4D5">&#x26;</span><span style="color:#A6ACCD">m);</span></span>
+<span class="line"><span style="color:#A6ACCD">    </span></span>
+<span class="line"><span style="color:#A6ACCD">    ost tree;</span></span>
+<span class="line"><span style="color:#A6ACCD">    unordered_map</span><span style="color:#91B4D5">&#x3C;int</span><span style="color:#A6ACCD">, pair</span><span style="color:#91B4D5">&#x3C;int</span><span style="color:#A6ACCD">, </span><span style="color:#91B4D5">int>></span><span style="color:#A6ACCD"> mp;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#A6ACCD">    for (</span><span style="color:#91B4D5">int</span><span style="color:#A6ACCD"> i </span><span style="color:#91B4D5">=</span><span style="color:#5DE4C7"> 1</span><span style="color:#A6ACCD">; i </span><span style="color:#91B4D5">&#x3C;=</span><span style="color:#A6ACCD"> n; i</span><span style="color:#91B4D5">++</span><span style="color:#A6ACCD">) &#123;</span></span>
+<span class="line"><span style="color:#ADD7FF">        tree</span><span style="color:#A6ACCD">.</span><span style="color:#ADD7FF">insert</span><span style="color:#A6ACCD">(&#123;&#123;</span><span style="color:#5DE4C7">0</span><span style="color:#A6ACCD">, </span><span style="color:#5DE4C7">0</span><span style="color:#A6ACCD">&#125;, </span><span style="color:#91B4D5">-</span><span style="color:#A6ACCD">i&#125;);</span></span>
+<span class="line"><span style="color:#ADD7FF">        mp</span><span style="color:#A6ACCD">[i] </span><span style="color:#91B4D5">=</span><span style="color:#A6ACCD"> &#123;</span><span style="color:#5DE4C7">0</span><span style="color:#A6ACCD">, </span><span style="color:#5DE4C7">0</span><span style="color:#A6ACCD">&#125;;</span></span>
+<span class="line"><span style="color:#A6ACCD">    &#125;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#A6ACCD">    while (m</span><span style="color:#91B4D5">--</span><span style="color:#A6ACCD">) &#123;</span></span>
+<span class="line"><span style="color:#ADD7FF">        scanf</span><span style="color:#A6ACCD">(</span><span style="color:#A6ACCD">"</span><span style="color:#E4F0FB">%d</span><span style="color:#E4F0FB"> %d</span><span style="color:#A6ACCD">"</span><span style="color:#A6ACCD">, </span><span style="color:#91B4D5">&#x26;</span><span style="color:#A6ACCD">i, </span><span style="color:#91B4D5">&#x26;</span><span style="color:#A6ACCD">b);</span></span>
+<span class="line"><span style="color:#ADD7FF">        tree</span><span style="color:#A6ACCD">.</span><span style="color:#ADD7FF">erase</span><span style="color:#A6ACCD">(&#123;</span><span style="color:#ADD7FF">mp</span><span style="color:#A6ACCD">[i], </span><span style="color:#91B4D5">-</span><span style="color:#A6ACCD">i&#125;);</span></span>
+<span class="line"><span style="color:#ADD7FF">        mp</span><span style="color:#A6ACCD">[i] </span><span style="color:#91B4D5">=</span><span style="color:#A6ACCD"> &#123;</span><span style="color:#ADD7FF">mp</span><span style="color:#A6ACCD">[i].</span><span style="color:#E4F0FB">first</span><span style="color:#91B4D5"> +</span><span style="color:#5DE4C7"> 1</span><span style="color:#A6ACCD">, </span><span style="color:#ADD7FF">mp</span><span style="color:#A6ACCD">[i].</span><span style="color:#E4F0FB">second</span><span style="color:#91B4D5"> -</span><span style="color:#A6ACCD"> b&#125;;</span></span>
+<span class="line"><span style="color:#ADD7FF">        tree</span><span style="color:#A6ACCD">.</span><span style="color:#ADD7FF">insert</span><span style="color:#A6ACCD">(&#123;</span><span style="color:#ADD7FF">mp</span><span style="color:#A6ACCD">[i], </span><span style="color:#91B4D5">-</span><span style="color:#A6ACCD">i&#125;);</span></span>
+<span class="line"><span style="color:#ADD7FF">        printf</span><span style="color:#A6ACCD">(</span><span style="color:#A6ACCD">"</span><span style="color:#E4F0FB">%d</span><span style="color:#5FB3A1">&#92;n</span><span style="color:#A6ACCD">"</span><span style="color:#A6ACCD">, </span><span style="color:#ADD7FF">tree</span><span style="color:#A6ACCD">.</span><span style="color:#ADD7FF">order_of_key</span><span style="color:#A6ACCD">(&#123;</span><span style="color:#ADD7FF">mp</span><span style="color:#A6ACCD">[</span><span style="color:#5DE4C7">1</span><span style="color:#A6ACCD">], </span><span style="color:#5DE4C7">1</span><span style="color:#A6ACCD">&#125;) </span><span style="color:#91B4D5">+</span><span style="color:#5DE4C7"> 1</span><span style="color:#A6ACCD">);</span></span>
+<span class="line"><span style="color:#A6ACCD">    &#125;</span></span>
+<span class="line"><span style="color:#A6ACCD">&#125;</span></span></code></pre><!----><!----></div></hgroup></main><!----><!----><!----><!--]--><!----><!----><!--]--> <!--[!--><!--]--><!--]-->
+			
+			<script>
+				{
+					__sveltekit_1oovd26 = {
+						base: new URL("..", location).pathname.slice(0, -1)
+					};
+
+					const element = document.currentScript.parentElement;
+
+					Promise.all([
+						import("../_app/immutable/entry/start.J1PdYh-l.js"),
+						import("../_app/immutable/entry/app.BqWiXqDo.js")
+					]).then(([kit, app]) => {
+						kit.start(app, element, {
+							node_ids: [0, 2, 5],
+							data: [null,null,null],
+							form: null,
+							error: null
+						});
+					});
+				}
+			</script>
+		</div>
+	</body>
+</html>

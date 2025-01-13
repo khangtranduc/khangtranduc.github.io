@@ -5,6 +5,8 @@ import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex-svelte';
 
+let highlighter;
+
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
 	// Consult https://svelte.dev/docs/kit/integrations
@@ -16,13 +18,14 @@ const config = {
 
 			highlight: {
 				highlighter: async (code, lang = 'text') => {
-					const highlighter = await createHighlighter({
-						themes: ['poimandres'],
-						langs: ['javascript', 'typescript']
-					});
-					await highlighter.loadLanguage('javascript', 'typescript', 'cpp');
+					if (!highlighter){
+						highlighter = await createHighlighter({
+							themes: ['poimandres'],
+							langs: ['javascript', 'typescript']
+						});
+						await highlighter.loadLanguage('javascript', 'typescript', 'cpp');
+					}
 					const html = escapeSvelte(highlighter.codeToHtml(code, { lang, theme: 'poimandres' }));
-					highlighter.dispose();
 					return `{@html \`${html}\`}`;
 				}
 			},
