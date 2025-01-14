@@ -1,7 +1,19 @@
 <script lang="ts">
 	import '../app.css';
 	import 'iconify-icon';
+
+	import { page } from "$app/state";
+
+	const capitalize = (str: string | undefined) => str ? String(str).charAt(0).toUpperCase() + String(str).slice(1) : ""
+
+	let title = $derived(page.route.id == '/' ? "khangtranduc" : capitalize(page.route.id?.split("/").at(-1)))
+
+	$effect(() => console.log(page.route.id?.split("/").at(-1)));
 </script>
+
+<svelte:head>
+	<title>{title}</title>
+</svelte:head>
 
 <nav>
 	<a href="/"><img src="/favicon.png" alt="logo" /></a>
