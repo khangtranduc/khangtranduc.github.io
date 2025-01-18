@@ -8,15 +8,15 @@
 		
 		<link href="../_app/immutable/assets/0.BYkjn869.css" rel="stylesheet">
 		<link href="../_app/immutable/assets/app.DzL7zd-v.css" rel="stylesheet">
+		<link href="../_app/immutable/assets/Youtube.ueDDkp2l.css" rel="stylesheet">
 		<link href="../_app/immutable/assets/2.DLi_JnGM.css" rel="stylesheet">
 		<link href="../_app/immutable/assets/5.DjbeUfP5.css" rel="stylesheet">
-		<link href="../_app/immutable/assets/Youtube.ueDDkp2l.css" rel="stylesheet">
-		<link rel="modulepreload" href="../_app/immutable/entry/start.BR9jVKSl.js">
-		<link rel="modulepreload" href="../_app/immutable/chunks/entry.DPwb7qAU.js">
+		<link rel="modulepreload" href="../_app/immutable/entry/start.BWTZ4kpc.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/entry.BusGAzon.js">
 		<link rel="modulepreload" href="../_app/immutable/chunks/runtime.BcKyo7YD.js">
 		<link rel="modulepreload" href="../_app/immutable/chunks/control.CYgJF_JY.js">
 		<link rel="modulepreload" href="../_app/immutable/chunks/index-client.DY7b72eE.js">
-		<link rel="modulepreload" href="../_app/immutable/entry/app.bYSfWQw-.js">
+		<link rel="modulepreload" href="../_app/immutable/entry/app.D_IHZel7.js">
 		<link rel="modulepreload" href="../_app/immutable/chunks/preload-helper.DuADFCk_.js">
 		<link rel="modulepreload" href="../_app/immutable/chunks/render.ZnNnvq22.js">
 		<link rel="modulepreload" href="../_app/immutable/chunks/svelte-head.CcKS_SDQ.js">
@@ -24,15 +24,15 @@
 		<link rel="modulepreload" href="../_app/immutable/chunks/if._3u0NIFC.js">
 		<link rel="modulepreload" href="../_app/immutable/chunks/proxy.CeXgTrKy.js">
 		<link rel="modulepreload" href="../_app/immutable/chunks/props.CFllZhvJ.js">
-		<link rel="modulepreload" href="../_app/immutable/nodes/0.BJo04aex.js">
+		<link rel="modulepreload" href="../_app/immutable/nodes/0.CCHUFVe5.js">
 		<link rel="modulepreload" href="../_app/immutable/chunks/app.BLLG0wQG.js">
 		<link rel="modulepreload" href="../_app/immutable/chunks/iconify-icon.DiWr_Qug.js">
-		<link rel="modulepreload" href="../_app/immutable/chunks/index.lfczKDMs.js">
-		<link rel="modulepreload" href="../_app/immutable/nodes/2.DkmVV7cH.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/utils.DW4414is.js">
 		<link rel="modulepreload" href="../_app/immutable/chunks/legacy.PYORki5n.js">
-		<link rel="modulepreload" href="../_app/immutable/nodes/5.BqVnNcjP.js">
-		<link rel="modulepreload" href="../_app/immutable/chunks/each.DGHF6jXb.js">
-		<link rel="modulepreload" href="../_app/immutable/chunks/utils.C7fNqKjf.js"><!--[--><!--]--><!--[--><!--]--><title>Posts | coding-2</title>
+		<link rel="modulepreload" href="../_app/immutable/chunks/index.BkDE7Xm1.js">
+		<link rel="modulepreload" href="../_app/immutable/nodes/2.DkmVV7cH.js">
+		<link rel="modulepreload" href="../_app/immutable/nodes/5.D-U8YpGj.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/each.DGHF6jXb.js"><!--[--><!--]--><!--[--><!--]--><title>Posts | coding-2</title>
 	</head>
 	<body data-sveltekit-preload-data="hover">
 		<div style="display: contents"><!--[--><!--[--><!----><nav class="svelte-nd50iq"><a href="/"><img src="/favicon.png" alt="logo" class="svelte-nd50iq"></a></nav> <!----><!--[--><!----><nav class="svelte-97m9fy"><a href="/" class="svelte-97m9fy"><img src="/favicon.png" alt="logo" class="svelte-97m9fy"></a> <div class="navbar svelte-97m9fy"><a href="/" class="svelte-97m9fy">home</a> <a href="/projects" class="svelte-97m9fy">projects</a> <a href="/downloads/khang-tran-resume.pdf" target="_blank" class="svelte-97m9fy">resume</a> <a href="/posts" class="svelte-97m9fy">posts</a></div></nav> <!----><!----><main class="svelte-6duwo1"><hgroup class="svelte-6duwo1"><h1>coding-2</h1> <p>Published at Dec 27, 2024</p> <div class="tags svelte-6duwo1"><!--[--><span class="svelte-6duwo1">#daily-coding</span><!--]--></div> <div class="prose"><!----><h2>Kattis – pivot</h2> <p>This one is not too bad either, we need to do two passes, one forwards and backwards. We also need to keep a set of candidate pivot elements. For the forward pass, we remove any elements that isn’t the largest so far from our set of candidates. We do something similar for the backwards pass, but in this case the smallest instead.</p> <p>We can use C++ <code>unordered_set</code> for <span class="math math-inline"><!----><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(1)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord">1</span><span class="mclose">)</span></span></span></span><!----></span> <code>insert</code> and <code>erase</code>, which allows our algorithm to run in <span class="math math-inline"><!----><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span><!----></span> time.</p> <p><strong>My solution:</strong></p> <!----><pre class="shiki poimandres" style="background-color:#1b1e28;color:#a6accd" tabindex="0"><code><span class="line"><span style="color:#A6ACCD">#include </span><span style="color:#A6ACCD">&#x3C;</span><span style="color:#5DE4C7">bits/stdc++.h</span><span style="color:#A6ACCD">></span></span>
@@ -74,15 +74,15 @@
 			
 			<script>
 				{
-					__sveltekit_ip33io = {
+					__sveltekit_18zkc4y = {
 						base: new URL("..", location).pathname.slice(0, -1)
 					};
 
 					const element = document.currentScript.parentElement;
 
 					Promise.all([
-						import("../_app/immutable/entry/start.BR9jVKSl.js"),
-						import("../_app/immutable/entry/app.bYSfWQw-.js")
+						import("../_app/immutable/entry/start.BWTZ4kpc.js"),
+						import("../_app/immutable/entry/app.D_IHZel7.js")
 					]).then(([kit, app]) => {
 						kit.start(app, element, {
 							node_ids: [0, 2, 5],

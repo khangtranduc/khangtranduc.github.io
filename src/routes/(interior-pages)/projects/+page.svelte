@@ -36,7 +36,7 @@
 				<h3><b><a target="_blank" href="/posts/{post.slug}">{post.title}</a></b></h3>
 				<h3>{post.date}</h3>
 				<div class="row">
-					{#each post.tags.filter(t => tabs.includes(t)) as tag}
+					{#each post.tags as tag}
 						<h4>({tag})</h4>
 					{/each}
 				</div>

@@ -1,1 +1,0 @@
-import"./disclose-version.w122s73S.js";import"./legacy.PYORki5n.js";/* empty css                                              */const p=(t,e="medium",r="en")=>{const a=new Date(t.split("T")[0].replaceAll("-","/"));return new Intl.DateTimeFormat(r,{dateStyle:e}).format(a)};export{p as f};

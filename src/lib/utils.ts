@@ -9,6 +9,8 @@ export const formatDate = (date: string, dateStyle: DateStyle = 'medium', locale
 	return dateFormatter.format(dateToFormat);
 }
 
+export const capitalize = (str: string | undefined) => str ? String(str).charAt(0).toUpperCase() + String(str).slice(1) : ""
+
 export const getPosts = async () => {
 	let posts: Post[] = [];
 

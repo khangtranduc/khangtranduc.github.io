@@ -1,10 +1,9 @@
 <script lang="ts">
 	import '../app.css';
 	import 'iconify-icon';
+	import { capitalize } from '$lib/utils';
 
 	import { page } from "$app/state";
-
-	const capitalize = (str: string | undefined) => str ? String(str).charAt(0).toUpperCase() + String(str).slice(1) : ""
 
 	let title = $derived(page.route.id == '/' ? "khangtranduc" : capitalize(page.route.id?.split("/").at(-1)))
 
