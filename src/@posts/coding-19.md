@@ -11,12 +11,13 @@ Today’s problem is quite exciting because I get to learn a new, cool data stru
 ## Fenwick Tree
 This structure is used for fast $O(m\log m)$ **dynamic** prefix sum queries, where $m$ is the length of the underlying array. In problem solving, the underlying array is frequently a frequency array.
 
-It makes frequent use of the `LSOne` operation (see [[coding-11]]).
+It makes frequent use of the `LSOne` operation (see [coding-11](/posts/coding-11)).
 ### structure
 The Fenwick tree is essentially a tree whose parents and children are linked together by the `LSOne(S)` operation. This relationship is special because each branch of the Fenwick tree will cover the full range from `[1...i]` where `i` is the index of the *last parent*.
 
 Here the *last parent* is the index with only one 1 in its binary representation. To borrow a diagram from `halim`, the structure of the Fenwick tree is as such:
-![[Pasted image 20250119133708.png|center]]
+
+![](/images/fenwick.png)
 ### basic operations
 The Fenwick Tree supports 2 basic operations:
 - `update(i, v)`: update element `i` in **underlying array** with `v` (i.e. `a[i] += v`)
