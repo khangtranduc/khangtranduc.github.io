@@ -1,0 +1,1 @@
+import"./disclose-version.BnNttdGv.js";import"./legacy.CLC5nI8X.js";/* empty css                                              */const c=(t,e="medium",a="en")=>{const r=new Date(t.split("T")[0].replaceAll("-","/"));return new Intl.DateTimeFormat(a,{dateStyle:e}).format(r)},p=t=>t?String(t).charAt(0).toUpperCase()+String(t).slice(1):"";export{p as c,c as f};
