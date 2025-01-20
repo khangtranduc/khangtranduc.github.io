@@ -127,6 +127,8 @@ This one was quite confusing, I was trying to brainstorm a solution involving ma
 This solution I feel pretty proud about, essentially it erases the intersection of the two sets. Then it breaks the elements in $b$ into $x$ and $y$ as there is only one unordered pair $(x, y)$ such that $x + y = b$. `YES` if $a$ and $b$ becomes empty and `NO` if we encounter an impossible situation.
 
 Unfortunately, I just missed the deadline, so I wasn’t able to submit this. I will submit it to the practice judge later when that becomes available.
+
+Edit: It got TLE :((
 ```cpp
 #include <bits/stdc++.h>
 
