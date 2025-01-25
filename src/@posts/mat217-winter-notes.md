@@ -15,7 +15,7 @@ image: /thumbs/axler.png
 </script>
 
 ## first installment!
-Finally, the first installment of my [quest to do a project a week](/posts/new%20blog!). During planning, I realized that I didn’t have nearly enough time in the winter to do all the things I wanted. So I resorted to doing one project per division (which I defined to be 3 days). At least that was the original plan.
+Finally, the first installment of my [quest to do a project a week](/posts/new-blog!). During planning, I realized that I didn’t have nearly enough time in the winter to do all the things I wanted. So I resorted to doing one project per division (which I defined to be 3 days). At least that was the original plan.
 
 I initially planned to work through 5 chapters of Axler in 3 days which, needless to say, I didn’t not succeed. This was because of numerous outings, delays, over-estimation of my abilities, and laziness. Nevertheless, I was at least still able to finish 2 chapters in a week, which is faithful (somewhat) to the original goal of weekly projects, though a lot less impressive.
 
