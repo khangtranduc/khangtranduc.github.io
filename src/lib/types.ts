@@ -6,5 +6,5 @@ export type Post = {
 	tags: string[];
 	published: boolean;
 	image?: string; // only here if it is project (normally)
-	pid: string; // unique identification to relate all projects of a kind
+	pid?: string; // unique identification to relate all projects of a kind
 };

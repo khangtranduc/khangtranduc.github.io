@@ -8,7 +8,6 @@ tags:
   - math
 published: true
 image: /thumbs/axler.png
-pid: axler
 ---
 
 <script>
