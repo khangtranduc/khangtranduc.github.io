@@ -5,7 +5,6 @@ date: 2025-01-25
 tags:
   - daily-coding
 published: true
-pid: axleer
 ---
 Just took a break for a few days to focus on COS 217 placement test. I think it went quite well. Still waiting for results tho…
 ## [Kattis – justforsidekicks](https://open.kattis.com/problems/justforsidekicks)
