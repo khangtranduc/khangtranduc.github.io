@@ -6,7 +6,7 @@ tags:
   - daily-coding
 published: true
 ---
-## Kattis – supercomputer
+## [Kattis – supercomputer](https://open.kattis.com/problems/supercomputer)
 Quite a straight-forward application of [Fenwick trees](/posts/coding-19).
 ## my solution
 ```cpp
