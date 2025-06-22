@@ -1,0 +1,81 @@
+import{a as l,t as p}from"./disclose-version.gCkiB1NA.js";import"./legacy.BBWxuCkZ.js";import{L as o,M as e}from"./runtime.DIMTQvhB.js";import{h as c}from"./html.BSu0e-bj.js";const y={title:"coding-20",description:"Kattis - justforsidekicks",date:"2025-01-25T00:00:00.000Z",tags:["daily-coding"],published:!0};var t=p('<p>Just took a break for a few days to focus on COS 217 placement test. I think it went quite well. Still waiting for results tho…</p> <h2><a href="https://open.kattis.com/problems/justforsidekicks" rel="nofollow">Kattis – justforsidekicks</a></h2> <p>Quite a simple problem but I brain-farted so it took me a while to actually figure out how to do it. Essentially keep 6 <a href="/posts/coding-19">Fenwick trees</a>, each tracking the cumulative frequency of one type of gem. Then keep another array <code>v[]</code> that keeps track of the value of each gem type.</p> <p>I definitely need more practice.</p> <h2>my solution</h2> <!>',1);function i(n){var s=t(),a=o(e(s),10);c(a,()=>`<pre class="shiki poimandres" style="background-color:#1b1e28;color:#a6accd" tabindex="0"><code><span class="line"><span style="color:#A6ACCD">#include </span><span style="color:#A6ACCD">&#x3C;</span><span style="color:#5DE4C7">bits/stdc++.h</span><span style="color:#A6ACCD">></span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#A6ACCD">#define </span><span style="color:#ADD7FF">LSOne</span><span style="color:#A6ACCD">(</span><span style="color:#E4F0FB">S</span><span style="color:#A6ACCD">) (S </span><span style="color:#91B4D5">&#x26;</span><span style="color:#91B4D5"> -</span><span style="color:#A6ACCD">S)</span></span>
+<span class="line"><span style="color:#A6ACCD">#define </span><span style="color:#ADD7FF">N_GEMS</span><span style="color:#5DE4C7"> 6</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#5DE4C7">using</span><span style="color:#91B4D5"> namespace</span><span style="color:#91B4D5"> std</span><span style="color:#A6ACCD">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#91B4D5">class</span><span style="color:#A6ACCDC0"> fenwick</span><span style="color:#A6ACCD"> &#123;</span></span>
+<span class="line"><span style="color:#91B4D5">    private</span><span style="color:#A6ACCD">:</span></span>
+<span class="line"><span style="color:#A6ACCD">        vector</span><span style="color:#91B4D5">&#x3C;int></span><span style="color:#A6ACCD"> ft;</span></span>
+<span class="line"><span style="color:#91B4D5">    public</span><span style="color:#A6ACCD">:</span></span>
+<span class="line"><span style="color:#ADD7FF">        fenwick</span><span style="color:#A6ACCD">(</span><span style="color:#91B4D5">int</span><span style="color:#E4F0FB"> m</span><span style="color:#A6ACCD">) &#123; </span><span style="color:#ADD7FF">ft</span><span style="color:#A6ACCD">.</span><span style="color:#ADD7FF">assign</span><span style="color:#A6ACCD">(m </span><span style="color:#91B4D5">+</span><span style="color:#5DE4C7"> 1</span><span style="color:#A6ACCD">, </span><span style="color:#5DE4C7">0</span><span style="color:#A6ACCD">); &#125;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#91B4D5">        void</span><span style="color:#ADD7FF"> update</span><span style="color:#A6ACCD">(</span><span style="color:#91B4D5">int</span><span style="color:#E4F0FB"> i</span><span style="color:#A6ACCD">, </span><span style="color:#91B4D5">int</span><span style="color:#E4F0FB"> v</span><span style="color:#A6ACCD">) &#123;</span></span>
+<span class="line"><span style="color:#A6ACCD">            for (; i </span><span style="color:#91B4D5">&#x3C;</span><span style="color:#ADD7FF"> ft</span><span style="color:#A6ACCD">.</span><span style="color:#ADD7FF">size</span><span style="color:#A6ACCD">(); i </span><span style="color:#91B4D5">+=</span><span style="color:#ADD7FF"> LSOne</span><span style="color:#A6ACCD">(i))</span></span>
+<span class="line"><span style="color:#ADD7FF">                ft</span><span style="color:#A6ACCD">[i] </span><span style="color:#91B4D5">+=</span><span style="color:#A6ACCD"> v;</span></span>
+<span class="line"><span style="color:#A6ACCD">        &#125;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#91B4D5">        long</span><span style="color:#ADD7FF"> rsq</span><span style="color:#A6ACCD">(</span><span style="color:#91B4D5">int</span><span style="color:#E4F0FB"> j</span><span style="color:#A6ACCD">) &#123;</span></span>
+<span class="line"><span style="color:#91B4D5">            long</span><span style="color:#A6ACCD"> sum </span><span style="color:#91B4D5">=</span><span style="color:#5DE4C7"> 0</span><span style="color:#A6ACCD">;</span></span>
+<span class="line"><span style="color:#A6ACCD">            for (; j </span><span style="color:#91B4D5">></span><span style="color:#5DE4C7"> 0</span><span style="color:#A6ACCD">; j </span><span style="color:#91B4D5">-=</span><span style="color:#ADD7FF"> LSOne</span><span style="color:#A6ACCD">(j))</span></span>
+<span class="line"><span style="color:#A6ACCD">                sum </span><span style="color:#91B4D5">+=</span><span style="color:#ADD7FF"> ft</span><span style="color:#A6ACCD">[j];</span></span>
+<span class="line"><span style="color:#A6ACCD">            return sum;</span></span>
+<span class="line"><span style="color:#A6ACCD">        &#125;</span></span>
+<span class="line"><span style="color:#A6ACCD">&#125;;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#91B4D5">int</span><span style="color:#ADD7FF"> main</span><span style="color:#A6ACCD">() &#123;</span></span>
+<span class="line"><span style="color:#767C9DB0;font-style:italic">    // get frequency of each gem type</span></span>
+<span class="line"><span style="color:#767C9DB0;font-style:italic">    // cummulative frequency of each gem type at each index</span></span>
+<span class="line"><span style="color:#767C9DB0;font-style:italic">    // simple multiplication at op 3</span></span>
+<span class="line"><span style="color:#767C9DB0;font-style:italic">    // simple changing of v at op 2</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#767C9DB0;font-style:italic">    // each fenwick counts cummulative up to that point</span></span>
+<span class="line"><span style="color:#767C9DB0;font-style:italic">    // ofc there is mapping [1...n] -> [0...n)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#91B4D5">    int</span><span style="color:#A6ACCD"> n, q, op, e1, e2;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#A6ACCD">    cin </span><span style="color:#91B4D5">>></span><span style="color:#A6ACCD"> n </span><span style="color:#91B4D5">>></span><span style="color:#A6ACCD"> q;</span></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"><span style="color:#A6ACCD">    vector</span><span style="color:#91B4D5">&#x3C;int></span><span style="color:#ADD7FF"> v</span><span style="color:#A6ACCD">(N_GEMS);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#A6ACCD">    for (</span><span style="color:#91B4D5">int</span><span style="color:#A6ACCD"> i </span><span style="color:#91B4D5">=</span><span style="color:#5DE4C7"> 0</span><span style="color:#A6ACCD">; i </span><span style="color:#91B4D5">&#x3C;</span><span style="color:#E4F0FB"> v</span><span style="color:#A6ACCD">.</span><span style="color:#ADD7FF">size</span><span style="color:#A6ACCD">(); i</span><span style="color:#91B4D5">++</span><span style="color:#A6ACCD">)</span></span>
+<span class="line"><span style="color:#A6ACCD">        cin </span><span style="color:#91B4D5">>></span><span style="color:#E4F0FB"> v</span><span style="color:#A6ACCD">[i];</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#A6ACCD">    vector</span><span style="color:#91B4D5">&#x3C;char></span><span style="color:#ADD7FF"> c</span><span style="color:#A6ACCD">(n </span><span style="color:#91B4D5">+</span><span style="color:#5DE4C7"> 1</span><span style="color:#A6ACCD">);</span></span>
+<span class="line"><span style="color:#A6ACCD">    fenwick </span><span style="color:#ADD7FF">f1</span><span style="color:#A6ACCD">(n </span><span style="color:#91B4D5">+</span><span style="color:#5DE4C7"> 1</span><span style="color:#A6ACCD">), </span><span style="color:#ADD7FF">f2</span><span style="color:#A6ACCD">(n </span><span style="color:#91B4D5">+</span><span style="color:#5DE4C7"> 1</span><span style="color:#A6ACCD">), </span><span style="color:#ADD7FF">f3</span><span style="color:#A6ACCD">(n </span><span style="color:#91B4D5">+</span><span style="color:#5DE4C7"> 1</span><span style="color:#A6ACCD">), </span><span style="color:#ADD7FF">f4</span><span style="color:#A6ACCD">(n </span><span style="color:#91B4D5">+</span><span style="color:#5DE4C7"> 1</span><span style="color:#A6ACCD">), </span><span style="color:#ADD7FF">f5</span><span style="color:#A6ACCD">(n </span><span style="color:#91B4D5">+</span><span style="color:#5DE4C7"> 1</span><span style="color:#A6ACCD">), </span><span style="color:#ADD7FF">f6</span><span style="color:#A6ACCD">(n </span><span style="color:#91B4D5">+</span><span style="color:#5DE4C7"> 1</span><span style="color:#A6ACCD">);</span></span>
+<span class="line"><span style="color:#A6ACCD">    vector</span><span style="color:#91B4D5">&#x3C;</span><span style="color:#A6ACCD">fenwick</span><span style="color:#91B4D5">></span><span style="color:#A6ACCD"> trees </span><span style="color:#91B4D5">=</span><span style="color:#A6ACCD"> &#123;f1, f2, f3, f4, f5, f6&#125;;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#A6ACCD">    for (</span><span style="color:#91B4D5">int</span><span style="color:#A6ACCD"> i </span><span style="color:#91B4D5">=</span><span style="color:#5DE4C7"> 1</span><span style="color:#A6ACCD">; i </span><span style="color:#91B4D5">&#x3C;=</span><span style="color:#A6ACCD"> n; i</span><span style="color:#91B4D5">++</span><span style="color:#A6ACCD">)&#123;</span></span>
+<span class="line"><span style="color:#A6ACCD">        cin </span><span style="color:#91B4D5">>></span><span style="color:#ADD7FF"> c</span><span style="color:#A6ACCD">[i];</span></span>
+<span class="line"><span style="color:#ADD7FF">        c</span><span style="color:#A6ACCD">[i] </span><span style="color:#91B4D5">=</span><span style="color:#ADD7FF"> c</span><span style="color:#A6ACCD">[i] </span><span style="color:#91B4D5">-</span><span style="color:#A6ACCD"> '</span><span style="color:#5DE4C7">1</span><span style="color:#A6ACCD">'</span><span style="color:#A6ACCD">;</span></span>
+<span class="line"><span style="color:#ADD7FF">        trees</span><span style="color:#A6ACCD">[</span><span style="color:#ADD7FF">c</span><span style="color:#A6ACCD">[i]].</span><span style="color:#ADD7FF">update</span><span style="color:#A6ACCD">(i, </span><span style="color:#5DE4C7">1</span><span style="color:#A6ACCD">);</span></span>
+<span class="line"><span style="color:#A6ACCD">    &#125;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#A6ACCD">    while (q</span><span style="color:#91B4D5">--</span><span style="color:#A6ACCD">) &#123;</span></span>
+<span class="line"><span style="color:#A6ACCD">        cin </span><span style="color:#91B4D5">>></span><span style="color:#A6ACCD"> op </span><span style="color:#91B4D5">>></span><span style="color:#A6ACCD"> e1 </span><span style="color:#91B4D5">>></span><span style="color:#A6ACCD"> e2;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#A6ACCD">        switch (op) &#123;</span></span>
+<span class="line"><span style="color:#A6ACCD">            case </span><span style="color:#5DE4C7">1</span><span style="color:#A6ACCD">:</span></span>
+<span class="line"><span style="color:#767C9DB0;font-style:italic">                // replace gem @ e1 with e2 gem type</span></span>
+<span class="line"><span style="color:#ADD7FF">                trees</span><span style="color:#A6ACCD">[</span><span style="color:#ADD7FF">c</span><span style="color:#A6ACCD">[e1]].</span><span style="color:#ADD7FF">update</span><span style="color:#A6ACCD">(e1, </span><span style="color:#91B4D5">-</span><span style="color:#5DE4C7">1</span><span style="color:#A6ACCD">);</span></span>
+<span class="line"><span style="color:#ADD7FF">                trees</span><span style="color:#A6ACCD">[</span><span style="color:#91B4D5">--</span><span style="color:#A6ACCD">e2].</span><span style="color:#ADD7FF">update</span><span style="color:#A6ACCD">(e1, </span><span style="color:#5DE4C7">1</span><span style="color:#A6ACCD">);</span></span>
+<span class="line"><span style="color:#ADD7FF">                c</span><span style="color:#A6ACCD">[e1] </span><span style="color:#91B4D5">=</span><span style="color:#A6ACCD"> e2;</span></span>
+<span class="line"><span style="color:#A6ACCD">                break;</span></span>
+<span class="line"><span style="color:#A6ACCD">            case </span><span style="color:#5DE4C7">2</span><span style="color:#A6ACCD">:</span></span>
+<span class="line"><span style="color:#767C9DB0;font-style:italic">                // change value of e1 gem to e2</span></span>
+<span class="line"><span style="color:#ADD7FF">                v</span><span style="color:#A6ACCD">[</span><span style="color:#91B4D5">--</span><span style="color:#A6ACCD">e1] </span><span style="color:#91B4D5">=</span><span style="color:#A6ACCD"> e2;</span></span>
+<span class="line"><span style="color:#A6ACCD">                break;  </span></span>
+<span class="line"><span style="color:#A6ACCD">            case </span><span style="color:#5DE4C7">3</span><span style="color:#A6ACCD">:</span></span>
+<span class="line"><span style="color:#767C9DB0;font-style:italic">                // range sum query [e1, e2]</span></span>
+<span class="line"><span style="color:#91B4D5">                long</span><span style="color:#A6ACCD"> sum </span><span style="color:#91B4D5">=</span><span style="color:#5DE4C7"> 0</span><span style="color:#A6ACCD">;</span></span>
+<span class="line"><span style="color:#A6ACCD">                for (</span><span style="color:#91B4D5">int</span><span style="color:#A6ACCD"> i </span><span style="color:#91B4D5">=</span><span style="color:#5DE4C7"> 0</span><span style="color:#A6ACCD">; i </span><span style="color:#91B4D5">&#x3C;</span><span style="color:#A6ACCD"> N_GEMS; i</span><span style="color:#91B4D5">++</span><span style="color:#A6ACCD">)</span></span>
+<span class="line"><span style="color:#A6ACCD">                    sum </span><span style="color:#91B4D5">+=</span><span style="color:#A6ACCD"> (</span><span style="color:#ADD7FF">trees</span><span style="color:#A6ACCD">[i].</span><span style="color:#ADD7FF">rsq</span><span style="color:#A6ACCD">(e2) </span><span style="color:#91B4D5">-</span><span style="color:#ADD7FF"> trees</span><span style="color:#A6ACCD">[i].</span><span style="color:#ADD7FF">rsq</span><span style="color:#A6ACCD">(e1 </span><span style="color:#91B4D5">-</span><span style="color:#5DE4C7"> 1</span><span style="color:#A6ACCD">)) </span><span style="color:#91B4D5">*</span><span style="color:#ADD7FF"> v</span><span style="color:#A6ACCD">[i];</span></span>
+<span class="line"><span style="color:#A6ACCD">                cout </span><span style="color:#91B4D5">&#x3C;&#x3C;</span><span style="color:#A6ACCD"> sum </span><span style="color:#91B4D5">&#x3C;&#x3C;</span><span style="color:#A6ACCD"> "</span><span style="color:#5FB3A1">&#92;n</span><span style="color:#A6ACCD">"</span><span style="color:#A6ACCD">;</span></span>
+<span class="line"><span style="color:#A6ACCD">                break;</span></span>
+<span class="line"><span style="color:#A6ACCD">        &#125;</span></span>
+<span class="line"><span style="color:#A6ACCD">    &#125;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#A6ACCD">    return </span><span style="color:#5DE4C7">0</span><span style="color:#A6ACCD">;</span></span>
+<span class="line"><span style="color:#A6ACCD">&#125;</span></span></code></pre>`),l(n,s)}export{i as default,y as metadata};
