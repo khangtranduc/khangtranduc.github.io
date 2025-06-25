@@ -13,15 +13,15 @@ This structure is used for fast $O(m\log m)$ **dynamic** prefix sum queries, whe
 
 It makes frequent use of the `LSOne` operation (see [coding-11](/posts/coding-11)).
 ### structure
-The Fenwick tree is essentially a tree whose parents and children are linked together by the `LSOne(S)` operation. This relationship is special because each branch of the Fenwick tree will cover the full range from `[1...i]` where `i` is the index of the *last parent*.
+The Fenwick tree is essentially a tree whose parents and children are linked together by the `LSOne(S)` operation. This relationship is special because each branch of the Fenwick tree will cover the full range from `[1...i]` where `i` is the index of the *last node*. With each node in the Fenwick Tree being itself the cumulative frequency of the underlying array `f` till the index of its parent.
 
-Here the *last parent* is the index with only one 1 in its binary representation. To borrow a diagram from `halim`, the structure of the Fenwick tree is as such:
+Here the *last node* is the index with only one 1 in its binary representation. To borrow a diagram from `halim`, the structure of the Fenwick tree is as such:
 
 ![](/images/fenwick.png)
 ### basic operations
 The Fenwick Tree supports 2 basic operations:
 - `update(i, v)`: update element `i` in **underlying array** with `v` (i.e. `a[i] += v`)
-- `rsq(j)`: find the prefix sum in range `[i...j]`
+- `rsq(j)`: find the prefix sum in range `[1...j]`
 	- this operation gives the range `[i...j]` trivially, i.e. `rsq(i,j) = rsq(j) - rsq(i-1)`
 ### implementation
 The bare-bones implementation of the Fenwick Tree is quite simple and easy to remember:

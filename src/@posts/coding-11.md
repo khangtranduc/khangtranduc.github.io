@@ -9,6 +9,8 @@ published: true
 ## Kattis – quickbrownfox
 Direct Addressing Table (DAT) problem, which essentially means hashing problem but the hash function is the *identity*. Not too bad, got to use bitmasks again.
 
+`LSOne` is an operation that gets the value of the least significant bit of `S`.
+
 Ran into a hitch because implemented `LSOne` wrongly. The correct function is:
 ```cpp
 T = (S & -S)

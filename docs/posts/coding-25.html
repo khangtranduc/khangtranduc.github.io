@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" href="../favicon.png" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css" integrity="sha384-MlJdn/WNKDGXveldHDdyRP1R4CTHr3FeuDNfhsLPYrq2t0UBkUdK2jyTnXPEK1NQ" crossorigin="anonymous">
+		
+		<link href="../_app/immutable/assets/0.BYkjn869.css" rel="stylesheet">
+		<link href="../_app/immutable/assets/app.DhrkJy6a.css" rel="stylesheet">
+		<link href="../_app/immutable/assets/Youtube.ueDDkp2l.css" rel="stylesheet">
+		<link href="../_app/immutable/assets/2.DLi_JnGM.css" rel="stylesheet">
+		<link href="../_app/immutable/assets/5.DjbeUfP5.css" rel="stylesheet">
+		<link rel="modulepreload" href="../_app/immutable/entry/start.CPgIOnGA.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/entry.D0saMnkA.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/runtime.DIMTQvhB.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/control.CYgJF_JY.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/index-client.BunhC1UL.js">
+		<link rel="modulepreload" href="../_app/immutable/entry/app.Bza2DoBM.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/preload-helper.1gvijidZ.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/render.CQbXAHBZ.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/svelte-head.D83LXbdQ.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/disclose-version.gCkiB1NA.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/if.QqKH5iSK.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/proxy.ClLCET0m.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/props.CMP4IkUn.js">
+		<link rel="modulepreload" href="../_app/immutable/nodes/0.B-AVZIIR.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/iconify-icon.DiWr_Qug.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/utils.DSw6a8Jz.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/legacy.BBWxuCkZ.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/index.Bkh2dYqM.js">
+		<link rel="modulepreload" href="../_app/immutable/nodes/2.CUiBYzOq.js">
+		<link rel="modulepreload" href="../_app/immutable/nodes/5.Dg7j5xL1.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/each.Bj6GIoFX.js"><!--[--><!--]--><!--[--><!--]--><title>Posts | coding-25</title>
+	</head>
+	<body data-sveltekit-preload-data="hover">
+		<div style="display: contents"><!--[--><!--[--><!----><nav class="svelte-nd50iq"><a href="/"><img src="/favicon.png" alt="logo" class="svelte-nd50iq"></a></nav> <!----><!--[--><!----><nav class="svelte-97m9fy"><a href="/" class="svelte-97m9fy"><img src="/favicon.png" alt="logo" class="svelte-97m9fy"></a> <div class="navbar svelte-97m9fy"><a href="/" class="svelte-97m9fy">home</a> <a href="/projects" class="svelte-97m9fy">projects</a> <a href="/downloads/khang-tran-resume.pdf" target="_blank" class="svelte-97m9fy">resume</a> <a href="/posts" class="svelte-97m9fy">posts</a></div></nav> <!----><main class="svelte-6duwo1"><hgroup class="svelte-6duwo1"><h1>coding-25</h1> <p>Published at Jun 24, 2025</p> <div class="tags svelte-6duwo1"><!--[--><span class="svelte-6duwo1">#daily-coding</span><!--]--></div> <div class="prose"><!----><h2>Kattis – baloni</h2> <p>Quite a clever use of a histogram array indeed. Essentially, each lower balloons removes a previous upper baloon.</p> <h2>Kattis – downtime</h2> <p>Sliding window idea, find the bottleneck and that will inform minimum number of servers needed. Had a bug regarding closing times of windows. I think my fix was quite elegant.</p> <h2>my solution (baloni)</h2> <!----><pre class="shiki poimandres" style="background-color:#1b1e28;color:#a6accd" tabindex="0"><code><span class="line"><span style="color:#A6ACCD">#include </span><span style="color:#A6ACCD">&#x3C;</span><span style="color:#5DE4C7">bits/stdc++.h</span><span style="color:#A6ACCD">></span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#5DE4C7">using</span><span style="color:#91B4D5"> namespace</span><span style="color:#91B4D5"> std</span><span style="color:#A6ACCD">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#91B4D5">int</span><span style="color:#ADD7FF"> main</span><span style="color:#A6ACCD">() &#123;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#91B4D5">	int</span><span style="color:#A6ACCD"> n, curr, champ </span><span style="color:#91B4D5">=</span><span style="color:#91B4D5"> -</span><span style="color:#5DE4C7">1</span><span style="color:#A6ACCD">, arrows </span><span style="color:#91B4D5">=</span><span style="color:#5DE4C7"> 0</span><span style="color:#A6ACCD">;</span></span>
+<span class="line"><span style="color:#A6ACCD">	vector</span><span style="color:#91B4D5">&#x3C;int></span><span style="color:#A6ACCD"> arr;</span></span>
+<span class="line"><span style="color:#E4F0FB">	arr</span><span style="color:#A6ACCD">.</span><span style="color:#ADD7FF">resize</span><span style="color:#A6ACCD">(</span><span style="color:#5DE4C7">10000001</span><span style="color:#A6ACCD">, </span><span style="color:#5DE4C7">0</span><span style="color:#A6ACCD">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#ADD7FF">	scanf</span><span style="color:#A6ACCD">(</span><span style="color:#A6ACCD">"</span><span style="color:#E4F0FB">%d</span><span style="color:#A6ACCD">"</span><span style="color:#A6ACCD">, </span><span style="color:#91B4D5">&#x26;</span><span style="color:#A6ACCD">n);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#A6ACCD">	while (n</span><span style="color:#91B4D5">--</span><span style="color:#A6ACCD">) &#123;</span></span>
+<span class="line"><span style="color:#ADD7FF">		scanf</span><span style="color:#A6ACCD">(</span><span style="color:#A6ACCD">"</span><span style="color:#E4F0FB">%d</span><span style="color:#A6ACCD">"</span><span style="color:#A6ACCD">, </span><span style="color:#91B4D5">&#x26;</span><span style="color:#A6ACCD">curr);</span></span>
+<span class="line"><span style="color:#A6ACCD">		if (</span><span style="color:#ADD7FF">arr</span><span style="color:#A6ACCD">[curr </span><span style="color:#91B4D5">+</span><span style="color:#5DE4C7"> 1</span><span style="color:#A6ACCD">] </span><span style="color:#91B4D5">></span><span style="color:#5DE4C7"> 0</span><span style="color:#A6ACCD">) </span><span style="color:#ADD7FF">arr</span><span style="color:#A6ACCD">[curr </span><span style="color:#91B4D5">+</span><span style="color:#5DE4C7"> 1</span><span style="color:#A6ACCD">] </span><span style="color:#91B4D5">-=</span><span style="color:#5DE4C7"> 1</span><span style="color:#A6ACCD">;</span></span>
+<span class="line"><span style="color:#ADD7FF">		arr</span><span style="color:#A6ACCD">[curr] </span><span style="color:#91B4D5">+=</span><span style="color:#5DE4C7"> 1</span><span style="color:#A6ACCD">;</span></span>
+<span class="line"><span style="color:#A6ACCD">		champ </span><span style="color:#91B4D5">=</span><span style="color:#ADD7FF"> max</span><span style="color:#A6ACCD">(champ, curr);</span></span>
+<span class="line"><span style="color:#A6ACCD">	&#125;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#A6ACCD">	for (</span><span style="color:#91B4D5">int</span><span style="color:#A6ACCD"> i </span><span style="color:#91B4D5">=</span><span style="color:#5DE4C7"> 0</span><span style="color:#A6ACCD">; i </span><span style="color:#91B4D5">&#x3C;</span><span style="color:#A6ACCD"> champ </span><span style="color:#91B4D5">+</span><span style="color:#5DE4C7"> 1</span><span style="color:#A6ACCD">; i</span><span style="color:#91B4D5">++</span><span style="color:#A6ACCD">)</span></span>
+<span class="line"><span style="color:#A6ACCD">		arrows </span><span style="color:#91B4D5">+=</span><span style="color:#E4F0FB"> arr</span><span style="color:#A6ACCD">[i];</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#ADD7FF">	printf</span><span style="color:#A6ACCD">(</span><span style="color:#A6ACCD">"</span><span style="color:#E4F0FB">%d</span><span style="color:#5FB3A1">&#92;n</span><span style="color:#A6ACCD">"</span><span style="color:#A6ACCD">, arrows);	</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#A6ACCD">	return </span><span style="color:#5DE4C7">0</span><span style="color:#A6ACCD">;</span></span>
+<span class="line"><span style="color:#A6ACCD">&#125;</span></span></code></pre><!----> <h2>my solution (downtime)</h2> <!----><pre class="shiki poimandres" style="background-color:#1b1e28;color:#a6accd" tabindex="0"><code><span class="line"><span style="color:#A6ACCD">#include </span><span style="color:#A6ACCD">&#x3C;</span><span style="color:#5DE4C7">bits/stdc++.h</span><span style="color:#A6ACCD">></span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#5DE4C7">using</span><span style="color:#91B4D5"> namespace</span><span style="color:#91B4D5"> std</span><span style="color:#A6ACCD">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#91B4D5">int</span><span style="color:#ADD7FF"> main</span><span style="color:#A6ACCD">() &#123;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#91B4D5">	int</span><span style="color:#A6ACCD"> n, k, v, processing </span><span style="color:#91B4D5">=</span><span style="color:#5DE4C7"> 0</span><span style="color:#A6ACCD">, champ </span><span style="color:#91B4D5">=</span><span style="color:#5DE4C7"> 0</span><span style="color:#A6ACCD">;</span></span>
+<span class="line"><span style="color:#ADD7FF">	scanf</span><span style="color:#A6ACCD">(</span><span style="color:#A6ACCD">"</span><span style="color:#E4F0FB">%d</span><span style="color:#E4F0FB"> %d</span><span style="color:#A6ACCD">"</span><span style="color:#A6ACCD">, </span><span style="color:#91B4D5">&#x26;</span><span style="color:#A6ACCD">n, </span><span style="color:#91B4D5">&#x26;</span><span style="color:#A6ACCD">k);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#A6ACCD">	map</span><span style="color:#91B4D5">&#x3C;int</span><span style="color:#A6ACCD">, </span><span style="color:#91B4D5">int></span><span style="color:#A6ACCD"> m;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#A6ACCD">	while (n</span><span style="color:#91B4D5">--</span><span style="color:#A6ACCD">) &#123;</span></span>
+<span class="line"><span style="color:#ADD7FF">		scanf</span><span style="color:#A6ACCD">(</span><span style="color:#A6ACCD">"</span><span style="color:#E4F0FB">%d</span><span style="color:#A6ACCD">"</span><span style="color:#A6ACCD">, </span><span style="color:#91B4D5">&#x26;</span><span style="color:#A6ACCD">v);</span></span>
+<span class="line"><span style="color:#ADD7FF">		m</span><span style="color:#A6ACCD">[v]</span><span style="color:#91B4D5">++</span><span style="color:#A6ACCD">;</span></span>
+<span class="line"><span style="color:#ADD7FF">		m</span><span style="color:#A6ACCD">[v </span><span style="color:#91B4D5">+</span><span style="color:#5DE4C7"> 1000</span><span style="color:#A6ACCD">]</span><span style="color:#91B4D5">--</span><span style="color:#A6ACCD">;</span></span>
+<span class="line"><span style="color:#A6ACCD">	&#125;</span></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"><span style="color:#A6ACCD">	for (</span><span style="color:#91B4D5">auto</span><span style="color:#A6ACCD"> x : m) &#123;</span></span>
+<span class="line"><span style="color:#A6ACCD">		processing </span><span style="color:#91B4D5">+=</span><span style="color:#ADD7FF"> x</span><span style="color:#A6ACCD">.</span><span style="color:#E4F0FB">second</span><span style="color:#A6ACCD">;		</span></span>
+<span class="line"><span style="color:#A6ACCD">		champ </span><span style="color:#91B4D5">=</span><span style="color:#ADD7FF"> max</span><span style="color:#A6ACCD">(champ, processing);</span></span>
+<span class="line"><span style="color:#A6ACCD">	&#125;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#ADD7FF">	printf</span><span style="color:#A6ACCD">(</span><span style="color:#A6ACCD">"</span><span style="color:#E4F0FB">%d</span><span style="color:#5FB3A1">&#92;n</span><span style="color:#A6ACCD">"</span><span style="color:#A6ACCD">, (champ </span><span style="color:#91B4D5">+</span><span style="color:#A6ACCD"> k </span><span style="color:#91B4D5">-</span><span style="color:#5DE4C7"> 1</span><span style="color:#A6ACCD">)</span><span style="color:#91B4D5">/</span><span style="color:#A6ACCD">k);</span></span>
+<span class="line"><span style="color:#A6ACCD">	</span></span>
+<span class="line"><span style="color:#A6ACCD">	return </span><span style="color:#5DE4C7">0</span><span style="color:#A6ACCD">;</span></span>
+<span class="line"><span style="color:#A6ACCD">&#125;</span></span></code></pre><!----><!----></div></hgroup></main><!----><!----><!----><!--]--><!----><!----><!--]--> <!--[!--><!--]--><!--]-->
+			
+			<script>
+				{
+					__sveltekit_11wxrq1 = {
+						base: new URL("..", location).pathname.slice(0, -1)
+					};
+
+					const element = document.currentScript.parentElement;
+
+					Promise.all([
+						import("../_app/immutable/entry/start.CPgIOnGA.js"),
+						import("../_app/immutable/entry/app.Bza2DoBM.js")
+					]).then(([kit, app]) => {
+						kit.start(app, element, {
+							node_ids: [0, 2, 5],
+							data: [null,null,null],
+							form: null,
+							error: null
+						});
+					});
+				}
+			</script>
+		</div>
+	</body>
+</html>
