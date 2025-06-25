@@ -1,6 +1,6 @@
 ---
 title: coding-25
-description: Kattis - baloni
+description: Kattis - baloni + Kattis - downtime
 date: 2025-06-24
 tags:
   - daily-coding
