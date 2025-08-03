@@ -3,7 +3,6 @@
 
 	let { data } = $props();
 
-	// turn into dictionary ?
 	let tags = [...new Set(data.posts.map(post => post.tags).flat())];
 	let tagSelect = $state(new Array(tags.length).fill(true));
 

@@ -5,7 +5,11 @@ import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex-svelte';
 
-let highlighter;
+const theme = 'monokai';
+const highlighter = await createHighlighter({
+	themes: [theme],
+	langs: ['javascript', 'typescript', 'cpp', 'c', 'python', 'bash']
+});
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -13,20 +17,22 @@ const config = {
 	// for more information about preprocessors
 	preprocess: [
 		vitePreprocess(),
+		{
+			markup: ({ content, filename }) => {
+				if (filename?.endsWith('.md')) {
+					// Convert ![[image.png]] to ![](image.png)
+					content = content.replace(/!\[\[([^\]]+)\]\]/g, '![](/images/$1)');
+				}
+				return { code: content };
+			}
+		},
 		mdsvex({
 			extensions: ['.md'],
 
 			highlight: {
 				highlighter: async (code, lang = 'text') => {
-					if (!highlighter){
-						highlighter = await createHighlighter({
-							themes: ['poimandres'],
-							langs: ['javascript', 'typescript']
-						});
-						await highlighter.loadLanguage('javascript', 'typescript', 'cpp');
-					}
-					const html = escapeSvelte(highlighter.codeToHtml(code, { lang, theme: 'poimandres' }));
-					return `{@html \`${html}\`}`;
+					const html = escapeSvelte(highlighter.codeToHtml(code, { lang, theme }));
+					return `{@html \`${html}\` }`;
 				}
 			},
 

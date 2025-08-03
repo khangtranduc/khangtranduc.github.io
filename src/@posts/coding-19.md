@@ -17,7 +17,8 @@ The Fenwick tree is essentially a tree whose parents and children are linked tog
 
 Here the *last node* is the index with only one 1 in its binary representation. To borrow a diagram from `halim`, the structure of the Fenwick tree is as such:
 
-![](/images/fenwick.png)
+![[fenwick.png]]
+
 ### basic operations
 The Fenwick Tree supports 2 basic operations:
 - `update(i, v)`: update element `i` in **underlying array** with `v` (i.e. `a[i] += v`)

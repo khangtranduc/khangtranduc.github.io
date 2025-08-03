@@ -8,6 +8,8 @@
 	let title = $derived(page.route.id == '/' ? "khangtranduc" : capitalize(page.route.id?.split("/").at(-1)))
 
 	$effect(() => console.log(page.route.id?.split("/").at(-1)));
+
+	let { children } = $props();
 </script>
 
 <svelte:head>
@@ -18,7 +20,7 @@
 	<a href="/"><img src="/favicon.png" alt="logo" /></a>
 </nav>
 
-<slot />
+{@render children?.()}
 
 <style>
 	nav {
