@@ -6,11 +6,11 @@ tags:
   - daily-coding
 published: true
 ---
-## Kattis – baloni
+# Kattis – baloni
 Quite a clever use of a histogram array indeed. Essentially, each lower balloons removes a previous upper baloon.
-## Kattis – downtime
+# Kattis – downtime
 Sliding window idea, find the bottleneck and that will inform minimum number of servers needed. Had a bug regarding closing times of windows. I think my fix was quite elegant.
-## my solution (baloni)
+# my solution (baloni)
 ```cpp
 #include <bits/stdc++.h>
 
@@ -39,7 +39,7 @@ int main() {
 	return 0;
 }
 ```
-## my solution (downtime)
+# my solution (downtime)
 ```cpp
 #include <bits/stdc++.h>
 

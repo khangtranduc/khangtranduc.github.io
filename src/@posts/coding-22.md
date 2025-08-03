@@ -7,11 +7,11 @@ tags:
 published: true
 ---
 Done two problems today, quite slow, but hopefully things will speed up eventually.
-## Kattis – jollyjumpers
+# Kattis – jollyjumpers
 Iteration and take diff, quite simple, took a while cuz I forgot C++ syntax.
-## UVa – poleposition
+# UVa – poleposition
 Rank counting problem, wasn’t able to see the key at first, had to look at solutions.
-## my solution (jolly)
+# my solution (jolly)
 ```cpp
 #include <bits/stdc++.h>
 

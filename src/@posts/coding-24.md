@@ -6,9 +6,9 @@ tags:
   - daily-coding
 published: true
 ---
-## UVa – sleepinginhostels
+# UVa – sleepinginhostels
 Quite a straightforward problem, compare spaces in between versus spaces at the edges, issue was just chasing down the corner cases.
-## my solution
+# my solution
 ```cpp
 #include <bits/stdc++.h>
 

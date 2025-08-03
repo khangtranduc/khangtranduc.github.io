@@ -6,9 +6,9 @@ tags:
   - daily-coding
 published: true
 ---
-## UVa – armybuddies
+# UVa – armybuddies
 Two book-keeping arrays for whose to the left and right. Initially used linear scans, got idea from viewing [ackoroa](https://github.com/ackoroa/UVa-Solutions/blob/master/UVa%2012356%20-%20Army%20Buddies/src/UVa%2012356%20-%20Army%20Buddies.cpp)’s solution.
-## my solution
+# my solution
 ```cpp
 #include <bits/stdc++.h>
 

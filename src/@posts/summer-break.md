@@ -7,8 +7,8 @@ tags:
   - website-update
 published: true
 ---
-I have completely neglected this blog for an entire semester, it was pretty hectic. But now I plan to return and continue writing more consistently.
-
-I will probably also develope the website more actively.
-
-I will start off today. I low-key forgot everything so I will start again from chapter 2, but this time I will do exhaustively.
+# I shall return
+I have completely neglected this blog for an entire semester, it was pretty hectic. But now:
+- I plan to return and continue writing more consistently.
+- I will probably also develope the website more actively.
+- I will start off today. I low-key forgot everything so I will start again from chapter 2, but this time I will do exhaustively.

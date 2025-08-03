@@ -6,25 +6,25 @@ tags:
   - daily-coding
 published: true
 ---
-## Kattis – fenwick
+# Kattis – fenwick
 Today’s problem is quite exciting because I get to learn a new, cool data structure: **the Fenwick (BIT) tree**. Since its a new data structure, I have only done the *Entry Level* problem from `halim`.
-## Fenwick Tree
+# Fenwick Tree
 This structure is used for fast $O(m\log m)$ **dynamic** prefix sum queries, where $m$ is the length of the underlying array. In problem solving, the underlying array is frequently a frequency array.
 
 It makes frequent use of the `LSOne` operation (see [coding-11](/posts/coding-11)).
-### structure
+## structure
 The Fenwick tree is essentially a tree whose parents and children are linked together by the `LSOne(S)` operation. This relationship is special because each branch of the Fenwick tree will cover the full range from `[1...i]` where `i` is the index of the *last node*. With each node in the Fenwick Tree being itself the cumulative frequency of the underlying array `f` till the index of its parent.
 
 Here the *last node* is the index with only one 1 in its binary representation. To borrow a diagram from `halim`, the structure of the Fenwick tree is as such:
 
 ![[fenwick.png]]
 
-### basic operations
+## basic operations
 The Fenwick Tree supports 2 basic operations:
 - `update(i, v)`: update element `i` in **underlying array** with `v` (i.e. `a[i] += v`)
 - `rsq(j)`: find the prefix sum in range `[1...j]`
 	- this operation gives the range `[i...j]` trivially, i.e. `rsq(i,j) = rsq(j) - rsq(i-1)`
-### implementation
+## implementation
 The bare-bones implementation of the Fenwick Tree is quite simple and easy to remember:
 ```cpp
 #define LSOne(S) ((S) & -(S))
@@ -50,9 +50,9 @@ class fenwick_tree {
 		int rsq(int i, int j) { return rsq(j) - rsq(i - 1); }
 }
 ```
-### expansions
+## expansions
 There are many expansions to the Fenwick Tree to optimize other common operations. I plan to explore those in the next few `daily-coding`s.
-## my solution (to Kattis – fenwick)
+# my solution (to Kattis – fenwick)
 ```cpp
 #include <bits/stdc++.h>
 

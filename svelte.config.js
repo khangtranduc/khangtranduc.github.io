@@ -21,7 +21,38 @@ const config = {
 			markup: ({ content, filename }) => {
 				if (filename?.endsWith('.md')) {
 					// Convert ![[image.png]] to ![](image.png)
-					content = content.replace(/!\[\[([^\]]+)\]\]/g, '![](/images/$1)');
+					content = content.replace(/!\[\[([^\]]+\.png)\]\]/g, '![amongus](/images/$1)');
+				}
+				return { code: content };
+			}
+		},
+		{
+			markup: ({ content, filename }) => {
+				if (filename?.endsWith('.md')) {
+					// Convert ![[doc.pdf]] to Pdf component
+					content = content.replace(/!\[\[([^\]]+\.pdf)\]\]/g, 
+						`
+						<a href="/post_pdfs/$1" target="_blank">$1</a>
+						<div>
+							<iframe src="/post_pdfs/$1" title="PDF"></iframe>
+						</div>
+						`);
+				}
+				return { code: content };
+			}
+		},
+		{
+			markup: ({ content, filename }) => {
+				if (filename?.endsWith('.md')) {
+					// Convert ![](https://www.youtube.com/watch?v=VIDEO_ID) to embedded iframe
+					if (content.includes('youtube.com/watch?v=')) {
+						content = content.replace(
+							/!\[\]\(https:\/\/www\.youtube\.com\/watch\?v=([a-zA-Z0-9_-]{11})\)/g,
+							`<div class="video-container">
+								<iframe src="https://www.youtube.com/embed/$1" title="YouTube video" frameborder="0" allowfullscreen></iframe>
+							</div>`
+						);
+					}
 				}
 				return { code: content };
 			}

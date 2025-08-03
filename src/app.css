@@ -40,10 +40,9 @@ p {
 }
 
 .prose {
-
 	p {
-		margin-top: var(--size-3);
-		margin-bottom: var(--size-3);
+		/* margin-top: var(--size-00); */
+		margin-bottom: var(--size-1);
 
 		/* ignore paragraph tag around images */
 		&:has(img) {
@@ -55,9 +54,14 @@ p {
 		width: 100%;
 	}
 
-	:is(h2, h3, h4, h5, h6) {
-		margin-top: var(--size-8);
-		margin-bottom: var(--size-3);
+	:is(h1, h2, h3, h4, h5, h6) {
+		margin-top: var(--size-4);
+		margin-bottom: var(--size-1);
+		font-weight: var(--font-weight-6);
+	}
+
+	h1 {
+		font-size: var(--font-size-fluid-2);
 	}
 
 	:is(ul, ol) {
@@ -76,5 +80,33 @@ p {
 		border-radius: 8px;
 		tab-size: 2;
 		overflow: scroll;
+	}
+
+	iframe {
+        width: 100%;
+        height: calc(100vh - var(--size-10));
+        border: none;
+    }
+
+	.video-container {
+		overflow: hidden;
+		position: relative;
+		width:100%;
+	}
+	
+	.video-container::after {
+		padding-top: 56.25%;
+		display: block;
+		content: '';
+	}
+	
+	.video-container iframe {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		margin-top: var(--size-3);
+		margin-bottom: var(--size-3);
 	}
 }

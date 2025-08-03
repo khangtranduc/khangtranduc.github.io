@@ -6,8 +6,10 @@ tags:
   - daily-coding
 published: true
 ---
-## Kattis – greedilyincreasingsequence
+# Kattis – greedilyincreasingsequence
 Chill problem
+
+# my solution
 ```cpp
 #include <bits/stdc++.h>
 
