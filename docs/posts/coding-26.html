@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" href="../favicon.png" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css" integrity="sha384-MlJdn/WNKDGXveldHDdyRP1R4CTHr3FeuDNfhsLPYrq2t0UBkUdK2jyTnXPEK1NQ" crossorigin="anonymous">
+		
+		<link href="../_app/immutable/assets/0.BYkjn869.css" rel="stylesheet">
+		<link href="../_app/immutable/assets/app.CtOjbNxl.css" rel="stylesheet">
+		<link href="../_app/immutable/assets/2.DLi_JnGM.css" rel="stylesheet">
+		<link href="../_app/immutable/assets/5.DjbeUfP5.css" rel="stylesheet">
+		<link rel="modulepreload" href="../_app/immutable/entry/start.BzynqURL.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/BzH3pFzB.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/DjuhRBA8.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/CUGHa9bo.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/WKesQgkQ.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/Upwf5luo.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/CYgJF_JY.js">
+		<link rel="modulepreload" href="../_app/immutable/entry/app.Cy0CcSzw.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/B4C-IIYm.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/CWj6FrbW.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/DJdAIvuw.js">
+		<link rel="modulepreload" href="../_app/immutable/nodes/0.TxC-ScYg.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/BUVkQp9k.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/5ysRL_Sm.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/BoS-TWde.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/rUQmIykp.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/BJ9vZX8s.js">
+		<link rel="modulepreload" href="../_app/immutable/nodes/2.B-kl9Eml.js">
+		<link rel="modulepreload" href="../_app/immutable/nodes/5.CggOtcvy.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/CFAtNFrd.js"><!--[--><!--]--><!--[--><!--]--><title>Posts | coding-26</title>
+	</head>
+	<body data-sveltekit-preload-data="hover">
+		<div style="display: contents"><!--[--><!--[--><!----><nav class="svelte-nd50iq"><a href="/"><img src="/favicon.png" alt="logo" class="svelte-nd50iq"/></a></nav> <!--[--><!----><nav class="svelte-97m9fy"><a href="/" class="svelte-97m9fy"><img src="/favicon.png" alt="logo" class="svelte-97m9fy"/></a> <div class="navbar svelte-97m9fy"><a href="/" class="svelte-97m9fy">home</a> <a href="/projects" class="svelte-97m9fy">projects</a> <a href="/downloads/tran_khang_resume.pdf" target="_blank" class="svelte-97m9fy">resume</a> <a href="/posts" class="svelte-97m9fy">posts</a></div></nav> <!----><main class="svelte-6duwo1"><hgroup class="svelte-6duwo1"><h1>coding-26</h1> <p>Published at Jun 25, 2025</p> <div class="tags svelte-6duwo1"><!--[--><span class="svelte-6duwo1">#daily-coding</span><!--]--></div> <div class="prose"><!----><h1>Kattis – greedilyincreasingsequence</h1> <p>Chill problem</p> <h1>my solution</h1> <!----><pre class="shiki monokai" style="background-color:#272822;color:#F8F8F2" tabindex="0"><code><span class="line"><span style="color:#F92672">#include</span><span style="color:#E6DB74"> &#x3C;bits/stdc++.h></span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F92672">using</span><span style="color:#66D9EF;font-style:italic"> namespace</span><span> </span><span style="color:#A6E22E;text-decoration:underline">std</span><span style="color:#F8F8F2">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#66D9EF;font-style:italic">int</span><span style="color:#A6E22E"> main</span><span style="color:#F8F8F2">() &#123;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#66D9EF;font-style:italic">	int</span><span style="color:#F8F8F2"> n, v;</span></span>
+<span class="line"><span style="color:#F8F8F2">	vector</span><span style="color:#F92672">&#x3C;</span><span style="color:#66D9EF;font-style:italic">int</span><span style="color:#F92672">></span><span style="color:#F8F8F2"> arr;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#A6E22E">	scanf</span><span style="color:#F8F8F2">(</span><span style="color:#E6DB74">"</span><span style="color:#AE81FF">%d</span><span style="color:#E6DB74">"</span><span style="color:#F8F8F2">, </span><span style="color:#F92672">&#x26;</span><span style="color:#F8F8F2">n);</span></span>
+<span class="line"><span style="color:#A6E22E">	scanf</span><span style="color:#F8F8F2">(</span><span style="color:#E6DB74">"</span><span style="color:#AE81FF">%d</span><span style="color:#E6DB74">"</span><span style="color:#F8F8F2">, </span><span style="color:#F92672">&#x26;</span><span style="color:#F8F8F2">v);</span></span>
+<span class="line"><span style="color:#F8F8F2">	arr.</span><span style="color:#A6E22E">push_back</span><span style="color:#F8F8F2">(v);</span></span>
+<span class="line"><span style="color:#F92672">	for</span><span style="color:#F8F8F2"> (</span><span style="color:#66D9EF;font-style:italic">int</span><span style="color:#F8F8F2"> i </span><span style="color:#F92672">=</span><span style="color:#AE81FF"> 1</span><span style="color:#F8F8F2">; i </span><span style="color:#F92672">&#x3C;</span><span style="color:#F8F8F2"> n; i</span><span style="color:#F92672">++</span><span style="color:#F8F8F2">) &#123;</span></span>
+<span class="line"><span style="color:#A6E22E">		scanf</span><span style="color:#F8F8F2">(</span><span style="color:#E6DB74">"</span><span style="color:#AE81FF">%d</span><span style="color:#E6DB74">"</span><span style="color:#F8F8F2">, </span><span style="color:#F92672">&#x26;</span><span style="color:#F8F8F2">v);</span></span>
+<span class="line"><span style="color:#F92672">		if</span><span style="color:#F8F8F2"> (v </span><span style="color:#F92672">></span><span style="color:#F8F8F2"> arr.</span><span style="color:#A6E22E">back</span><span style="color:#F8F8F2">())</span></span>
+<span class="line"><span style="color:#F8F8F2">			arr.</span><span style="color:#A6E22E">push_back</span><span style="color:#F8F8F2">(v);</span></span>
+<span class="line"><span style="color:#F8F8F2">	&#125;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#A6E22E">	printf</span><span style="color:#F8F8F2">(</span><span style="color:#E6DB74">"</span><span style="color:#AE81FF">%d&#92;n</span><span style="color:#E6DB74">"</span><span style="color:#F8F8F2">, arr.</span><span style="color:#A6E22E">size</span><span style="color:#F8F8F2">());</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F92672">	for</span><span style="color:#F8F8F2"> (</span><span style="color:#66D9EF;font-style:italic">auto</span><span style="color:#F8F8F2"> x : arr)</span></span>
+<span class="line"><span style="color:#A6E22E">		printf</span><span style="color:#F8F8F2">(</span><span style="color:#E6DB74">"</span><span style="color:#AE81FF">%d</span><span style="color:#E6DB74"> "</span><span style="color:#F8F8F2">, x);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#A6E22E">	puts</span><span style="color:#F8F8F2">(</span><span style="color:#E6DB74">""</span><span style="color:#F8F8F2">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F92672">	return</span><span style="color:#AE81FF"> 0</span><span style="color:#F8F8F2">;</span></span>
+<span class="line"><span style="color:#F8F8F2">&#125;</span></span></code></pre><!----><!----></div></hgroup></main><!----><!----><!----><!--]--><!----><!----><!--]--> <!--[!--><!--]--><!--]-->
+			
+			<script>
+				{
+					__sveltekit_6dc6ym = {
+						base: new URL("..", location).pathname.slice(0, -1)
+					};
+
+					const element = document.currentScript.parentElement;
+
+					Promise.all([
+						import("../_app/immutable/entry/start.BzynqURL.js"),
+						import("../_app/immutable/entry/app.Cy0CcSzw.js")
+					]).then(([kit, app]) => {
+						kit.start(app, element, {
+							node_ids: [0, 2, 5],
+							data: [null,null,null],
+							form: null,
+							error: null,
+							remote: null
+						});
+					});
+				}
+			</script>
+		</div>
+	</body>
+</html>

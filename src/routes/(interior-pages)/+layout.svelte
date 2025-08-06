@@ -11,7 +11,7 @@
 	<div class="navbar">
 		<a href="/">home</a>
 		<a href="/projects">projects</a>
-		<a href="/downloads/khang-tran-resume.pdf" target="_blank">resume</a>
+		<a href="/downloads/tran_khang_resume.pdf" target="_blank">resume</a>
 		<a href="/posts">posts</a>
 	</div>
 </nav>

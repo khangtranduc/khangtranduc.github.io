@@ -4,7 +4,7 @@
 
 	const links = Object.entries({
 		projects: '/projects',
-		resume: '/downloads/khang-tran-resume.pdf',
+		resume: '/downloads/tran_khang_resume.pdf',
 		posts: '/posts'
 	});
 
