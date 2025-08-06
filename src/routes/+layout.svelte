@@ -37,7 +37,7 @@
 		z-index: var(--layer-important);
 		background-color: white;
 	}
-	
+
 	img {
 		width: var(--size-7);
 	}
