@@ -1,14 +1,16 @@
 <script lang="ts">
 	import { formatDate } from '$lib/utils.js';
+	import type { Project } from '$lib/types.js';
 
 	let tabs = ['all', 'cs', 'physics', 'engineering', 'math'];
 	let selected_tab = $state('all');
 
 	let { data } = $props();
 
-	let posts = $derived(data.posts.filter(post => (selected_tab == 'all') ? post.tags.some(t => tabs.includes(t)) : post.tags.some(t => t == selected_tab)));
+	// let posts = $derived(data.posts.filter(post => (selected_tab == 'all') ? post.tags.some(t => tabs.includes(t)) : post.tags.some(t => t == selected_tab)));
+	let projects: Project[] = []
 
-	$effect.pre(() => posts.forEach(post => post.date = post.date.split('T')[0].split('-')[0]));
+	$effect.pre(() => projects.forEach(post => post.date = post.date.split('T')[0].split('-')[0]));
 </script>
 
 <main>
@@ -29,9 +31,9 @@
 	</hgroup>
 
 	<div class="row carousel">
-		{#each posts as post}
+		{#each projects as post}
 			<article>
-				{post.image?.split('/')[-1]}
+				<!-- {post.image?.split('/')[-1]}
 				<img src={post.image} alt={post.image?.split('/')[-1]}/>
 				<h3><b><a target="_blank" href="/posts/{post.slug}">{post.title}</a></b></h3>
 				<h3>{post.date}</h3>
@@ -39,7 +41,7 @@
 					{#each post.tags as tag}
 						<h4>({tag})</h4>
 					{/each}
-				</div>
+				</div> -->
 			</article>
 		{/each}
 	</div>

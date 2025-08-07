@@ -13,7 +13,7 @@
 <main>
 	<hgroup>
 		<h1>{data.meta.title}</h1>
-		<p>Published at {formatDate(data.meta.date)}</p>
+		<p>published at {formatDate(data.meta.date)}</p>
 		<div class="tags">
 			{#each data.meta.tags as tag}
 				<span>&num;{tag}</span>
@@ -42,6 +42,10 @@
 		margin-right: var(--size-6);
 	}
 
+	p {
+		color: var(--gray-7);
+	}
+
 	.tags {
 		display: flex;
 		gap: var(--size-3);
@@ -49,10 +53,10 @@
 		margin: 0;
 
 		> * {
-			padding: var(--size-2) var(--size-3);
+			padding: var(--size-1) var(--size-2);
 			border-radius: var(--radius-round);
-			box-shadow: var(--shadow-2);
-			background-color: white;
+			box-shadow: var(--shadow-3);
+			background-color: var(--gray-2);
 			/* border: var(--border-size-1) solid; */
 		}
 	}
