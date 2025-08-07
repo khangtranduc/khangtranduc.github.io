@@ -1,12 +1,22 @@
 precision mediump float;
 
-uniform float uTime; 
+uniform float uTime;
+uniform vec2 uResolution;
+uniform vec2 uMouse;
 
 void main() {
-    vec2 uv = gl_FragCoord.xy / vec2(800.0, 600.0); // Normalize coordinates
+    vec2 uv = gl_FragCoord.xy / uResolution.xy; // Normalize coordinates
+    vec2 uvMouse = uMouse.xy;
+
+    uv = uv * 2. - 1.;
+    uvMouse = uvMouse * 2. - 1.;
+
+    uv.x *= uResolution.x / uResolution.y;
+    uvMouse.x *= uResolution.x / uResolution.y;
     
-    // Moving gradient
-    float gradient = sin(uv.x * 10.0 + uTime) * sin(uv.y * 10.0 + uTime);
-    
-    gl_FragColor = vec4(vec3(gradient * 0.5 + 0.5), 1.0);
+    float dist = distance(uv, uvMouse);
+
+    vec3 color = vec3(1. - step(.2, dist));
+
+    gl_FragColor = vec4(color, 1.);
 }

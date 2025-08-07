@@ -5,15 +5,15 @@
     // Vertex shader program
     const vsSource = `
         attribute vec4 aVertexPosition;
-        uniform mat4 uModelViewMatrix;
-        uniform mat4 uProjectionMatrix;
         void main() {
-            gl_Position = uProjectionMatrix * uModelViewMatrix * aVertexPosition;
+            gl_Position = aVertexPosition;
         }
     `;
 
     let startTime: number;
     let animationId: number;
+    let mouseX = 0;
+    let mouseY = 0;
 
     // Function to load shader from static file
     const loadShaderFile = async (url: string): Promise<string> => {
@@ -121,9 +121,9 @@
             vertexPosition: number;
         };
         uniformLocations: {
-            projectionMatrix: WebGLUniformLocation | null;
-            modelViewMatrix: WebGLUniformLocation | null;
             time: WebGLUniformLocation | null;
+            resolution: WebGLUniformLocation | null;
+            mouse: WebGLUniformLocation | null;
         };
     }
     
@@ -158,43 +158,44 @@
 
     const drawScene = (gl: WebGLRenderingContext, buffers: PositionBuffer, programInfo: ProgramInfo, currentTime: number) => {
         gl.clearColor(0.0, 0.0, 0.0, 1.0); // Clear to black, fully opaque
-        gl.clearDepth(1.0); // Clear everything
-        gl.enable(gl.DEPTH_TEST); // Enable depth testing
-        gl.depthFunc(gl.LEQUAL); // Near things obscure far things
+        gl.clear(gl.COLOR_BUFFER_BIT);
+        // gl.clearDepth(1.0); // Clear everything
+        // gl.enable(gl.DEPTH_TEST); // Enable depth testing
+        // gl.depthFunc(gl.LEQUAL); // Near things obscure far things
 
-        // Clear the canvas before we start drawing on it.
+        // // Clear the canvas before we start drawing on it.
 
-        gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+        // gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
-        // Create a perspective matrix, a special matrix that is
-        // used to simulate the distortion of perspective in a camera.
-        // Our field of view is 45 degrees, with a width/height
-        // ratio that matches the display size of the canvas
-        // and we only want to see objects between 0.1 units
-        // and 100 units away from the camera.
+        // // Create a perspective matrix, a special matrix that is
+        // // used to simulate the distortion of perspective in a camera.
+        // // Our field of view is 45 degrees, with a width/height
+        // // ratio that matches the display size of the canvas
+        // // and we only want to see objects between 0.1 units
+        // // and 100 units away from the camera.
 
-        const fieldOfView = (45 * Math.PI) / 180; // in radians
-        const canvas = gl.canvas as HTMLCanvasElement
-        const aspect = canvas.clientWidth / canvas.clientHeight;
-        const zNear = 0.1;
-        const zFar = 100.0;
-        const projectionMatrix = mat4.create();
+        // const fieldOfView = (45 * Math.PI) / 180; // in radians
+        const canvas = gl.canvas as HTMLCanvasElement;
+        // const aspect = canvas.clientWidth / canvas.clientHeight;
+        // const zNear = 0.1;
+        // const zFar = 100.0;
+        // const projectionMatrix = mat4.create();
 
-        // note: glMatrix always has the first argument
-        // as the destination to receive the result.
-        mat4.perspective(projectionMatrix, fieldOfView, aspect, zNear, zFar);
+        // // note: glMatrix always has the first argument
+        // // as the destination to receive the result.
+        // mat4.perspective(projectionMatrix, fieldOfView, aspect, zNear, zFar);
 
-        // Set the drawing position to the "identity" point, which is
-        // the center of the scene.
-        const modelViewMatrix = mat4.create();
+        // // Set the drawing position to the "identity" point, which is
+        // // the center of the scene.
+        // const modelViewMatrix = mat4.create();
 
-        // Now move the drawing position a bit to where we want to
-        // start drawing the square.
-        mat4.translate(
-            modelViewMatrix, // destination matrix
-            modelViewMatrix, // matrix to translate
-            [-0.0, 0.0, -6.0],
-        ); // amount to translate
+        // // Now move the drawing position a bit to where we want to
+        // // start drawing the square.
+        // mat4.translate(
+        //     modelViewMatrix, // destination matrix
+        //     modelViewMatrix, // matrix to translate
+        //     [-0.0, 0.0, -6.0],
+        // ); // amount to translate
 
         // Tell WebGL how to pull out the positions from the position
         // buffer into the vertexPosition attribute.
@@ -203,26 +204,39 @@
         // Tell WebGL to use our program when drawing
         gl.useProgram(programInfo.program);
 
-        // Set the shader uniforms
-        gl.uniformMatrix4fv(
-            programInfo.uniformLocations.projectionMatrix,
-            false,
-            projectionMatrix,
-        );
-        gl.uniformMatrix4fv(
-            programInfo.uniformLocations.modelViewMatrix,
-            false,
-            modelViewMatrix,
-        );
+        // // Set the shader uniforms
+        // gl.uniformMatrix4fv(
+        //     programInfo.uniformLocations.projectionMatrix,
+        //     false,
+        //     projectionMatrix,
+        // );
+        // gl.uniformMatrix4fv(
+        //     programInfo.uniformLocations.modelViewMatrix,
+        //     false,
+        //     modelViewMatrix,
+        // );
 
         const timeInSeconds = (currentTime - startTime) * 0.001; //Convert to seconds
         gl.uniform1f(programInfo.uniformLocations.time, timeInSeconds);
+
+        gl.uniform2f(programInfo.uniformLocations.resolution, canvas.width, canvas.height);
+
+        const normalizedMouseX = mouseX / canvas.clientWidth;
+        const normalizedMouseY = 1 - (mouseY / canvas.clientHeight);
+        gl.uniform2f(programInfo.uniformLocations.mouse, normalizedMouseX, normalizedMouseY);
 
         {
             const offset = 0;
             const vertexCount = 4;
             gl.drawArrays(gl.TRIANGLE_STRIP, offset, vertexCount);
         }
+    }
+    
+    const handleMouseMove = (event: MouseEvent) => {
+        const canvas = event.target as HTMLCanvasElement;
+        const rect = canvas.getBoundingClientRect();
+        mouseX = event.clientX - rect.left;
+        mouseY = event.clientY - rect.top;
     }
 
     const render = (gl: WebGLRenderingContext, buffers: PositionBuffer, programInfo: ProgramInfo) => {
@@ -260,6 +274,8 @@
 
             const canvas = <HTMLCanvasElement> document.querySelector("#gl-canvas");
             
+            canvas.addEventListener('mousemove', handleMouseMove);
+
             resizeCanvasToDisplaySize(canvas);
             
             // Initialize the GL context
@@ -289,9 +305,9 @@
                     vertexPosition: gl.getAttribLocation(shaderProgram, "aVertexPosition"),
                 },
                 uniformLocations: {
-                    projectionMatrix: gl.getUniformLocation(shaderProgram, "uProjectionMatrix"),
-                    modelViewMatrix: gl.getUniformLocation(shaderProgram, "uModelViewMatrix"),
                     time: gl.getUniformLocation(shaderProgram, "uTime"),
+                    resolution: gl.getUniformLocation(shaderProgram, "uResolution"),
+                    mouse: gl.getUniformLocation(shaderProgram, "uMouse")
                 },
             };
 
