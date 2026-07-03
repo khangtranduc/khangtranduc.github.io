@@ -21,3 +21,6 @@ Thumbs.db
 # Vite
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
+
+# nb — notebook index files, created via the ~/.nb/home/website symlink
+.index

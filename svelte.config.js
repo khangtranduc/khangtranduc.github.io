@@ -8,7 +8,7 @@ import rehypeKatex from 'rehype-katex-svelte';
 const theme = 'monokai';
 const highlighter = await createHighlighter({
 	themes: [theme],
-	langs: ['javascript', 'typescript', 'cpp', 'c', 'python', 'bash']
+	langs: ['javascript', 'typescript', 'cpp', 'c', 'python', 'bash', 'markdown']
 });
 
 /** @type {import('@sveltejs/kit').Config} */
@@ -18,42 +18,53 @@ const config = {
 	preprocess: [
 		vitePreprocess(),
 		{
+			// Expand Obsidian-style embeds (as authored in nb) into HTML before
+			// mdsvex runs. Assets resolve to /media/<file>, served from static/media/.
+			//   ![[pic.png]]             image (png | jpg | jpeg | gif | svg | webp | avif)
+			//   ![[pic.png|320]]         image at a pixel width
+			//   ![[pic.png|a caption]]   image with a <figcaption>
+			//   ![[notes.pdf]]           inline PDF viewer + "open" link
+			//   ![](youtube watch url)   embedded video
 			markup: ({ content, filename }) => {
-				if (filename?.endsWith('.md')) {
-					// Convert ![[image.png]] to ![](image.png)
-					content = content.replace(/!\[\[([^\]]+\.png)\]\]/g, '![amongus](/images/$1)');
-				}
-				return { code: content };
-			}
-		},
-		{
-			markup: ({ content, filename }) => {
-				if (filename?.endsWith('.md')) {
-					// Convert ![[doc.pdf]] to Pdf component
-					content = content.replace(/!\[\[([^\]]+\.pdf)\]\]/g, 
-						`
-						<a href="/post_pdfs/$1" target="_blank">$1</a>
-						<div>
-							<iframe src="/post_pdfs/$1" title="PDF"></iframe>
-						</div>
-						`);
-				}
-				return { code: content };
-			}
-		},
-		{
-			markup: ({ content, filename }) => {
-				if (filename?.endsWith('.md')) {
-					// Convert ![](https://www.youtube.com/watch?v=VIDEO_ID) to embedded iframe
-					if (content.includes('youtube.com/watch?v=')) {
-						content = content.replace(
+				if (!filename?.endsWith('.md')) return { code: content };
+
+				const transformEmbeds = (text) =>
+					text
+						// Images — ![[file.ext]] with an optional |width (numeric) or |caption
+						.replace(
+							/!\[\[\s*([^|\]]+?\.(?:png|jpe?g|gif|svg|webp|avif))\s*(?:\|\s*([^\]]+?)\s*)?\]\]/gi,
+							(_, file, alias) => {
+								const src = `/media/${file}`;
+								if (alias && /^\d+$/.test(alias))
+									return `<img src="${src}" alt="${file}" style="width:${alias}px;max-width:100%" />`;
+								if (alias)
+									return `<figure><img src="${src}" alt="${alias}" /><figcaption>${alias}</figcaption></figure>`;
+								return `<img src="${src}" alt="${file}" />`;
+							}
+						)
+						// PDFs — ![[file.pdf]] with an optional |label
+						.replace(
+							/!\[\[\s*([^|\]]+?\.pdf)\s*(?:\|\s*([^\]]+?)\s*)?\]\]/gi,
+							(_, file, alias) => {
+								const src = `/media/${file}`;
+								const label = alias || file;
+								return `<figure class="pdf-embed"><iframe src="${src}" title="${label}" loading="lazy"></iframe><figcaption><a href="${src}" target="_blank" rel="noreferrer">Open ${label} ↗</a></figcaption></figure>`;
+							}
+						)
+						// YouTube — ![](https://www.youtube.com/watch?v=ID)
+						.replace(
 							/!\[\]\(https:\/\/www\.youtube\.com\/watch\?v=([a-zA-Z0-9_-]{11})\)/g,
-							`<div class="video-container">
-								<iframe src="https://www.youtube.com/embed/$1" title="YouTube video" frameborder="0" allowfullscreen></iframe>
-							</div>`
+							`<div class="video-container"><iframe src="https://www.youtube.com/embed/$1" title="YouTube video" frameborder="0" allowfullscreen></iframe></div>`
 						);
-					}
-				}
+
+				// Only transform outside code, so ![[...]] can be shown literally in a
+				// fenced or inline code span. Splitting on a capturing group keeps the
+				// code spans as odd-indexed segments, which are left untouched.
+				content = content
+					.split(/(```[\s\S]*?```|`[^`\n]*`)/g)
+					.map((seg, i) => (i % 2 === 0 ? transformEmbeds(seg) : seg))
+					.join('');
+
 				return { code: content };
 			}
 		},
@@ -62,8 +73,15 @@ const config = {
 
 			highlight: {
 				highlighter: async (code, lang = 'text') => {
-					const html = escapeSvelte(highlighter.codeToHtml(code, { lang, theme }));
-					return `{@html \`${html}\` }`;
+					// Fall back to plaintext for any language we haven't loaded, so an
+					// unknown ```lang fence degrades gracefully instead of failing the build.
+					let highlighted;
+					try {
+						highlighted = highlighter.codeToHtml(code, { lang, theme });
+					} catch {
+						highlighted = highlighter.codeToHtml(code, { lang: 'text', theme });
+					}
+					return `{@html \`${escapeSvelte(highlighted)}\` }`;
 				}
 			},
 

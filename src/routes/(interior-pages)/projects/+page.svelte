@@ -1,115 +1,167 @@
 <script lang="ts">
-	import { formatDate } from '$lib/utils.js';
-	import type { Project } from '$lib/types.js';
-
-	let tabs = ['all', 'cs', 'physics', 'engineering', 'math'];
-	let selected_tab = $state('all');
+	import { formatDate } from '$lib/utils';
+	import type { Project } from '$lib/types';
 
 	let { data } = $props();
 
-	// let posts = $derived(data.posts.filter(post => (selected_tab == 'all') ? post.tags.some(t => tabs.includes(t)) : post.tags.some(t => t == selected_tab)));
-	let projects: Project[] = []
+	const tabs = ['all', 'cs', 'physics', 'engineering', 'math'];
+	let selected = $state('all');
 
-	$effect.pre(() => projects.forEach(post => post.date = post.date.split('T')[0].split('-')[0]));
+	let projects = $derived(
+		data.projects.filter((p: Project) => selected === 'all' || p.tags.includes(selected))
+	);
 </script>
 
 <main>
 	<hgroup>
 		<h1>projects</h1>
-		<div class="row">
+		<div class="tabs">
 			{#each tabs as tab, i}
-				{#if tab == selected_tab}
-					<h2><a href={''}><b>{tab}</b></a></h2>
-				{:else}
-					<h2><a href={''} onclick={() => (selected_tab = tab)}>{tab}</a></h2>
-				{/if}
-				{#if i < tabs.length - 1}
-					<h2>|</h2>
-				{/if}
+				<a href={'#'} class:active={tab === selected} onclick={() => (selected = tab)}>{tab}</a>
+				{#if i < tabs.length - 1}<span>|</span>{/if}
 			{/each}
 		</div>
 	</hgroup>
 
-	<div class="row carousel">
-		{#each projects as post}
-			<article>
-				<!-- {post.image?.split('/')[-1]}
-				<img src={post.image} alt={post.image?.split('/')[-1]}/>
-				<h3><b><a target="_blank" href="/posts/{post.slug}">{post.title}</a></b></h3>
-				<h3>{post.date}</h3>
-				<div class="row">
-					{#each post.tags as tag}
-						<h4>({tag})</h4>
-					{/each}
-				</div> -->
-			</article>
+	<div class="grid">
+		{#each projects as project}
+			<a class="card" href="/projects/{project.slug}">
+				{#if project.image}
+					<img src={project.image} alt={project.title} />
+				{/if}
+				<div class="body">
+					<div class="titlerow">
+						<h2>{project.title}</h2>
+						{#if project.status}<span class="status {project.status}">{project.status}</span>{/if}
+					</div>
+					<span class="date">{formatDate(project.date)}</span>
+					<p>{project.description}</p>
+					<div class="tags">
+						{#each project.tags as tag}<span>&num;{tag}</span>{/each}
+					</div>
+				</div>
+			</a>
+		{:else}
+			<p class="empty">No projects here yet.</p>
 		{/each}
 	</div>
-
 </main>
 
 <style>
-	main {
-		height: calc(100vh - var(--size-9));
-	}
-
 	hgroup {
 		display: flex;
 		flex-direction: column;
 		gap: var(--size-2);
-
 		margin-left: var(--size-6);
 	}
 
-	a {
+	.tabs {
+		display: flex;
+		gap: var(--size-2);
+	}
+
+	.tabs a {
 		text-decoration: none;
-		color: var(--stone-8);
-		
+		color: var(--stone-6);
+		transition: 0.3s;
+
 		&:hover {
 			color: black;
 		}
 	}
-	
-	b {
+
+	.tabs a.active {
 		color: var(--stone-9);
 		font-weight: var(--font-weight-7);
 	}
-	
-	.row {
-		display: flex;
-		flex-direction: row;
-		gap: var(--size-2);
+
+	.tabs span {
+		color: var(--stone-4);
 	}
 
-	.carousel {
-		margin: var(--size-11) var(--size-6);
+	.grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
+		gap: var(--size-5);
+
+		margin: var(--size-7) var(--size-6);
 	}
 
-	@media (max-width: 768px) {
-		.carousel {
-			display: flex;
-			flex-direction: column;
-			gap: var(--size-2);
-			margin-top: var(--size-6);
-		}
-	}
-	
-	article {
+	.card {
 		display: flex;
 		flex-direction: column;
-		align-items: center;
-		gap: var(--size-2);
+
+		border-radius: var(--radius-3);
+		box-shadow: var(--shadow-2);
+		background-color: white;
+		overflow: hidden;
+
+		text-decoration: none;
+		color: inherit;
+		transition: 0.3s;
+
+		&:hover {
+			box-shadow: var(--shadow-4);
+			transform: translateY(-2px);
+		}
 	}
 
-	article h4, h3:nth-last-child(2) {
-		margin-top: 0;
-		color: var(--stone-6);
-	}
-
-	img {
-		width: var(--size-fluid-9);
-		aspect-ratio: 1;
+	.card img {
+		width: 100%;
+		aspect-ratio: 16 / 9;
 		object-fit: cover;
 	}
 
+	.body {
+		display: flex;
+		flex-direction: column;
+		gap: var(--size-1);
+		padding: var(--size-3) var(--size-4) var(--size-4);
+	}
+
+	.titlerow {
+		display: flex;
+		align-items: baseline;
+		justify-content: space-between;
+		gap: var(--size-2);
+	}
+
+	.status {
+		font-size: var(--font-size-fluid-0);
+		padding: 0 var(--size-2);
+		border-radius: var(--radius-round);
+		white-space: nowrap;
+	}
+
+	.status.in-progress {
+		background-color: var(--yellow-2);
+	}
+
+	.status.complete {
+		background-color: var(--green-2);
+	}
+
+	.date {
+		color: var(--stone-6);
+		font-size: var(--font-size-fluid-0);
+	}
+
+	.tags {
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--size-2);
+		margin-top: var(--size-1);
+
+		> * {
+			padding: var(--size-1) var(--size-2);
+			border-radius: var(--radius-round);
+			box-shadow: var(--shadow-1);
+			background-color: var(--gray-1);
+			font-size: var(--font-size-fluid-0);
+		}
+	}
+
+	.empty {
+		color: var(--stone-6);
+	}
 </style>

@@ -109,4 +109,30 @@ p {
 		margin-top: var(--size-3);
 		margin-bottom: var(--size-3);
 	}
+
+	/* ![[img|caption]] renders as a figure with a caption below */
+	figure {
+		margin: var(--size-4) 0;
+	}
+
+	figcaption {
+		margin-top: var(--size-2);
+		color: var(--gray-7);
+		font-size: var(--font-size-fluid-0);
+		text-align: center;
+	}
+
+	/* ![[doc.pdf]] inline viewer */
+	.pdf-embed iframe {
+		width: 100%;
+		aspect-ratio: 8.5 / 11;
+		height: auto;
+		border: var(--border-size-1) solid var(--gray-3);
+		border-radius: var(--radius-2);
+	}
+
+	.pdf-embed figcaption a {
+		color: var(--stone-8);
+		font-weight: var(--font-weight-6);
+	}
 }

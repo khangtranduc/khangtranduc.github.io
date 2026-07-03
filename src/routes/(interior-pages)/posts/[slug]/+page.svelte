@@ -20,6 +20,12 @@
 			{/each}
 		</div>
 
+		{#if data.meta.project}
+			<p class="backlink">
+				part of project <a href="/projects/{data.meta.project}">{data.meta.project}</a>
+			</p>
+		{/if}
+
 		<div class="prose">
 			<data.content />
 		</div>
@@ -58,6 +64,19 @@
 			box-shadow: var(--shadow-3);
 			background-color: var(--gray-2);
 			/* border: var(--border-size-1) solid; */
+		}
+	}
+
+	.backlink {
+		color: var(--gray-7);
+
+		a {
+			color: var(--stone-8);
+			font-weight: var(--font-weight-6);
+
+			&:hover {
+				color: black;
+			}
 		}
 	}
 </style>
