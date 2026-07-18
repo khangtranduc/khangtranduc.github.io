@@ -3,6 +3,11 @@
 	import '@fontsource-variable/inter';
 	import '@fontsource-variable/jetbrains-mono';
 	import 'iconify-icon';
+	import { fade } from 'svelte/transition';
+	import { loadIcon } from 'iconify-icon';
+	import NavDropdown from '$lib/NavDropdown.svelte';
+	import { resumes } from '$lib/resumes';
+	import { contacts } from '$lib/contacts';
 
 	let { children } = $props();
 </script>
@@ -16,8 +21,34 @@
 		<div class="navbar">
 			<a href="/">home</a>
 			<a href="/projects">projects</a>
-			<a href="/downloads/tran_khang_resume.pdf" target="_blank">resume</a>
+			<NavDropdown label="resume">
+				{#each resumes as [label, link], i}
+					<a
+						href={link}
+						target="_blank"
+						in:fade|global={{ delay: i * 60, duration: 300 }}
+						out:fade|global={{ delay: (resumes.length - i) * 60, duration: 300 }}>{label}</a
+					>
+				{/each}
+			</NavDropdown>
 			<a href="/posts">posts</a>
+			<NavDropdown label="contacts" direction="row">
+				{#each contacts as [icon, link], i}
+					<a
+						href={link}
+						target="_blank"
+						in:fade|global={{ delay: (contacts.length - i) * 60, duration: 300 }}
+						out:fade|global={{ delay: i * 60, duration: 300 }}
+					>
+						<!-- svelte-ignore block_empty -->
+						{#await loadIcon(icon) then _}
+							<iconify-icon inline width="24" {icon}></iconify-icon>
+						{:catch}
+							{icon.split(':')[1]}
+						{/await}
+					</a>
+				{/each}
+			</NavDropdown>
 		</div>
 	</nav>
 
@@ -69,7 +100,16 @@
 		transition: .3s;
 
 		&:hover {
-			color: var(--accent);
+			color: var(--nav-hover);
+		}
+	}
+
+	iconify-icon {
+		color: var(--text);
+		transition: .3s;
+
+		&:hover {
+			color: var(--nav-hover);
 		}
 	}
 

@@ -23,6 +23,10 @@
 	--chip-bg: var(--stone-1);
 	--chip-border: var(--stone-3);
 
+	/* nav links darken on hover rather than taking the indigo accent, matching
+	   the landing page's stone-8 -> black treatment */
+	--nav-hover: var(--stone-12);
+
 	--bg-col: var(--sand-0);
 
 	font-family: var(--font-system-ui);

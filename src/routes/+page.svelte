@@ -1,22 +1,19 @@
 <script lang="ts">
 	import { fade } from 'svelte/transition';
 	import { loadIcon } from 'iconify-icon';
+	import { resumes } from '$lib/resumes';
+	import { contacts as icons } from '$lib/contacts';
 
 	const links = Object.entries({
 		projects: '/projects',
-		resume: '/downloads/tran_khang_resume.pdf',
 		posts: '/posts'
-	});
-
-	const icons = Object.entries({
-		'mdi:github': 'https://github.com/khangtranduc',
-		'mdi:gmail': 'mailto:khangductran@duck.com',
-		'mdi:linkedin': 'https://www.linkedin.com/in/khangtranduc/',
-		'ic:baseline-telegram': 'https://t.me/khangductran'
 	});
 
 	let showContacts = $state(false);
 	let maintain = $state(false);
+
+	let showResumes = $state(false);
+	let maintainResumes = $state(false);
 </script>
 
 <main>
@@ -24,17 +21,36 @@
 		<h1>HI, <span>i'm <mark>khang</mark></span></h1>
 
 		<div class="links">
-			{#each links as [label, link], i}
-				{#if link.includes('/downloads/')}
-					<h2><a href={link} class="contrast" target="_blank">{label}</a></h2>
-				{:else}
-					<h2><a href={link} class="contrast">{label}</a></h2>
-				{/if}
+			<h2><a href={links[0][1]} class="contrast">{links[0][0]}</a></h2>
+			<h2>|</h2>
+			<h2
+				class="dropdown"
+				onmouseenter={() => (showResumes = true)}
+				onmouseleave={() => (showResumes = false)}
+			>
+				<a href={'#'} class="contrast">resume</a>
 
-				{#if i < links.length - 1}
-					<h2>|</h2>
+				{#if showResumes || maintainResumes}
+					<div
+						class="resumes"
+						role="menu"
+						tabindex="-1"
+						onmouseenter={() => (maintainResumes = true)}
+						onmouseleave={() => (maintainResumes = false)}
+					>
+						{#each resumes as [label, link], i}
+							<a
+								href={link}
+								target="_blank"
+								in:fade|global={{ delay: i * 60, duration: 300 }}
+								out:fade|global={{ delay: (resumes.length - i) * 60, duration: 300 }}>{label}</a
+							>
+						{/each}
+					</div>
 				{/if}
-			{/each}
+			</h2>
+			<h2>|</h2>
+			<h2><a href={links[1][1]} class="contrast">{links[1][0]}</a></h2>
 			<h2>|</h2>
 			<h2>
 				<a
@@ -138,6 +154,28 @@
 
 		animation-name: links;
 		animation-duration: 5s;
+	}
+
+	.dropdown {
+		position: relative;
+	}
+
+	.resumes {
+		position: absolute;
+		top: 100%;
+		left: 50%;
+		transform: translateX(-50%);
+		z-index: 1;
+
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: var(--size-1);
+
+		padding-top: var(--size-2);
+
+		font-size: var(--font-size-2);
+		white-space: nowrap;
 	}
 
 	.contacts {
