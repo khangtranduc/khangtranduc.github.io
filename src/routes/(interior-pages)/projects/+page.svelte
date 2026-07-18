@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { formatDate } from '$lib/utils';
+	import { formatDate, toWebp } from '$lib/utils';
 	import type { Project } from '$lib/types';
 
 	let { data } = $props();
@@ -26,18 +26,27 @@
 	<div class="grid">
 		{#each projects as project}
 			<a class="card" href="/projects/{project.slug}">
-				{#if project.image}
-					<img src={project.image} alt={project.title} />
-				{/if}
+				<div class="thumb">
+					{#if project.image}
+						<img src={toWebp(project.image)} alt={project.title} />
+					{/if}
+					{#if project.status === 'in-progress'}
+						<div class="haze"></div>
+					{/if}
+					{#if project.status}
+						<span class="status {project.status}">{project.status}</span>
+					{/if}
+				</div>
 				<div class="body">
-					<div class="titlerow">
-						<h2>{project.title}</h2>
-						{#if project.status}<span class="status {project.status}">{project.status}</span>{/if}
-					</div>
+					<h2>{project.title}</h2>
 					<span class="date">{formatDate(project.date)}</span>
-					<p>{project.description}</p>
-					<div class="tags">
-						{#each project.tags as tag}<span>&num;{tag}</span>{/each}
+					<div class="reveal">
+						<div class="reveal-inner">
+							<p>{project.description}</p>
+							<div class="tags">
+								{#each project.tags as tag}<span>&num;{tag}</span>{/each}
+							</div>
+						</div>
 					</div>
 				</div>
 			</a>
@@ -56,27 +65,28 @@
 	}
 
 	.tabs {
+		font-size: var(--font-size-4);
 		display: flex;
 		gap: var(--size-2);
 	}
 
 	.tabs a {
 		text-decoration: none;
-		color: var(--stone-6);
+		color: var(--text-muted);
 		transition: 0.3s;
 
 		&:hover {
-			color: black;
+			color: var(--accent);
 		}
 	}
 
 	.tabs a.active {
-		color: var(--stone-9);
+		color: var(--text);
 		font-weight: var(--font-weight-7);
 	}
 
 	.tabs span {
-		color: var(--stone-4);
+		color: var(--border);
 	}
 
 	.grid {
@@ -91,46 +101,51 @@
 		display: flex;
 		flex-direction: column;
 
-		border-radius: var(--radius-3);
-		box-shadow: var(--shadow-2);
-		background-color: white;
-		overflow: hidden;
-
 		text-decoration: none;
 		color: inherit;
-		transition: 0.3s;
+		transition: transform 0.3s;
 
 		&:hover {
-			box-shadow: var(--shadow-4);
 			transform: translateY(-2px);
 		}
 	}
 
-	.card img {
+	.thumb {
+		position: relative;
+		aspect-ratio: 1 / 1;
+		overflow: hidden;
+		box-shadow: var(--shadow-2);
+		transition: box-shadow 0.3s;
+	}
+
+	.card:hover .thumb {
+		box-shadow: var(--shadow-4);
+	}
+
+	.thumb img {
 		width: 100%;
-		aspect-ratio: 16 / 9;
+		height: 100%;
 		object-fit: cover;
+		display: block;
 	}
 
-	.body {
-		display: flex;
-		flex-direction: column;
-		gap: var(--size-1);
-		padding: var(--size-3) var(--size-4) var(--size-4);
-	}
-
-	.titlerow {
-		display: flex;
-		align-items: baseline;
-		justify-content: space-between;
-		gap: var(--size-2);
+	/* white haze over the image while a project is in-progress */
+	.haze {
+		position: absolute;
+		inset: 0;
+		background-color: rgb(255 255 255 / 45%);
 	}
 
 	.status {
+		position: absolute;
+		top: var(--size-2);
+		right: var(--size-2);
 		font-size: var(--font-size-fluid-0);
 		padding: 0 var(--size-2);
 		border-radius: var(--radius-round);
 		white-space: nowrap;
+		box-shadow: var(--shadow-2);
+		color: var(--stone-9);
 	}
 
 	.status.in-progress {
@@ -141,27 +156,75 @@
 		background-color: var(--green-2);
 	}
 
+	.body {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		text-align: center;
+		gap: var(--size-1);
+		padding: var(--size-3) var(--size-4) var(--size-4);
+	}
+
+	.body h2 {
+		margin: 0;
+	}
+
 	.date {
-		color: var(--stone-6);
+		color: var(--text-muted);
 		font-size: var(--font-size-fluid-0);
+	}
+
+	/* description + tags stay collapsed until hover (0fr → 1fr animates the height) */
+	.reveal {
+		display: grid;
+		grid-template-rows: 0fr;
+		width: 100%;
+		transition: grid-template-rows 0.3s ease;
+	}
+
+	.card:hover .reveal {
+		grid-template-rows: 1fr;
+	}
+
+	.reveal-inner {
+		min-height: 0;
+		overflow: hidden;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: var(--size-2);
+	}
+
+	.reveal p {
+		margin: var(--size-2) 0 0;
+		color: var(--text-muted);
+		font-size: var(--font-size-fluid-0);
+
+		/* keep it a brief: clamp to three lines */
+		display: -webkit-box;
+		-webkit-line-clamp: 3;
+		line-clamp: 3;
+		-webkit-box-orient: vertical;
+		overflow: hidden;
 	}
 
 	.tags {
 		display: flex;
 		flex-wrap: wrap;
+		justify-content: center;
 		gap: var(--size-2);
-		margin-top: var(--size-1);
 
 		> * {
 			padding: var(--size-1) var(--size-2);
 			border-radius: var(--radius-round);
-			box-shadow: var(--shadow-1);
-			background-color: var(--gray-1);
+			background-color: var(--chip-bg);
+			border: var(--border-size-1) solid var(--chip-border);
+			color: var(--text-muted);
 			font-size: var(--font-size-fluid-0);
 		}
 	}
 
 	.empty {
-		color: var(--stone-6);
+		color: var(--text-muted);
 	}
 </style>

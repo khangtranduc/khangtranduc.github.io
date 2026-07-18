@@ -1,12 +1,31 @@
 @import 'open-props/style';
 @import 'open-props/colors-hsl';
 
+/* The site default is the ORIGINAL look — system font, sand paper — so the
+   landing page is untouched. The posts/projects pages opt into the themed
+   look (Inter + these palette tokens) via .themed in the interior layout.
+   No dark mode; the original site never had one. */
 :root {
+	--font-code: 'JetBrains Mono Variable', var(--font-mono);
+
 	--font-size-fluid-4: clamp(3rem, 9vw, 4.5rem);
+
+	/* reading measure for article text */
+	--measure: 46rem;
+
+	--bg: var(--sand-0);
+	--surface: #fff;
+	--text: var(--stone-9);
+	--text-muted: var(--stone-6);
+	--border: var(--stone-3);
+	--accent: var(--indigo-7);
+	--accent-hover: var(--indigo-9);
+	--chip-bg: var(--stone-1);
+	--chip-border: var(--stone-3);
+
 	--bg-col: var(--sand-0);
 
 	font-family: var(--font-system-ui);
-
 	background-color: var(--bg-col);
 }
 
@@ -23,12 +42,13 @@ main {
 h1 {
 	font-weight: var(--font-weight-8);
 	font-size: var(--font-size-fluid-3);
-	letter-spacing: var(--font-letterspacing-2);
+	letter-spacing: -0.02em;
 }
 
 h2 {
 	font-size: var(--font-size-fluid-1);
 	font-weight: var(--font-weight-6);
+	letter-spacing: -0.01em;
 }
 
 h1,
@@ -39,10 +59,20 @@ p {
 	margin: 0;
 }
 
+a {
+	color: var(--accent);
+}
+
+::selection {
+	background: color-mix(in srgb, var(--accent) 22%, transparent);
+}
+
 .prose {
+	line-height: var(--font-lineheight-4);
+	color: var(--text);
+
 	p {
-		/* margin-top: var(--size-00); */
-		margin-bottom: var(--size-1);
+		margin-bottom: var(--size-3);
 
 		/* ignore paragraph tag around images */
 		&:has(img) {
@@ -50,18 +80,61 @@ p {
 		}
 	}
 
+	a {
+		color: var(--accent);
+		text-underline-offset: 2px;
+		text-decoration-thickness: 1px;
+
+		&:hover {
+			color: var(--accent-hover);
+		}
+	}
+
 	img {
 		width: 100%;
+		border-radius: var(--radius-2);
+		border: var(--border-size-1) solid var(--border);
 	}
 
+	/* Heading hierarchy — differentiated across size, weight, colour, a rule and
+	   case, so the levels read at a glance rather than relying on size alone
+	   (the old h1 dwarfed everything below it). */
 	:is(h1, h2, h3, h4, h5, h6) {
-		margin-top: var(--size-4);
-		margin-bottom: var(--size-1);
-		font-weight: var(--font-weight-6);
+		margin-top: var(--size-6);
+		margin-bottom: var(--size-2);
+		font-weight: var(--font-weight-7);
+		letter-spacing: -0.01em;
+		line-height: 1.25;
 	}
 
+	/* h1 — major section: sized down from fluid-2 and given a ruled divider so
+	   it reads as a section break, not a hero title. */
 	h1 {
-		font-size: var(--font-size-fluid-2);
+		font-size: var(--font-size-5);
+		margin-top: var(--size-8);
+		padding-bottom: var(--size-2);
+		border-bottom: var(--border-size-1) solid var(--border);
+	}
+
+	/* h2 — subsection: plain bold, one step down. */
+	h2 {
+		font-size: var(--font-size-4);
+	}
+
+	/* h3 — sub-subsection: same text colour as h1/h2 (accent read as a link,
+	   muted grey blended in) — set apart by a smaller size + lighter weight. */
+	h3 {
+		font-size: var(--font-size-3);
+		font-weight: var(--font-weight-6);
+		letter-spacing: 0;
+	}
+
+	/* h4 — eyebrow/overline: small, uppercase, tracked and muted. */
+	h4 {
+		font-size: var(--font-size-0);
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+		color: var(--text-muted);
 	}
 
 	:is(ul, ol) {
@@ -74,32 +147,56 @@ p {
 		padding-inline-start: var(--size-2);
 	}
 
+	blockquote {
+		margin: var(--size-4) 0;
+		padding-left: var(--size-4);
+		border-left: 3px solid var(--accent);
+		color: var(--text-muted);
+		font-style: italic;
+	}
+
+	/* inline code */
+	:not(pre) > code {
+		font-family: var(--font-code);
+		font-size: 0.9em;
+		padding: 0.1em 0.35em;
+		border-radius: var(--radius-1);
+		background: var(--chip-bg);
+		border: var(--border-size-1) solid var(--chip-border);
+	}
+
 	pre {
 		max-inline-size: 100%;
 		padding: var(--size-3);
-		border-radius: 8px;
+		border-radius: var(--radius-2);
+		border: var(--border-size-1) solid var(--border);
 		tab-size: 2;
-		overflow: scroll;
+		overflow: auto;
+		font-family: var(--font-code);
+	}
+
+	pre code {
+		font-family: var(--font-code);
 	}
 
 	iframe {
-        width: 100%;
-        height: calc(100vh - var(--size-10));
-        border: none;
-    }
+		width: 100%;
+		height: calc(100vh - var(--size-10));
+		border: none;
+	}
 
 	.video-container {
 		overflow: hidden;
 		position: relative;
-		width:100%;
+		width: 100%;
 	}
-	
+
 	.video-container::after {
 		padding-top: 56.25%;
 		display: block;
 		content: '';
 	}
-	
+
 	.video-container iframe {
 		position: absolute;
 		top: 0;
@@ -117,7 +214,7 @@ p {
 
 	figcaption {
 		margin-top: var(--size-2);
-		color: var(--gray-7);
+		color: var(--text-muted);
 		font-size: var(--font-size-fluid-0);
 		text-align: center;
 	}
@@ -127,12 +224,12 @@ p {
 		width: 100%;
 		aspect-ratio: 8.5 / 11;
 		height: auto;
-		border: var(--border-size-1) solid var(--gray-3);
+		border: var(--border-size-1) solid var(--border);
 		border-radius: var(--radius-2);
 	}
 
 	.pdf-embed figcaption a {
-		color: var(--stone-8);
+		color: var(--accent);
 		font-weight: var(--font-weight-6);
 	}
 }

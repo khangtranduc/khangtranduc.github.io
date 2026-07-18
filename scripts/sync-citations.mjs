@@ -1,0 +1,152 @@
+// Regenerate src/content/references.bib from the @citekeys actually used in
+// src/content, pulling each entry straight from Better BibTeX (Zotero).
+//
+// This makes references.bib a *generated* file: cite a new key in a post, and
+// the next `npm run dev` / `npm run build` (via predev/prebuild) fetches that
+// entry from Zotero automatically. Don't hand-edit references.bib — it's
+// overwritten here.
+//
+// WSL note: Zotero runs on the Windows host. Its HTTP server enforces a
+// DNS-rebinding guard that only accepts Host: 127.0.0.1 | localhost | [::1].
+// So we may connect via the WSL gateway IP but must always send Host: 127.0.0.1.
+// If Zotero is unreachable (closed, offline), we warn and keep the existing bib
+// so the build still succeeds.
+
+import { readFile, writeFile, readdir } from 'node:fs/promises';
+import { existsSync } from 'node:fs';
+import { execSync } from 'node:child_process';
+import path from 'node:path';
+
+const CONTENT_DIR = 'src/content';
+const BIB_PATH = 'src/content/references.bib';
+const PORT = 23119;
+const TRANSLATOR = 'biblatex';
+
+/** Candidate hosts to reach Zotero: localhost (socat/mirrored) first, then the WSL gateway. */
+function candidateHosts() {
+	const hosts = ['127.0.0.1'];
+	try {
+		const route = execSync('ip route', { encoding: 'utf8' });
+		const gw = route.match(/default via (\d+\.\d+\.\d+\.\d+)/)?.[1];
+		if (gw) hosts.push(gw);
+	} catch {
+		/* not on Linux / no `ip` — localhost is our only shot */
+	}
+	return hosts;
+}
+
+/** Recursively collect all .md files under a directory. */
+async function markdownFiles(dir) {
+	const out = [];
+	for (const entry of await readdir(dir, { withFileTypes: true })) {
+		const full = path.join(dir, entry.name);
+		if (entry.isDirectory()) out.push(...(await markdownFiles(full)));
+		else if (entry.name.endsWith('.md')) out.push(full);
+	}
+	return out;
+}
+
+/** Strip fenced/inline code so a literal @key in a code sample isn't treated as a citation. */
+function stripCode(text) {
+	return text
+		.split(/(```[\s\S]*?```|`[^`\n]*`)/g)
+		.filter((_, i) => i % 2 === 0)
+		.join('');
+}
+
+/** Extract unique pandoc-style @citekeys (both `@key` and `[@key; @key2]`). */
+function extractKeys(text) {
+	const keys = new Set();
+	const re = /(?<![\w@])@([\p{L}\d_][\w-]*)/gu;
+	for (const m of stripCode(text).matchAll(re)) keys.add(m[1]);
+	return keys;
+}
+
+/**
+ * Drop fields that are useless for a web bibliography and, worse, break
+ * rehype-citation's biblatex parser: `file` holds Windows paths whose
+ * backslashes (C:\Users\...) derail the grammar, and `abstract` bloats the
+ * vendored file. Only single-line fields are removed (BBT emits one per line).
+ */
+function cleanBib(bib) {
+	return bib
+		.replace(/^[ \t]*(?:file|abstract|keywords)[ \t]*=[ \t]*\{.*\},?[ \t]*\r?\n/gm, '')
+		// citation-js's biblatex parser rejects a trailing comma after the final
+		// field, which dropping the last field can leave behind — strip it.
+		.replace(/,(\s*\n\})/g, '$1')
+		.replace(/\n{3,}/g, '\n\n');
+}
+
+/** Ask Better BibTeX to export the given citekeys as biblatex. */
+async function exportFromBBT(keys) {
+	const body = JSON.stringify({
+		jsonrpc: '2.0',
+		method: 'item.export',
+		params: [keys, TRANSLATOR],
+		id: 1
+	});
+	let lastErr;
+	for (const host of candidateHosts()) {
+		try {
+			const res = await fetch(`http://${host}:${PORT}/better-bibtex/json-rpc`, {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json', Host: `127.0.0.1:${PORT}` },
+				body,
+				signal: AbortSignal.timeout(10000)
+			});
+			if (!res.ok) throw new Error(`HTTP ${res.status} from ${host}`);
+			const json = await res.json();
+			if (json.error) throw new Error(`BBT error: ${json.error.message ?? JSON.stringify(json.error)}`);
+			return json.result;
+		} catch (err) {
+			lastErr = err;
+		}
+	}
+	throw lastErr ?? new Error('no reachable host');
+}
+
+async function main() {
+	const files = await markdownFiles(CONTENT_DIR);
+	const keys = new Set();
+	for (const f of files) for (const k of extractKeys(await readFile(f, 'utf8'))) keys.add(k);
+	const sorted = [...keys].sort();
+
+	if (sorted.length === 0) {
+		console.log('[sync-citations] no @citekeys found in content — leaving references.bib untouched.');
+		return;
+	}
+
+	let bib;
+	try {
+		bib = await exportFromBBT(sorted);
+	} catch (err) {
+		console.warn(
+			`[sync-citations] could not reach Better BibTeX (${err.message}). ` +
+				`Keeping existing references.bib. Is Zotero running?`
+		);
+		process.exitCode = 0; // don't break offline builds
+		return;
+	}
+
+	const exported = (bib.match(/^@\w+\{([^,]+),/gm) || []).map((m) => m.replace(/^@\w+\{|,$/g, ''));
+	const missing = sorted.filter((k) => !exported.includes(k));
+	if (missing.length) {
+		console.warn(
+			`[sync-citations] ${missing.length} cited key(s) not found in your Zotero library: ${missing.join(', ')}`
+		);
+	}
+
+	// NB: no "@" anywhere in this header — citation-js's biblatex parser treats
+	// "@" as an entry start even inside a "%" comment line, and would choke.
+	const header =
+		'% AUTO-GENERATED by scripts/sync-citations.mjs — do not edit by hand.\n' +
+		'% Entries are pulled from Better BibTeX (Zotero) for the cite keys used in src/content.\n\n';
+	await writeFile(BIB_PATH, header + cleanBib(bib).trim() + '\n');
+	console.log(`[sync-citations] wrote ${exported.length} entr${exported.length === 1 ? 'y' : 'ies'} to ${BIB_PATH}.`);
+}
+
+if (!existsSync(CONTENT_DIR)) {
+	console.warn(`[sync-citations] ${CONTENT_DIR} not found — skipping.`);
+} else {
+	await main();
+}

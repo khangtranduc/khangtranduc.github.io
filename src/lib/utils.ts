@@ -12,6 +12,12 @@ export const formatDate = (date: string, dateStyle: DateStyle = 'medium', locale
 export const capitalize = (str: string | undefined) =>
 	str ? String(str).charAt(0).toUpperCase() + String(str).slice(1) : '';
 
+// Raster image references point at the optimised .webp the build generates
+// (see scripts/optimize-images.mjs). Callers can author .png/.jpg and still get
+// the .webp; non-raster refs (.svg/.gif/.webp) are left untouched.
+export const toWebp = (src: string | undefined): string | undefined =>
+	src?.replace(/\.(png|jpe?g)$/i, '.webp');
+
 // --- Content loading -------------------------------------------------------
 // import.meta.glob needs a *static* string literal, so we glob each content
 // folder separately. The folder a file lives in decides its type:

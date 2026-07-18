@@ -17,6 +17,7 @@
 				{#if data.meta.status}<span class="status {data.meta.status}">{data.meta.status}</span>{/if}
 				{#if data.meta.repo}<a href={data.meta.repo} target="_blank" rel="noreferrer">repo</a>{/if}
 				{#if data.meta.demo}<a href={data.meta.demo} target="_blank" rel="noreferrer">demo</a>{/if}
+				{#if data.meta.report}<a href={data.meta.report} target="_blank" rel="noreferrer">report</a>{/if}
 			</div>
 			<div class="tags">
 				{#each data.meta.tags as tag}
@@ -55,10 +56,13 @@
 	article {
 		display: flex;
 		flex-direction: column;
-		width: clamp(5rem, 100vw - var(--size-9), 55rem);
+		width: clamp(5rem, 100vw - var(--size-9), var(--measure));
 
 		margin-left: var(--size-6);
 		margin-right: var(--size-6);
+
+		/* Keep the last block (references / dev log) off the viewport bottom */
+		padding-bottom: var(--size-9);
 	}
 
 	hgroup {
@@ -68,7 +72,7 @@
 	}
 
 	.date {
-		color: var(--gray-7);
+		color: var(--text-muted);
 	}
 
 	.meta {
@@ -78,10 +82,10 @@
 	}
 
 	.meta a {
-		color: var(--stone-8);
+		color: var(--accent);
 
 		&:hover {
-			color: black;
+			color: var(--accent-hover);
 		}
 	}
 
@@ -89,6 +93,7 @@
 		padding: 0 var(--size-2);
 		border-radius: var(--radius-round);
 		font-size: var(--font-size-fluid-0);
+		color: var(--stone-9);
 	}
 
 	.status.in-progress {
@@ -108,15 +113,17 @@
 		> * {
 			padding: var(--size-1) var(--size-2);
 			border-radius: var(--radius-round);
-			box-shadow: var(--shadow-3);
-			background-color: var(--gray-2);
+			background-color: var(--chip-bg);
+			border: var(--border-size-1) solid var(--chip-border);
+			color: var(--text-muted);
 		}
 	}
 
 	.devlog {
 		margin-top: var(--size-8);
-		border-top: var(--border-size-1) solid var(--gray-3);
+		border-top: var(--border-size-1) solid var(--border);
 		padding-top: var(--size-5);
+		margin-bottom: var(--size-8);
 	}
 
 	.devlog h2 {
@@ -139,12 +146,12 @@
 		transition: 0.3s;
 
 		&:hover h3 {
-			color: black;
+			color: var(--accent);
 		}
 	}
 
 	.post h3 {
-		color: var(--stone-8);
+		color: var(--text);
 	}
 
 	.post .date {

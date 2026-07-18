@@ -55,19 +55,19 @@
 
 	button {
 		border-radius: var(--radius-round);
-		box-shadow: var(--shadow-1);
 		padding: var(--size-1) var(--size-2);
-		border: none;
+		border: var(--border-size-1) solid var(--border);
 
 		font-size: var(--font-size-fluid-0);
 
-		background-color: white;
+		color: var(--text-muted);
+		background-color: var(--surface);
 
 		transition: .3s;
 
 		&:hover {
-			box-shadow: var(--shadow-3);
-			transform: scale(1.01);
+			border-color: var(--accent);
+			color: var(--accent);
 		}
 	}
 
@@ -76,16 +76,18 @@
 		gap: var(--size-3);
 	}
 
-	.tag-select { 
+	.tag-select {
 		width: 100%;
-		overflow: scroll;
+		overflow: auto;
 
 		display: flex;
 		gap: var(--size-3);
 	}
 
 	.selected {
-		background-color: var(--yellow-2);
+		background-color: color-mix(in srgb, var(--accent) 14%, var(--surface));
+		border-color: var(--accent);
+		color: var(--accent);
 	}
 
 	.tags {
@@ -98,16 +100,16 @@
 		> * {
 			padding: var(--size-1) var(--size-2);
 			border-radius: var(--radius-round);
-			box-shadow: var(--shadow-2);
-			background-color: white;
-			/* border: var(--border-size-1) solid; */
+			background-color: var(--chip-bg);
+			border: var(--border-size-1) solid var(--chip-border);
+			color: var(--text-muted);
 		}
 	}
 
 	.posts {
 		display: flex;
 		flex-direction: column;
-		gap: var(--size-3);
+		gap: var(--size-5);
 
 		margin-left: var(--size-6);
 		margin-top: var(--size-6);
@@ -122,5 +124,25 @@
 	.post {
 		display: flex;
 		flex-direction: column;
+		gap: var(--size-1);
+	}
+
+	.post h2 a {
+		color: var(--text);
+		text-decoration: none;
+		transition: 0.3s;
+
+		&:hover {
+			color: var(--accent);
+		}
+	}
+
+	.post > span {
+		color: var(--text-muted);
+		font-size: var(--font-size-fluid-0);
+	}
+
+	.post p {
+		color: var(--text-muted);
 	}
 </style>

@@ -24,4 +24,5 @@ export type Project = {
 	status?: 'in-progress' | 'complete';
 	repo?: string;
 	demo?: string;
+	report?: string;
 };

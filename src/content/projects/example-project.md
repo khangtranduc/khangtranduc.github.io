@@ -11,8 +11,10 @@ tags:                        # drive the category tabs on /projects (all | cs | 
   - cs
 # image: /thumbs/example.png # optional card thumbnail — drop a file in static/thumbs/ and uncomment
 status: in-progress          # optional: in-progress | complete
+image: /thumbs/fox.webp
 repo: https://github.com/khangtranduc   # optional link rendered on the page
 demo: /test                  # optional link rendered on the page
+# report: /downloads/report.pdf # optional link — e.g. a PDF in static/downloads/
 # ──────────────────────────────────────────────────────────────────────
 ---
 

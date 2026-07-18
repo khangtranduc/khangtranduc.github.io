@@ -42,14 +42,14 @@
 		display: flex;
 		flex-direction: column;
 		gap: 0.5rem;
-		width: clamp(5rem, 100vw - var(--size-9), 55rem);
+		width: clamp(5rem, 100vw - var(--size-9), var(--measure));
 
 		margin-left: var(--size-6);
 		margin-right: var(--size-6);
 	}
 
 	p {
-		color: var(--gray-7);
+		color: var(--text-muted);
 	}
 
 	.tags {
@@ -61,21 +61,22 @@
 		> * {
 			padding: var(--size-1) var(--size-2);
 			border-radius: var(--radius-round);
-			box-shadow: var(--shadow-3);
-			background-color: var(--gray-2);
-			/* border: var(--border-size-1) solid; */
+			background-color: var(--chip-bg);
+			border: var(--border-size-1) solid var(--chip-border);
+			color: var(--text-muted);
+			font-size: var(--font-size-fluid-0);
 		}
 	}
 
 	.backlink {
-		color: var(--gray-7);
+		color: var(--text-muted);
 
 		a {
-			color: var(--stone-8);
+			color: var(--accent);
 			font-weight: var(--font-weight-6);
 
 			&:hover {
-				color: black;
+				color: var(--accent-hover);
 			}
 		}
 	}
