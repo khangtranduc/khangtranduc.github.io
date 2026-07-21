@@ -32,23 +32,19 @@
 				{/each}
 			</NavDropdown>
 			<a href="/posts">posts</a>
-			<NavDropdown label="contacts" direction="row">
-				{#each contacts as [icon, link], i}
-					<a
-						href={link}
-						target="_blank"
-						in:fade|global={{ delay: (contacts.length - i) * 60, duration: 300 }}
-						out:fade|global={{ delay: i * 60, duration: 300 }}
-					>
-						<!-- svelte-ignore block_empty -->
-						{#await loadIcon(icon) then _}
-							<iconify-icon inline width="24" {icon}></iconify-icon>
-						{:catch}
-							{icon.split(':')[1]}
-						{/await}
-					</a>
-				{/each}
-			</NavDropdown>
+		</div>
+
+		<div class="contacts">
+			{#each contacts as [icon, link]}
+				<a href={link} target="_blank" aria-label={icon.split(':')[1]}>
+					<!-- svelte-ignore block_empty -->
+					{#await loadIcon(icon) then _}
+						<iconify-icon inline width="24" {icon}></iconify-icon>
+					{:catch}
+						{icon.split(':')[1]}
+					{/await}
+				</a>
+			{/each}
 		</div>
 	</nav>
 
@@ -63,14 +59,15 @@
 	nav {
 		position: fixed;
 		top: 0;
-		left: 0;
+		/* inset rather than `width: 100vw` — 100vw includes the scrollbar gutter,
+		   which pushed the right-aligned icons off the visible edge. */
+		inset-inline: 0;
 
 		display: flex;
 		align-items: center;
 
 		height: var(--size-9);
-		width: 100vw;
-		padding-left: var(--size-4);
+		padding-inline: var(--size-4);
 		z-index: var(--layer-important);
 		background-color: var(--surface);
 		border-bottom: var(--border-size-1) solid var(--border);
@@ -90,6 +87,16 @@
 		display: flex;
 		align-items: center;
 		gap: var(--size-5);
+	}
+
+	/* `.navbar` is absolutely positioned, so it isn't a flex sibling — auto margin
+	   against the logo is what pins the icons to the right edge. */
+	.contacts {
+		margin-left: auto;
+
+		display: flex;
+		align-items: center;
+		gap: var(--size-3);
 	}
 
 	a {

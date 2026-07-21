@@ -1,11 +1,7 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
 
-	let {
-		label,
-		direction = 'column',
-		children
-	}: { label: string; direction?: 'row' | 'column'; children: Snippet } = $props();
+	let { label, children }: { label: string; children: Snippet } = $props();
 
 	// `open` tracks the trigger, `maintain` the panel — the panel keeps itself
 	// alive so the cursor can travel from the trigger into it without closing.
@@ -20,7 +16,6 @@
 	{#if open || maintain}
 		<div
 			class="panel"
-			class:row={direction === 'row'}
 			role="menu"
 			tabindex="-1"
 			onmouseenter={() => (maintain = true)}
@@ -60,12 +55,6 @@
 
 		font-size: var(--font-size-1);
 		white-space: nowrap;
-	}
-
-	/* icon menus read better laid out sideways, as on the landing page */
-	.panel.row {
-		flex-direction: row;
-		gap: var(--size-3);
 	}
 
 	a {

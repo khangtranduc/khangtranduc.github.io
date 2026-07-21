@@ -1,4 +1,4 @@
-import"../chunks/CWj6FrbW.js";import"../chunks/Bg_gcRQw.js";import{o as _}from"../chunks/CSCxBCSz.js";import{p as B,f as E,b as U,c as y}from"../chunks/DO8rusNK.js";import{i as C}from"../chunks/7SOzXRYl.js";var M=E('<main class="svelte-1ht3dhn"><canvas id="gl-canvas" class="svelte-1ht3dhn"></canvas></main>');function V(h,l){B(l,!1);const p=`
+import"../chunks/CWj6FrbW.js";import"../chunks/B30eqveE.js";import{o as _}from"../chunks/C2wiTGLK.js";import{p as B,f as E,b as U,c as y}from"../chunks/03Xll2cz.js";import{i as C}from"../chunks/B_VrLPj1.js";var M=E('<main class="svelte-1ht3dhn"><canvas id="gl-canvas" class="svelte-1ht3dhn"></canvas></main>');function V(h,l){B(l,!1);const p=`
         attribute vec4 aVertexPosition;
         void main() {
             gl_Position = aVertexPosition;
