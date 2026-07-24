@@ -3,6 +3,7 @@ title: 'Example dev log #2: making progress'
 description: Second entry of the example dev-log series — the middle grind.
 date: 2026-06-27
 published: true
+example: true
 tags:
   - example
   - cs

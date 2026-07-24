@@ -7,6 +7,7 @@ title: Example Project
 description: A template project writeup showing how a project and its dev-log posts link together.
 date: 2026-07-02
 published: true              # set false to hide it everywhere (draft)
+example: true                # template/demo content: shown in dev, stripped from prod builds
 tags:                        # drive the category tabs on /projects (all | cs | physics | ...)
   - cs
 # image: /thumbs/example.png # optional card thumbnail — drop a file in static/thumbs/ and uncomment

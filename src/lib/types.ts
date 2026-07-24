@@ -5,6 +5,8 @@ export type Post = {
 	date: string;
 	tags: string[];
 	published: boolean;
+	// Template/demo content: visible in dev, stripped from prod builds.
+	example?: boolean;
 	image?: string;
 	// Membership link: the slug of the project this dev-log documents.
 	// Use `project` for the common one-project case, `projects` if a post
@@ -20,6 +22,8 @@ export type Project = {
 	date: string;
 	tags: string[];
 	published: boolean;
+	// Template/demo content: visible in dev, stripped from prod builds.
+	example?: boolean;
 	image?: string;
 	status?: 'in-progress' | 'complete';
 	repo?: string;

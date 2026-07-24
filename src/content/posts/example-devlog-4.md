@@ -3,6 +3,7 @@ title: 'Example dev log #4: amongusing it up'
 description: Fourth entry of the example dev-log series — tying it off.
 date: 2026-07-04
 published: true
+example: true
 tags:
   - example
   - cs

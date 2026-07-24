@@ -26,7 +26,12 @@ export const toWebp = (src: string | undefined): string | undefined =>
 const postFiles = import.meta.glob('/src/content/posts/*.md', { eager: true });
 const projectFiles = import.meta.glob('/src/content/projects/*.md', { eager: true });
 
-type Content = { slug: string; date: string; published: boolean };
+type Content = { slug: string; date: string; published: boolean; example?: boolean };
+
+// `example: true` content (the annotated templates) is dev-only — it renders
+// while running `vite dev` but is stripped from prod builds. import.meta.env.DEV
+// is statically inlined by Vite, so the branch is compiled out of the bundle.
+export const showExample = import.meta.env.DEV;
 
 // Turn a glob record into a sorted (newest-first), published-only list.
 const collect = <T extends Content>(files: Record<string, unknown>): T[] => {
@@ -37,6 +42,7 @@ const collect = <T extends Content>(files: Record<string, unknown>): T[] => {
 		if (file && typeof file === 'object' && 'metadata' in file && slug) {
 			const metadata = (file as { metadata: Omit<T, 'slug'> }).metadata;
 			const item = { ...metadata, slug } as T;
+			if (item.example && !showExample) continue;
 			if (item.published) items.push(item);
 		}
 	}

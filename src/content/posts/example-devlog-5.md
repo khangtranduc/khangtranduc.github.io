@@ -3,6 +3,7 @@ title: 'Example dev log #5: jazzing up'
 description: Fifth entry of the example dev-log series — tying it off.
 date: 2026-07-05
 published: true
+example: true
 tags:
   - example
   - cs

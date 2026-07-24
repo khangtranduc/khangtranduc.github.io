@@ -6,6 +6,7 @@ title: Example standalone post
 description: A plain blog post that doesn't belong to any project.
 date: 2026-06-15
 published: true
+example: true                # template/demo content: shown in dev, stripped from prod builds
 tags:
   - example
 # ──────────────────────────────────────────────────────────────────────

@@ -119,6 +119,11 @@ const config = {
 		adapter: adapter({
 			pages: 'docs',
 			assets: 'docs',
+			// The posts/projects [slug] routes are 'auto' so a prod build with no
+			// non-example content yields zero pages without erroring. Real slugs are
+			// still prerendered explicitly via each route's entries(); unprerendered
+			// (i.e. example) URLs simply 404 on the static host, which is intended.
+			strict: false,
 		}),
 	},
 

@@ -7,6 +7,7 @@ title: 'Example dev log #1: getting started'
 description: First entry of the example dev-log series — scaffolding the idea.
 date: 2026-06-20
 published: true
+example: true                # template/demo content: shown in dev, stripped from prod builds
 tags:                        # free-form topical tags; power the filter on /posts
   - example
   - cs

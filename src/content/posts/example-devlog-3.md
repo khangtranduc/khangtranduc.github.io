@@ -3,6 +3,7 @@ title: 'Example dev log #3: wrapping up'
 description: Third entry of the example dev-log series — tying it off.
 date: 2026-07-01
 published: true
+example: true
 tags:
   - example
   - cs
