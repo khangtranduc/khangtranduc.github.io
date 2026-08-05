@@ -7,6 +7,9 @@ export type Post = {
 	published: boolean;
 	// Template/demo content: visible in dev, stripped from prod builds.
 	example?: boolean;
+	// Real work-in-progress content staged for dev only: same strip-from-prod
+	// behaviour as `example`, but semantically "not ready to publish yet".
+	devOnly?: boolean;
 	image?: string;
 	// Membership link: the slug of the project this dev-log documents.
 	// Use `project` for the common one-project case, `projects` if a post
@@ -24,6 +27,9 @@ export type Project = {
 	published: boolean;
 	// Template/demo content: visible in dev, stripped from prod builds.
 	example?: boolean;
+	// Real work-in-progress content staged for dev only: same strip-from-prod
+	// behaviour as `example`, but semantically "not ready to publish yet".
+	devOnly?: boolean;
 	image?: string;
 	status?: 'in-progress' | 'complete';
 	repo?: string;

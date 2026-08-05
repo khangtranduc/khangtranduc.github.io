@@ -4,7 +4,20 @@
 
 	let { data } = $props();
 
-	const tabs = ['all', 'cs', 'physics', 'engineering', 'math'];
+	// Preferred ordering for known categories; any others follow, alphabetically.
+	const order = ['cs', 'finance', 'physics', 'engineering', 'math'];
+
+	// Tabs are derived from the tags actually present on the visible projects, so
+	// empty categories never show (and a new one appears the moment it's first
+	// used). This also stays correct across the prod/dev split: a devOnly project's
+	// category is absent from prod builds where that project is stripped.
+	let tabs = $derived.by(() => {
+		const present = new Set(data.projects.flatMap((p: Project) => p.tags));
+		const known = order.filter((t) => present.has(t));
+		const extra = [...present].filter((t) => !order.includes(t)).sort();
+		return ['all', ...known, ...extra];
+	});
+
 	let selected = $state('all');
 
 	let projects = $derived(

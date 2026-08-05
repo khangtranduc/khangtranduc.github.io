@@ -12,6 +12,33 @@ const highlighter = await createHighlighter({
 	langs: ['javascript', 'typescript', 'cpp', 'c', 'python', 'bash', 'markdown']
 });
 
+// rehype-citation appends the bibliography as a bare `<div id="refs">` with no
+// title. Run this AFTER it to prepend an `<h2>references</h2>`, so the bibliography
+// renders as its own titled section (styled in app.css), mirroring the dev log.
+function rehypeReferencesHeading() {
+	const findRefs = (node) => {
+		if (!node?.children) return null;
+		for (const child of node.children) {
+			if (child.type === 'element' && child.properties?.id === 'refs') return child;
+			const found = findRefs(child);
+			if (found) return found;
+		}
+		return null;
+	};
+	return (tree) => {
+		const refs = findRefs(tree);
+		// Only add the heading when there are actual entries — no stray title on
+		// pages without citations (where no #refs is emitted at all).
+		if (!refs || !refs.children?.length) return;
+		refs.children.unshift({
+			type: 'element',
+			tagName: 'h2',
+			properties: { className: ['references-heading'] },
+			children: [{ type: 'text', value: 'references' }]
+		});
+	};
+}
+
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
 	// Consult https://svelte.dev/docs/kit/integrations
@@ -107,6 +134,7 @@ const config = {
 						linkCitations: true
 					}
 				],
+				rehypeReferencesHeading,
 				rehypeKatex
 			]
 		})

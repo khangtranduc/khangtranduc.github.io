@@ -1,5 +1,5 @@
 import { error } from '@sveltejs/kit';
-import { getPosts, showExample } from '$lib/utils';
+import { getPosts, isDevOnly, showDevOnly } from '$lib/utils';
 
 // 'auto' rather than inheriting `true`: in prod every post may be example-only,
 // leaving this route with zero pages, which a strict `prerender = true` treats
@@ -18,8 +18,8 @@ export async function load({ params }) {
 	try {
 		const post = await import(`../../../../content/posts/${params.slug}.md`);
 
-		// Example content is dev-only — 404 it in prod even on a direct URL.
-		if (post.metadata?.example && !showExample) error(404, `Could not find ${params.slug}`);
+		// Dev-only content — 404 it in prod even on a direct URL.
+		if (isDevOnly(post.metadata) && !showDevOnly) error(404, `Could not find ${params.slug}`);
 
 		return {
 			content: post.default,

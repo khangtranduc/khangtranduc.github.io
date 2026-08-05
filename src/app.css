@@ -141,6 +141,33 @@ a {
 		color: var(--text-muted);
 	}
 
+	/* References — the auto-generated bibliography (rehype-citation's #refs, given
+	   an <h2>references</h2> by rehypeReferencesHeading). Presented as its own
+	   ruled-off section, matching the dev-log block on the project page. */
+	#refs {
+		margin-top: var(--size-8);
+		border-top: var(--border-size-1) solid var(--border);
+		padding-top: var(--size-5);
+	}
+
+	#refs .references-heading {
+		margin-top: 0;
+		margin-bottom: var(--size-4);
+	}
+
+	/* Each entry: hanging indent with the [n] number in a fixed gutter. */
+	.csl-entry {
+		display: flex;
+		gap: var(--size-2);
+		margin-bottom: var(--size-2);
+		font-size: var(--font-size-1);
+		color: var(--text-muted);
+	}
+
+	.csl-left-margin {
+		flex-shrink: 0;
+	}
+
 	:is(ul, ol) {
 		margin-top: var(--size-00);
 		padding-left: var(--size-5);
