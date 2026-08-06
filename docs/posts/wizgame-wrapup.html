@@ -10,26 +10,26 @@
 		<link href="../_app/immutable/assets/app.DrXswxBE.css" rel="stylesheet">
 		<link href="../_app/immutable/assets/2.CSYboH9X.css" rel="stylesheet">
 		<link href="../_app/immutable/assets/5.BUB4DVoK.css" rel="stylesheet">
-		<link rel="modulepreload" href="../_app/immutable/entry/start.Cm0iAq4v.js">
-		<link rel="modulepreload" href="../_app/immutable/chunks/CHG1dikD.js">
+		<link rel="modulepreload" href="../_app/immutable/entry/start.CvKfvXTA.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/D2rBjCml.js">
 		<link rel="modulepreload" href="../_app/immutable/chunks/C2wiTGLK.js">
 		<link rel="modulepreload" href="../_app/immutable/chunks/03Xll2cz.js">
 		<link rel="modulepreload" href="../_app/immutable/chunks/cJL0nfFF.js">
 		<link rel="modulepreload" href="../_app/immutable/chunks/CYgJF_JY.js">
-		<link rel="modulepreload" href="../_app/immutable/entry/app.DUsL7m__.js">
+		<link rel="modulepreload" href="../_app/immutable/entry/app.B7hUyj8o.js">
 		<link rel="modulepreload" href="../_app/immutable/chunks/CakdltBg.js">
 		<link rel="modulepreload" href="../_app/immutable/chunks/CWj6FrbW.js">
 		<link rel="modulepreload" href="../_app/immutable/chunks/CWjCay0T.js">
-		<link rel="modulepreload" href="../_app/immutable/nodes/0.CsDsDSxN.js">
+		<link rel="modulepreload" href="../_app/immutable/nodes/0.CFw9fH2F.js">
 		<link rel="modulepreload" href="../_app/immutable/chunks/BUVkQp9k.js">
-		<link rel="modulepreload" href="../_app/immutable/chunks/CofvZAzs.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/CLPNf7B4.js">
 		<link rel="modulepreload" href="../_app/immutable/chunks/B30eqveE.js">
-		<link rel="modulepreload" href="../_app/immutable/chunks/nSkGmnxi.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/BeO_Cldf.js">
 		<link rel="modulepreload" href="../_app/immutable/nodes/2.B7y7DAIZ.js">
 		<link rel="modulepreload" href="../_app/immutable/chunks/BZ5Tvw9W.js">
 		<link rel="modulepreload" href="../_app/immutable/chunks/B7TrSskN.js">
 		<link rel="modulepreload" href="../_app/immutable/chunks/DnLpvSJf.js">
-		<link rel="modulepreload" href="../_app/immutable/nodes/5.CnZydrIp.js">
+		<link rel="modulepreload" href="../_app/immutable/nodes/5.C7_EghPC.js">
 		<link rel="modulepreload" href="../_app/immutable/chunks/DF8_1p6z.js"><!--[--><!--]--><!--[--><!--]--><title>Posts | Wrap-up</title>
 	</head>
 	<body data-sveltekit-preload-data="hover">
@@ -40,36 +40,43 @@ usual <code>Shader</code> / <code>Texture</code> / <code>Mesh</code> wrappers �
 little renderer.</p> <h2>What got built</h2> <ul><li><strong>Physics</strong> — rigid-body AABB dynamics: a force-accumulator semi-implicit Euler integrator,
 minimum-translation-vector collision, and impulse-based resolution with restitution and
 Coulomb friction.</li> <li><strong>Rendering</strong> — forward Blinn-Phong with directional + point lights, <strong>shadow mapping</strong> (normal-offset bias + PCF), and a full <strong>HDR → bright-pass → bloom</strong> pipeline built on one
-general <code>Framebuffer</code> class.</li> <li><strong>Procedural world</strong> — an infinite <code>heightAt</code> noise terrain (and a bounded authored arena
+general <code>Framebuffer</code> class.</li> <li><strong>Particles</strong> — a GPU-instanced particle system with a pooled, swap-and-pop CPU update, one
+instanced draw call per emitter regardless of particle count.</li> <li><strong>Procedural world</strong> — an infinite <code>heightAt</code> noise terrain (and a bounded authored arena
 behind the same seam), a procedural sky, a Gerstner-wave <strong>ocean</strong>, and instanced,
 wind-animated grass that bends away from the player.</li> <li><strong>The hero spell</strong> — a castable <strong>vortex</strong>: a refracting, swirling water column that lifts
 and traps anything inside it, painted by a surface-agnostic 2D field onto a cylinder mesh.</li> <li><strong>Data-driven content</strong> — <code>.level</code> files as verb + keyed tokens (hot-reloadable with one
-key), and a spell system where casting is <strong>data → closures</strong> and effect lifetime is <strong>behavior → virtuals</strong>.</li></ul> <p>The whole thing is <strong>5,322 lines of C++</strong> across 38 files plus <strong>735 lines of GLSL</strong> (16
-shaders) — no engine, no physics library, no renderer library. GLFW, glad, GLM, Assimp and
+key), and a spell system where casting is <strong>data → closures</strong> and effect lifetime is <strong>behavior → virtuals</strong>.</li></ul> <p>The whole thing runs on <strong>no engine, no physics library, no renderer library</strong>. GLFW, glad, GLM, Assimp and
 stb_image do windowing, GL loading, math, model import and image decode; everything else is
 first-party.</p> <h2>By the numbers</h2> <p>Measured with a <code>--bench</code> mode — fixed timestep, scripted camera path, per-pass <code>GL_TIME_ELAPSED</code> timer queries — median of three runs at 1080p on an <strong>integrated Radeon
-780M</strong>:</p> <ul><li><strong>5.31 ms/frame</strong> — 188 FPS mean, 137 FPS 1% low — with the 2048² shadow pass isolated at <strong>0.469 ms</strong>.</li> <li><strong>Fill-bound, not CPU- or draw-call-bound:</strong> across 720p/1080p/1440p, GPU time scaled
+780M</strong>:</p> <ul><li><strong>5.31 ms/frame</strong> — 188 FPS mean, 137 FPS 1% low, frame-time stddev <strong>1.24 ms</strong> — with the
+2048² shadow pass isolated at <strong>0.469 ms</strong>.</li> <li><strong>Fill-bound, not CPU- or draw-call-bound:</strong> across 720p/1080p/1440p, GPU time scaled
 1 : 1.96 : 3.45 against a 1 : 2.25 : 4.0 pixel ratio while CPU update stayed flat at ~0.13 ms.</li> <li><strong>Instancing vs an identical naive draw path:</strong> at 50K particles, <strong>4,149× fewer draw calls
-and 3.9× faster frames</strong> (26.1 → 6.8 ms).</li> <li><strong>1,000,000 instanced grass blades</strong> (9.1M triangles) in <strong>one draw call</strong> at 79 FPS mean.</li> <li><strong>~450,000 live particles</strong> and <strong>2,560 rigid bodies</strong> each sustained above 60 FPS (the
-physics is all-pairs, ~4 ns/pair at scale).</li></ul> <h2>Why stop here and rebuild</h2> <p>The renderer works, but the scaffolding didn’t scale. <code>Game</code> became a god-object global, <code>Entity</code> only half-decomposed into components, scene uniforms were re-uploaded per shader
+and 3.9× faster frames</strong> (26.1 → 6.8 ms).</li> <li><strong>1,000,000 instanced grass blades</strong> (9.1M triangles) in <strong>one draw call</strong> at 79 FPS mean —
+though the 1% low is 19 FPS, because every blade is re-scattered on an 8-unit snap and that
+rebuild stalls for 53 ms.</li> <li><strong>~450,000 live particles</strong> and <strong>2,560 rigid bodies</strong> each sustained above 60 FPS (the
+physics is all-pairs, ~4 ns/pair at scale).</li> <li><strong>740 ms</strong> cold start, and a <strong>5.10 MB</strong> static Windows binary from the MinGW cross-compile.</li></ul> <h2>Why stop here and rebuild</h2> <p>The renderer works, but the scaffolding didn’t scale. <code>Game</code> became a god-object global, <code>Entity</code> only half-decomposed into components, scene uniforms were re-uploaded per shader
 program by hand, there was no general translucent draw queue, and the physics carried real
 debt (no continuous collision, no inverse-mass correction). I was also moving fast enough
 that I never kept a proper devlog.</p> <p>Benchmarking turned up its own embarrassments — the kind measurement exists to catch. The
-biggest: the <strong>bloom pass eats 61% of GPU time and its output is never used</strong> — <code>tonemap.fs</code> has no sampler for the blur result, so ten full-resolution Gaussian passes are computed and
-discarded every frame. Skipping it takes the scene from <strong>188 to 412 FPS</strong>.</p> <p>So the next pass is a clean-room re-implementation on better engine-design principles — and,
+biggest: the <strong>bloom pass ate 61% of GPU time and its output was never used</strong> — <code>tonemap.fs</code> had no sampler for the blur result, so ten full-resolution Gaussian passes were computed and
+discarded every frame. That one is <strong>fixed</strong>: the composite now adds the blurred bright buffer
+in linear HDR space before the tonemap, and wiring it cost nothing measurable (191.9 vs 188.2
+mean FPS, inside run-to-run noise). What survives is a real trade-off rather than pure waste —
+bloom is <strong>2.59 ms of 4.33 ms of GPU time</strong>, and skipping it still takes the scene from <strong>192
+to 400 FPS</strong>, so the obvious next optimization is to run the blur at half resolution.</p> <p>So the next pass is a clean-room re-implementation on better engine-design principles — and,
 this time, with the devlog written as I go.</p><!----></div></hgroup></main><!----><!----></div><!----><!--]--><!----><!----><!--]--> <!--[!--><!--]--><!--]-->
 			
 			<script>
 				{
-					__sveltekit_1y6yogo = {
+					__sveltekit_1uz4fwc = {
 						base: new URL("..", location).pathname.slice(0, -1)
 					};
 
 					const element = document.currentScript.parentElement;
 
 					Promise.all([
-						import("../_app/immutable/entry/start.Cm0iAq4v.js"),
-						import("../_app/immutable/entry/app.DUsL7m__.js")
+						import("../_app/immutable/entry/start.CvKfvXTA.js"),
+						import("../_app/immutable/entry/app.B7hUyj8o.js")
 					]).then(([kit, app]) => {
 						kit.start(app, element, {
 							node_ids: [0, 2, 5],
