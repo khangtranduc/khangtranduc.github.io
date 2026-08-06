@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" href="../favicon.png" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css" integrity="sha384-MlJdn/WNKDGXveldHDdyRP1R4CTHr3FeuDNfhsLPYrq2t0UBkUdK2jyTnXPEK1NQ" crossorigin="anonymous">
+		
+		<link href="../_app/immutable/assets/0.C_Pzbw4D.css" rel="stylesheet">
+		<link href="../_app/immutable/assets/app.DrXswxBE.css" rel="stylesheet">
+		<link href="../_app/immutable/assets/2.CSYboH9X.css" rel="stylesheet">
+		<link href="../_app/immutable/assets/5.BUB4DVoK.css" rel="stylesheet">
+		<link rel="modulepreload" href="../_app/immutable/entry/start.Cm0iAq4v.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/CHG1dikD.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/C2wiTGLK.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/03Xll2cz.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/cJL0nfFF.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/CYgJF_JY.js">
+		<link rel="modulepreload" href="../_app/immutable/entry/app.DUsL7m__.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/CakdltBg.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/CWj6FrbW.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/CWjCay0T.js">
+		<link rel="modulepreload" href="../_app/immutable/nodes/0.CsDsDSxN.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/BUVkQp9k.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/CofvZAzs.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/B30eqveE.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/nSkGmnxi.js">
+		<link rel="modulepreload" href="../_app/immutable/nodes/2.B7y7DAIZ.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/BZ5Tvw9W.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/B7TrSskN.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/DnLpvSJf.js">
+		<link rel="modulepreload" href="../_app/immutable/nodes/5.CnZydrIp.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/DF8_1p6z.js"><!--[--><!--]--><!--[--><!--]--><title>Posts | Asset Embeddings</title>
+	</head>
+	<body data-sveltekit-preload-data="hover">
+		<div style="display: contents"><!--[--><!--[--><!----><nav class="svelte-1ppvv0d"><a href="/"><img src="/favicon.png" alt="logo" class="svelte-1ppvv0d"/></a></nav> <!--[--><!----><div class="themed svelte-ucqx28"><nav class="svelte-ucqx28"><a href="/" class="svelte-ucqx28"><img src="/favicon.png" alt="logo" class="svelte-ucqx28"/></a> <div class="navbar svelte-ucqx28"><a href="/" class="svelte-ucqx28">home</a> <a href="/projects" class="svelte-ucqx28">projects</a> <span class="dropdown svelte-10hzt75"><a href="#" class="svelte-10hzt75">resume</a> <!--[!--><!--]--></span><!----> <a href="/posts" class="svelte-ucqx28">posts</a></div> <div class="contacts svelte-ucqx28"><!--[--><a href="https://github.com/khangtranduc" target="_blank" aria-label="github" class="svelte-ucqx28"><!--[--><!--]--></a><a href="mailto:khangductran@duck.com" target="_blank" aria-label="gmail" class="svelte-ucqx28"><!--[--><!--]--></a><a href="https://www.linkedin.com/in/khangtranduc/" target="_blank" aria-label="linkedin" class="svelte-ucqx28"><!--[--><!--]--></a><a href="https://t.me/khangductran" target="_blank" aria-label="baseline-telegram" class="svelte-ucqx28"><!--[--><!--]--></a><!--]--></div></nav> <!----><main class="svelte-1bygah1"><hgroup class="svelte-1bygah1"><h1>Asset Embeddings</h1> <p class="svelte-1bygah1">published at Aug 4, 2026</p> <div class="tags svelte-1bygah1"><!--[--><span class="svelte-1bygah1">#cs</span><span class="svelte-1bygah1">#vertical-slice</span><!--]--></div> <!--[--><p class="backlink svelte-1bygah1">part of project <a href="/projects/asemb" class="svelte-1bygah1">asemb</a></p><!--]--> <div class="prose"><!----><p>Each manager’s portfolio is treated as a “sentence” and each stock (PERMCO) as a “word,” ordered by holding conviction; Word2Vec then learns a dense vector per stock from co-holding patterns — the Asset Embeddings idea from <a href="https://www.nber.org/papers/w33651" rel="nofollow">Gabaix et al.</a> I train a skip-gram model with negative sampling.</p> <p><strong>Configuration.</strong> Each portfolio is ordered by <strong>active weight</strong> — portfolio weight minus market weight — which demotes the mega-caps nearly everyone holds and surfaces idiosyncratic positions. The context window is <strong>±10</strong>, and the embedding dimension is <strong>d = 100</strong>.</p> <p><strong>Measuring reproducibility.</strong> The embedding axes are arbitrary (the space is only defined up to rotation), so I measure a rotation-invariant, seed-vs-seed <strong>top-10 nearest-neighbor Jaccard</strong> overlap — how much each stock’s neighborhood survives re-training under a new random seed.</p> <figure><img src="/media/asemb_jaccard_dimension.webp" alt="Seed-vs-seed neighbor Jaccard. A whole-book window collapses the space (0.13); the ±10 window is the big fix (→0.47); dimension is a smaller lever that plateaus near 0.57–0.60."/><figcaption>Seed-vs-seed neighbor Jaccard. A whole-book window collapses the space (0.13); the ±10 window is the big fix (→0.47); dimension is a smaller lever that plateaus near 0.57–0.60.</figcaption></figure> <p>A whole-book window <strong>collapses</strong> the space — every vector ends up nearly parallel (cos ≈ 0.99, Jaccard 0.13). The <strong>±10 window is the real fix</strong>, lifting it to 0.47; dimension adds a smaller gain, plateauing around 0.57–0.60, with d = 100 sitting on that plateau.</p> <p>Even fully tuned, Jaccard is only <strong>~0.5</strong> — about a third of each stock’s nearest neighbors change with the seed. I read this as the co-holding data <strong>under-determining</strong> the geometry (non-identifiability), not a bug.</p> <p><strong>The fix: ensembling.</strong> A K-seed, Procrustes-aligned ensemble raises the floor from 0.51 (single seed) to <strong>~0.77 at K = 10</strong>, with diminishing returns beyond — so I run K = 10.</p> <figure><img src="/media/asemb_ensemble_k.webp" alt="Averaging K Procrustes-aligned seeds raises the reproducibility floor from 0.51 toward ~0.8. K=10 is the compute/stability sweet spot."/><figcaption>Averaging K Procrustes-aligned seeds raises the reproducibility floor from 0.51 toward ~0.8. K=10 is the compute/stability sweet spot.</figcaption></figure> <p>The ensemble is what feeds the trading stage — and it improves the P&amp;L there too, not just the Jaccard.</p> <p><strong>Next: cross-quarter drift.</strong> Independent per-quarter fits drift in their coordinate frame over time. I plan to adapt <a href="https://arxiv.org/abs/1702.08359" rel="nofollow">Bamler–Mandt’s dynamic word embeddings</a> to impose temporal coherence while keeping the nonlinear representation.</p> <p>Code: <code>code/asemb/embed</code>.</p><!----></div></hgroup></main><!----><!----></div><!----><!--]--><!----><!----><!--]--> <!--[!--><!--]--><!--]-->
+			
+			<script>
+				{
+					__sveltekit_1y6yogo = {
+						base: new URL("..", location).pathname.slice(0, -1)
+					};
+
+					const element = document.currentScript.parentElement;
+
+					Promise.all([
+						import("../_app/immutable/entry/start.Cm0iAq4v.js"),
+						import("../_app/immutable/entry/app.DUsL7m__.js")
+					]).then(([kit, app]) => {
+						kit.start(app, element, {
+							node_ids: [0, 2, 5],
+							data: [null,null,null],
+							form: null,
+							error: null,
+							remote: null
+						});
+					});
+				}
+			</script>
+		</div>
+	</body>
+</html>
