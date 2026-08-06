@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { loadIcon } from 'iconify-icon';
 	import { formatDate } from '$lib/utils';
 
 	let { data } = $props();
@@ -15,7 +16,15 @@
 			<p class="date">published at {formatDate(data.meta.date)}</p>
 			<div class="meta">
 				{#if data.meta.status}<span class="status {data.meta.status}">{data.meta.status}</span>{/if}
-				{#if data.meta.repo}<a href={data.meta.repo} target="_blank" rel="noreferrer">repo</a>{/if}
+				{#if data.meta.repo}
+					<a href={data.meta.repo} target="_blank" rel="noreferrer">
+						<!-- svelte-ignore block_empty -->
+						{#await loadIcon('mdi:github') then _}
+							<iconify-icon inline width="18" icon="mdi:github"></iconify-icon>
+						{/await}
+						repo
+					</a>
+				{/if}
 				{#if data.meta.demo}<a href={data.meta.demo} target="_blank" rel="noreferrer">demo</a>{/if}
 				{#if data.meta.report}<a href={data.meta.report} target="_blank" rel="noreferrer">report</a>{/if}
 			</div>
@@ -82,6 +91,9 @@
 	}
 
 	.meta a {
+		display: inline-flex;
+		align-items: center;
+		gap: var(--size-1);
 		color: var(--accent);
 
 		&:hover {
